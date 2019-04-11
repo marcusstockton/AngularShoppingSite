@@ -11,6 +11,9 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { OrdersComponent } from './orders/orders.component';
 import { AccountComponent } from './account/account.component';
 import { AboutComponent } from './about/about.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NotFoundComponent } from './not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +25,14 @@ import { AboutComponent } from './about/about.component';
     ReviewsComponent,
     OrdersComponent,
     AccountComponent,
-    AboutComponent
+    AboutComponent,
+    NavMenuComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

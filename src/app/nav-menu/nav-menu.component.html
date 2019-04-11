@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    EBay Rip Off
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" [routerLink]='["/"]' [routerLinkActive]='["link-active"]'>Home</a>
+      <a class="nav-item nav-link" [routerLink]='["/items"]' [routerLinkActive]='["link-active"]'>Items</a>
+      <a class="nav-item nav-link" [routerLink]='["/reviews"]' [routerLinkActive]='["link-active"]'>Reviews</a>
+      <a class="nav-item nav-link" [routerLink]='["/account"]' [routerLinkActive]='["link-active"]'>Account</a>
+      <a class="nav-item nav-link" [routerLink]='["/orders"]' [routerLinkActive]='["link-active"]'>Orders</a>
+      <a class="nav-item nav-link" [routerLink]='["/about"]' [routerLinkActive]='["link-active"]'>About</a>
+    </div>
+    <div class="navbar-nav">
+      <div *ngIf="isLoggedIn(); then loggedIn else loggedOut"></div>
+      <ng-template #loggedOut>
+        <li [routerLinkActive]='["link-active"]'>
+          <a [routerLink]='["/auth"]' class="nav-link nav-item">
+            Login
+          </a>
+        </li>
+      </ng-template>
+      <ng-template #loggedIn>
+        <li>
+          <a [routerLink]='["/"]' class="nav-link nav-item" (click)='signOut()'>
+            Log Out
+          </a>
+        </li>
+      </ng-template>
+    </div>
+  </div>
+</nav>
