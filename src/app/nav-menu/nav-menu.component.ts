@@ -9,11 +9,12 @@ import { Router } from '@angular/router';
 })
 export class NavMenuComponent implements OnInit {
 
+  isExpanded = false;
+
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
-  isExpanded = false;
 
   collapse() {
     this.isExpanded = false;
