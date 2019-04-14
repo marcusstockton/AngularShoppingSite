@@ -4,7 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { AuthComponent } from './auth/auth.component';
 import { NotFoundComponent } from './not-found.component';
-import { AccountDashboardComponent } from './account-dashboard/containers/account-dashboard/account-dashboard.component';
+import { AccountDashboardComponent } from './account/containers/account-dashboard/account-dashboard.component';
 import { ItemsDashboardComponent } from './items/containers/items-dashboard/items-dashboard.component';
 import { OrdersDashboardComponent } from './orders/containers/orders-dashboard/orders-dashboard.component';
 import { ReviewsDashboardComponent } from './reviews/containers/reviews-dashboard/reviews-dashboard.component';
