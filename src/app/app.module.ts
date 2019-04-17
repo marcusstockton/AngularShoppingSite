@@ -14,6 +14,7 @@ import { ItemsModule } from './items/items.module';
 import { OrdersModule } from './orders/orders.module';
 import { AccountModule } from './account/account.module';
 import { ReviewsModule } from './reviews/reviews.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ReviewsModule } from './reviews/reviews.module';
     AboutComponent,
     NavMenuComponent,
     NotFoundComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { ReviewsModule } from './reviews/reviews.module';
     ItemsModule,
     OrdersModule,
     AccountModule,
-    ReviewsModule
+    ReviewsModule,
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
