@@ -15,6 +15,9 @@ import { OrdersModule } from './orders/orders.module';
 import { AccountModule } from './account/account.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { CoreModule } from './core/core.module';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import { CoreModule } from './core/core.module';
     AboutComponent,
     NavMenuComponent,
     NotFoundComponent,
+    NavBarComponent,
   
   ],
   imports: [
@@ -36,6 +40,12 @@ import { CoreModule } from './core/core.module';
     AccountModule,
     ReviewsModule,
     CoreModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
