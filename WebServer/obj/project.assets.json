@@ -12065,6 +12065,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.AspNetCore.App >= 2.2.0",
+      "Microsoft.AspNetCore.Cors >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0"
     ]
@@ -12076,11 +12077,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
+      "projectUniqueName": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
       "projectName": "WebServer",
-      "projectPath": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
+      "projectPath": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
       "packagesPath": "C:\\Users\\mstockton\\.nuget\\packages\\",
-      "outputPath": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\obj\\",
+      "outputPath": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12117,6 +12118,10 @@
             "target": "Package",
             "version": "[2.2.0, )",
             "autoReferenced": true
+          },
+          "Microsoft.AspNetCore.Cors": {
+            "target": "Package",
+            "version": "[2.2.0, )"
           },
           "Microsoft.AspNetCore.Razor.Design": {
             "suppressParent": "All",

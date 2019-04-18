@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +9,14 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  private baseURL = environment.apiBaseURL;
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
+    // Test that calling the back end works:
+    this.httpClient.get(this.baseURL + 'values').subscribe((res)=>{
+      console.log(res);
+    });
   }
 
   animalControl = new FormControl('', [Validators.required]);
