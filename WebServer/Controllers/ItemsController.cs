@@ -20,6 +20,7 @@ namespace WebServer.Controllers
         }
 
         // GET api/values
+		// curl https://localhost:5001/api/Items --insecure | python -mjson.tool
         [HttpGet]
         public ActionResult<IEnumerable<Item>> Get()
         {

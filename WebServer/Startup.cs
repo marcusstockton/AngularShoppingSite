@@ -31,6 +31,7 @@ namespace WebServer
         {
             services.AddDbContext<ApplicationDbContext>(context => { context.UseInMemoryDatabase("InMemoryDatabase"); });
 
+            services.AddTransient<DataSeeder>();
             services.AddTransient<IItemsService, ItemsService>();
 
             services.AddCors();
@@ -38,7 +39,7 @@ namespace WebServer
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DataSeeder seeder)
         {
             if (env.IsDevelopment())
             {
@@ -57,6 +58,8 @@ namespace WebServer
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            seeder.SeedData();
         }
     }
 }

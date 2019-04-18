@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ItemsService } from '../../items.service';
 
 @Component({
   selector: 'app-items-dashboard',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./items-dashboard.component.css']
 })
 export class ItemsDashboardComponent implements OnInit {
-
-  constructor() { }
+  public ItemList: any[];
+  constructor(private service: ItemsService) { }
 
   ngOnInit() {
+
+    this.service.getItems().subscribe((result)=>{
+      this.ItemList = result;
+    })
   }
 
 }

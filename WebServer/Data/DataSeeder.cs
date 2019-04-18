@@ -12,7 +12,10 @@ namespace WebServer.Data
         public DataSeeder(ApplicationDbContext context, IServiceProvider service)
         {
             _context = context;
+        }
 
+        public void SeedData()
+        {
 
             if (!_context.Items.Any())
             {
@@ -40,6 +43,8 @@ namespace WebServer.Data
                     Title = "Some old guff",
                     Price = 0.12,
                 });
+
+                _context.SaveChanges();
             }
         }
     }
