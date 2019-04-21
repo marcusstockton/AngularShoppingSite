@@ -7,14 +7,11 @@ import { ItemsService } from '../../items.service';
   styleUrls: ['./items-dashboard.component.css']
 })
 export class ItemsDashboardComponent implements OnInit {
-  public ItemList: any[];
-  constructor(private service: ItemsService) { }
+  public itemList;
+  public displayedColumns: string[];
+  constructor() { }
 
   ngOnInit() {
-
-    this.service.getItems().subscribe((result)=>{
-      this.ItemList = result;
-    })
   }
 
 }

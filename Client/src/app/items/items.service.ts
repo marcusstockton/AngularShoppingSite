@@ -16,7 +16,7 @@ export class ItemsService implements OnInit {
     this.getItems();
   }
 
-  getItems(): Observable<any[]>{
+  getItems(): Observable<any[]> {
     return this.httpClient.get<any[]>(`${this.baseURL}`)
       .pipe(
         tap( // Log the result or error

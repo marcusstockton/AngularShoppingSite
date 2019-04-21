@@ -17,7 +17,6 @@ import { ReviewsModule } from './reviews/reviews.module';
 import { CoreModule } from './core/core.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     NavMenuComponent,
     NotFoundComponent,
     NavBarComponent,
-  
   ],
   imports: [
     BrowserModule,
@@ -39,13 +37,8 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     OrdersModule,
     AccountModule,
     ReviewsModule,
-    CoreModule,
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
