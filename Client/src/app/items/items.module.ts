@@ -7,7 +7,10 @@ import { ItemViewerComponent } from './containers/item-viewer/item-viewer.compon
 import { ReviewsModule } from '../reviews/reviews.module';
 import { CoreModule } from '@angular/flex-layout';
 import { ItemsTableComponent } from './components/items-table/items-table.component';
-import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import {
+  MatTableModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatFormFieldModule,
+  MatInputModule
+} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -15,14 +18,18 @@ import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/mate
     ItemDetailComponent,
     ItemFormComponent,
     ItemViewerComponent,
-    ItemsTableComponent,  ],
+    ItemsTableComponent,
+  ],
   imports: [
     CommonModule,
-    CoreModule,
     ReviewsModule,
+    CoreModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     ItemsDashboardComponent,

@@ -11,7 +11,8 @@ import {
   MatBadgeModule, MatBottomSheetModule, MatButtonToggleModule, MatCardModule, MatChipsModule, MatStepperModule, MatDialogModule,
   MatDividerModule, MatExpansionModule, MatListModule, MatMenuModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule,
   MatRippleModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTabsModule, MatTooltipModule,
-  MatTreeModule
+  MatTreeModule,
+  MatFormFieldModule
 } from '@angular/material';
 
 
@@ -59,6 +60,7 @@ import {
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
+    MatFormFieldModule
   ],
   exports: [
     CommonModule,
@@ -101,6 +103,7 @@ import {
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
+    MatFormFieldModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },

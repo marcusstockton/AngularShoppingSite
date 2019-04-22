@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { IItem } from './models/Item';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ItemsService implements OnInit {
     this.getItems();
   }
 
-  getItems(): Observable<any[]> {
+  getItems(): Observable<IItem[]> {
     return this.httpClient.get<any[]>(`${this.baseURL}`)
       .pipe(
         tap( // Log the result or error
