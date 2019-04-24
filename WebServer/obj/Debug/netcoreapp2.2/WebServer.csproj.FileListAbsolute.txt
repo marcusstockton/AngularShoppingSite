@@ -17,6 +17,7 @@ D:\Dropbox\Angular Projects\AngularShoppingSite\WebServer\bin\Debug\netcoreapp2.
 D:\Dropbox\Angular Projects\AngularShoppingSite\WebServer\bin\Debug\netcoreapp2.2\WebServer.runtimeconfig.dev.json
 D:\Dropbox\Angular Projects\AngularShoppingSite\WebServer\bin\Debug\netcoreapp2.2\WebServer.dll
 D:\Dropbox\Angular Projects\AngularShoppingSite\WebServer\bin\Debug\netcoreapp2.2\WebServer.pdb
+D:\Dropbox\Angular Projects\AngularShoppingSite\WebServer\obj\Debug\netcoreapp2.2\WebServer.csprojAssemblyReference.cache
 D:\Dropbox\Angular Projects\AngularShoppingSite\WebServer\obj\Debug\netcoreapp2.2\WebServer.csproj.CoreCompileInputs.cache
 D:\Dropbox\Angular Projects\AngularShoppingSite\WebServer\obj\Debug\netcoreapp2.2\WebServer.RazorAssemblyInfo.cache
 D:\Dropbox\Angular Projects\AngularShoppingSite\WebServer\obj\Debug\netcoreapp2.2\WebServer.RazorAssemblyInfo.cs
@@ -25,4 +26,3 @@ D:\Dropbox\Angular Projects\AngularShoppingSite\WebServer\obj\Debug\netcoreapp2.
 D:\Dropbox\Angular Projects\AngularShoppingSite\WebServer\obj\Debug\netcoreapp2.2\WebServer.RazorTargetAssemblyInfo.cache
 D:\Dropbox\Angular Projects\AngularShoppingSite\WebServer\obj\Debug\netcoreapp2.2\WebServer.dll
 D:\Dropbox\Angular Projects\AngularShoppingSite\WebServer\obj\Debug\netcoreapp2.2\WebServer.pdb
-D:\Dropbox\Angular Projects\AngularShoppingSite\WebServer\obj\Debug\netcoreapp2.2\WebServer.csprojAssemblyReference.cache

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Interfaces;
 using WebServer.Models;
+using System.Web.Http.Cors;
 
 namespace WebServer.Controllers
 {

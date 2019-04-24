@@ -10,7 +10,20 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
   private baseURL = environment.apiBaseURL;
-  constructor(private httpClient: HttpClient) { }
+  public animalControl;
+  public selectFormControl;
+  public animals: any[] = [];
+
+  constructor(private httpClient: HttpClient) {
+    this.animalControl = new FormControl('', [Validators.required]);
+    this.selectFormControl = new FormControl('', Validators.required);
+    this.animals = [
+      {name: 'Dog', sound: 'Woof!'},
+      {name: 'Cat', sound: 'Meow!'},
+      {name: 'Cow', sound: 'Moo!'},
+      {name: 'Fox', sound: 'Wa-pa-pa-pa-pa-pa-pow!'},
+    ];
+  }
 
   ngOnInit() {
     // Test that calling the back end works:
@@ -19,14 +32,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  animalControl = new FormControl('', [Validators.required]);
-  selectFormControl = new FormControl('', Validators.required);
-  animals: any[] = [
-    {name: 'Dog', sound: 'Woof!'},
-    {name: 'Cat', sound: 'Meow!'},
-    {name: 'Cow', sound: 'Moo!'},
-    {name: 'Fox', sound: 'Wa-pa-pa-pa-pa-pa-pow!'},
-  ];
+  
 
   
 }

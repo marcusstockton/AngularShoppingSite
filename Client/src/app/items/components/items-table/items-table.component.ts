@@ -18,7 +18,7 @@ export class ItemsTableComponent implements AfterViewInit {
     this.service.getItems().subscribe((result) => {
       this.dataSource = new MatTableDataSource(result);
     }, (error) => {
-      console.log(error);
+      console.log(error.statusText);
     });
   }
 
@@ -27,9 +27,11 @@ export class ItemsTableComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }, 600);
+      if (this.dataSource) {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    }, 1000);
   }
 
   applyFilter(filterValue: string) {
