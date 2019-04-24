@@ -1,19 +1,13 @@
-export class Item implements IItem {
-    Name: string;
-    Title: string;
-    Description: string;
-    Price: number;
-    Id: string;
-    CreatedDate: Date;
-    UpdatedDate: Date;
+export class Item {
+
 }
 
 export interface IItem {
-    Name: string;
-    Title: string;
-    Description: string;
-    Price: number;
-    Id: string;
-    CreatedDate: Date;
-    UpdatedDate: Date;
+    name: string;
+    title: string;
+    description: string;
+    price: number;
+    id: string;
+    createdDate: Date;
+    updatedDate: Date;
 }

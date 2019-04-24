@@ -26,4 +26,14 @@ export class ItemsService implements OnInit {
         )
       );
   }
+
+  getItemById(id: any): Observable<IItem> {
+    return this.httpClient.get<any>(`${this.baseURL}/${id}`)
+      .pipe(
+        tap( // Log the result or error
+          // data => console.log(data),
+          // error => console.log(error)
+        )
+      );
+  }
 }

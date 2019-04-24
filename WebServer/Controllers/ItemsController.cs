@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Interfaces;
 using WebServer.Models;
-using System.Web.Http.Cors;
 
 namespace WebServer.Controllers
 {
@@ -30,9 +29,11 @@ namespace WebServer.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<ActionResult<Item>> Get(string id)
         {
-            return "value";
+            var idGuid = Guid.Parse(id);
+            var item = await _service.GetItemById(idGuid);
+            return Ok(item);
         }
 
         // POST api/values

@@ -8,10 +8,17 @@ import { AccountDashboardComponent } from './account/containers/account-dashboar
 import { ItemsDashboardComponent } from './items/containers/items-dashboard/items-dashboard.component';
 import { OrdersDashboardComponent } from './orders/containers/orders-dashboard/orders-dashboard.component';
 import { ReviewsDashboardComponent } from './reviews/containers/reviews-dashboard/reviews-dashboard.component';
+import { ItemDetailComponent } from './items/components/item-detail/item-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'items', component: ItemsDashboardComponent },
+  {
+    path: 'items',
+        children: [
+            { path: '', component: ItemsDashboardComponent },
+            { path: ':id', component: ItemDetailComponent}
+        ],
+  },
   { path: 'reviews', component: ReviewsDashboardComponent },
   { path: 'account', component: AccountDashboardComponent },
   { path: 'orders', component: OrdersDashboardComponent },

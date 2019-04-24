@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ItemsService } from '../../items.service';
 import { IItem } from '../../models/Item';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-items-table',
@@ -14,8 +15,8 @@ export class ItemsTableComponent implements AfterViewInit {
   dataSource: MatTableDataSource<IItem>;
   ItemList: IItem[]  = [];
 
-  constructor(private service: ItemsService) {
-    this.service.getItems().subscribe((result) => {
+  constructor(private service: ItemsService, private router: Router) {
+    this.service.getItems().subscribe((result: IItem[]) => {
       this.dataSource = new MatTableDataSource(result);
     }, (error) => {
       console.log(error.statusText);
@@ -40,7 +41,8 @@ export class ItemsTableComponent implements AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
-  selectRow(row) {
+  selectRow(row: IItem) {
     console.log(row);
+    this.router.navigate([`items/${row.id}`]);
   }
 }

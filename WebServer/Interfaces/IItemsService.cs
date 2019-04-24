@@ -9,5 +9,6 @@ namespace WebServer.Interfaces
     public interface IItemsService
     {
         Task<IEnumerable<Item>> GetItems();
+        Task<Item> GetItemById(Guid Id);
     }
 }

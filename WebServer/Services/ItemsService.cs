@@ -22,5 +22,9 @@ namespace WebServer.Services
         {
             return await _context.Items.ToListAsync();
         }
+
+        public async Task<Item> GetItemById(Guid Id){
+            return await _context.Items.FindAsync(Id);
+        }
     }
 }
