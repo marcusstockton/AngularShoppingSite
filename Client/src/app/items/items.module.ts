@@ -9,8 +9,11 @@ import { CoreModule } from '@angular/flex-layout';
 import { ItemsTableComponent } from './components/items-table/items-table.component';
 import {
   MatTableModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatButtonModule
 } from '@angular/material';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,12 +27,16 @@ import {
     CommonModule,
     ReviewsModule,
     CoreModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
   ],
   exports: [
     ItemsDashboardComponent,

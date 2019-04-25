@@ -24,7 +24,7 @@ namespace WebServer.Services
         }
 
         public async Task<Item> GetItemById(Guid Id){
-            return await _context.Items.FindAsync(Id);
+            return await _context.Items.Include(x=>x.Reviews).Where(i=>i.Id == Id).FirstOrDefaultAsync();
         }
     }
 }

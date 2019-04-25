@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace WebServer.Models
 {
     public class Item : Base
@@ -7,5 +9,6 @@ namespace WebServer.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
+        public virtual List<Review> Reviews { get; set; }
     }
 }

@@ -7,3 +7,13 @@
 <p>{{item?.price}}</p>
 <p>{{item?.createdDate}}</p>
 <p>{{item?.name}}</p>
+
+<button mat-raised-button color="primary" [routerLink]="['edit']">Edit</button>
+<hr>
+<legend>Reviews:</legend>
+<div  *ngFor="let review of item?.reviews">
+  <p>{{review.title}}</p>
+  <p>{{review.description}}</p>
+  <p>{{review.rating}} / 5</p>
+  <p>{{review.createdDate}}</p>
+</div >

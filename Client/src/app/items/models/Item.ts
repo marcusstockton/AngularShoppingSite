@@ -1,3 +1,5 @@
+import { IReview } from 'src/app/reviews/models/review';
+
 export class Item {
 
 }
@@ -10,4 +12,5 @@ export interface IItem {
     id: string;
     createdDate: Date;
     updatedDate: Date;
+    reviews: IReview[],
 }
