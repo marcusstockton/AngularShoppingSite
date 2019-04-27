@@ -26,5 +26,16 @@ namespace WebServer.Services
         public async Task<Item> GetItemById(Guid Id){
             return await _context.Items.Include(x=>x.Reviews).Where(i=>i.Id == Id).FirstOrDefaultAsync();
         }
+
+        public async Task<bool> UpdateItemById(Guid id, Item item){
+            if(item.Id == id)
+            {
+                // Update the item
+                _context.Entry(item).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
     }
 }

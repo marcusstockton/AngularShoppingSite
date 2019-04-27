@@ -44,8 +44,23 @@ namespace WebServer.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(string id, [FromBody] Item item)
         {
+            Guid _id;
+            var idGuid = Guid.TryParse(id, out _id);
+            if (idGuid && item != null)
+            {
+                var result = await _service.UpdateItemById(_id, item);
+                if(result){
+                    return NoContent();
+                } 
+                else 
+                {
+                    return BadRequest("Invalid Data");
+                }
+            }
+            
+            return BadRequest("Empty Item record passed down doofus!");
         }
 
         // DELETE api/values/5
