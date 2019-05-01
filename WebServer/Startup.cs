@@ -73,7 +73,7 @@ namespace WebServer
                 };
             });
 
-            services.AddScoped<IUserService, UserService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -93,6 +93,7 @@ namespace WebServer
             }
 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseMvc();
 
             seeder.SeedData();

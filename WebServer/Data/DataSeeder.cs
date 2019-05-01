@@ -26,6 +26,13 @@ namespace WebServer.Data
                     Password = "test",
                     Username = "testUser",
                 });
+                _context.Users.AddAsync(new User
+                {
+                    CreatedDate = DateTime.Now,
+                    FirstName = "Crap",
+                    LastName = "User",
+                    Username = "noPassword",
+                });
             }
 
             if (!_context.Items.Any())

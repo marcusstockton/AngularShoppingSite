@@ -34,7 +34,8 @@ namespace WebServer.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        [Authorize]
+        public IActionResult GetAllUsersWithoutPasswords()
         {
             var users = _userService.GetAll();
             return Ok(users);
