@@ -16,6 +16,17 @@ namespace WebServer.Data
 
         public void SeedData()
         {
+            if (!_context.Users.Any())
+            {
+                _context.Users.AddAsync(new User
+                {
+                    CreatedDate = DateTime.Now,
+                    FirstName = "Marcus",
+                    LastName = "TestUser",
+                    Password = "test",
+                    Username = "testUser",
+                });
+            }
 
             if (!_context.Items.Any())
             {
