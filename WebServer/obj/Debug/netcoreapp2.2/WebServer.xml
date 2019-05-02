@@ -31,5 +31,47 @@
             <param name="item">The Item</param>
             <returns>An IActionResult</returns>
         </member>
+        <member name="M:WebServer.Controllers.UsersController.Authenticate(WebServer.Models.DTOs.Users.LoginDto)">
+             <summary>
+             End point for authenticating individual user account.
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /authenticate
+                 {
+                    "username": "testUser",
+                    "password": "Pa$$w0rd"
+                 }
+            
+             </remarks>
+             <param name="userParam"></param>
+             <returns>User object with auth token.</returns>
+        </member>
+        <member name="M:WebServer.Controllers.UsersController.RegisterUser(WebServer.Models.DTOs.Users.RegisterUser)">
+             <summary>
+             Register a new user
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /register
+                 {
+                    "username": "testUser",
+                    "password": "password",
+                    "firstName": "John",
+                    "lastname": "Doe",
+                    "dob": "1 mar 1998"
+                 }
+             </remarks>
+             <param name="user"></param>
+             <returns></returns>
+        </member>
+        <member name="M:WebServer.Controllers.UsersController.GetAllUsersWithoutFirstName">
+            <summary>
+            Gets all users who don't have a first name set
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

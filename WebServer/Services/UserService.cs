@@ -12,6 +12,7 @@ using WebServer.Data;
 using WebServer.Helpers;
 using WebServer.Interfaces;
 using WebServer.Models;
+using WebServer.Models.DTOs.Users;
 
 namespace WebServer.Services
 {
@@ -55,6 +56,23 @@ namespace WebServer.Services
         {
             // return users without passwords
             return _userManager.Users.Where(c => string.IsNullOrEmpty(c.FirstName));
+        }
+
+        public Task RegisterUser(RegisterUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ApplicationUser> ValidateUser(LoginDto userParam)
+        {
+            var user = await _userManager.FindByNameAsync(userParam.Username);
+            var _passwordHasher = new PasswordHasher<ApplicationUser>();
+
+            if (user == null || _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, userParam.Password) != PasswordVerificationResult.Success)
+            {
+                return null;
+            }
+            return user;
         }
     }
 }
