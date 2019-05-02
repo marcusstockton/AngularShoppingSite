@@ -9,6 +9,7 @@ using WebServer.Models;
 namespace WebServer.Controllers
 {
     [Route("api/[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class ItemsController : ControllerBase
     {
@@ -21,6 +22,11 @@ namespace WebServer.Controllers
 
         // GET api/values
 		// curl https://localhost:5001/api/Items --insecure | python -mjson.tool
+
+        /// <summary>
+        /// Gets a list of all Items.
+        /// </summary>
+        /// <returns>An Ienumerable of Items.</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Item>>> Get()
         {
@@ -28,6 +34,11 @@ namespace WebServer.Controllers
         }
 
         // GET api/values/5
+        /// <summary>
+        /// Get a specific item.
+        /// </summary>
+        /// <param name="id">The Item Id.</param>
+        /// <returns>An Item.</returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Item>> Get(string id)
         {
@@ -37,12 +48,24 @@ namespace WebServer.Controllers
         }
 
         // POST api/values
+
+        /// <summary>
+        /// Creates a new Item
+        /// </summary>
+        /// <param name="value">The Item data</param>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
         // PUT api/values/5
+
+        /// <summary>
+        /// Updates a cerain Item
+        /// </summary>
+        /// <param name="id">The item Id</param>
+        /// <param name="item">The Item</param>
+        /// <returns>An IActionResult</returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromBody] Item item)
         {

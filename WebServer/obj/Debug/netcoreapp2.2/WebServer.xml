@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebServer</name>
+    </assembly>
+    <members>
+        <member name="M:WebServer.Controllers.ItemsController.Get">
+            <summary>
+            Gets a list of all Items.
+            </summary>
+            <returns>An Ienumerable of Items.</returns>
+        </member>
+        <member name="M:WebServer.Controllers.ItemsController.Get(System.String)">
+            <summary>
+            Get a specific item.
+            </summary>
+            <param name="id">The Item Id.</param>
+            <returns>An Item.</returns>
+        </member>
+        <member name="M:WebServer.Controllers.ItemsController.Post(System.String)">
+            <summary>
+            Creates a new Item
+            </summary>
+            <param name="value">The Item data</param>
+        </member>
+        <member name="M:WebServer.Controllers.ItemsController.Put(System.String,WebServer.Models.Item)">
+            <summary>
+            Updates a cerain Item
+            </summary>
+            <param name="id">The item Id</param>
+            <param name="item">The Item</param>
+            <returns>An IActionResult</returns>
+        </member>
+    </members>
+</doc>
