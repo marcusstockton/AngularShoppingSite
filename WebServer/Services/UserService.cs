@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -18,16 +19,16 @@ namespace WebServer.Services
     {
         private readonly AppSettings _appSettings;
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserService(IOptions<AppSettings> appSettings, ApplicationDbContext context)
+        public UserService(IOptions<AppSettings> appSettings, ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _appSettings = appSettings.Value;
             _context = context;
+            _userManager = userManager;
         }
-        public User Authenticate(string username, string password)
+        public ApplicationUser Authenticate(ApplicationUser user)
         {
-            var user = _context.Users.SingleOrDefault(x => x.Username == username && x.Password == password);
-
             // return null if user not found
             if (user == null)
                 return null;
@@ -39,24 +40,21 @@ namespace WebServer.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.Name, user.UserName),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);
-
-            // remove password before returning
-            user.Password = null;
-
+            
             return user;
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<ApplicationUser> GetAllUsersWithoutFirstName()
         {
             // return users without passwords
-            return _context.Users.Where(x => x.Password == null ).AsEnumerable();
+            return _userManager.Users.Where(c => string.IsNullOrEmpty(c.FirstName));
         }
     }
 }

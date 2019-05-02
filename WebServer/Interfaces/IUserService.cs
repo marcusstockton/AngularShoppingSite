@@ -8,7 +8,7 @@ namespace WebServer.Interfaces
 {
     public interface IUserService
     {
-        User Authenticate(string username, string password);
-        IEnumerable<User> GetAll();
+        ApplicationUser Authenticate(ApplicationUser user);
+        IEnumerable<ApplicationUser> GetAllUsersWithoutFirstName();
     }
 }

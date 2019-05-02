@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebServer.Models
+namespace WebServer.Models.DTOs
 {
-    public class User : Base
+    public class LoginDto
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public string Token { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,30 +10,38 @@ namespace WebServer.Data
     public class DataSeeder
     {
         private readonly ApplicationDbContext _context;
-        public DataSeeder(ApplicationDbContext context, IServiceProvider service)
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public DataSeeder(ApplicationDbContext context, IServiceProvider service, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole<Guid>> roleManager)
         {
             _context = context;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
 
-        public void SeedData()
+        public async void SeedData()
         {
             if (!_context.Users.Any())
             {
-                _context.Users.AddAsync(new User
+
+                var validUser = new ApplicationUser()
                 {
-                    CreatedDate = DateTime.Now,
-                    FirstName = "Marcus",
-                    LastName = "TestUser",
-                    Password = "test",
-                    Username = "testUser",
-                });
-                _context.Users.AddAsync(new User
+                    Id = Guid.NewGuid(),
+                    Email = "test@test.com",
+                    UserName = "testUser",
+                    FirstName = "Marcus"
+                };
+                var validUserResult = await _userManager.CreateAsync(validUser, "Pa$$w0rd");
+
+                var noNameUser = new ApplicationUser()
                 {
-                    CreatedDate = DateTime.Now,
-                    FirstName = "Crap",
-                    LastName = "User",
-                    Username = "noPassword",
-                });
+                    Id = Guid.NewGuid(),
+                    Email = "someShit@test.com",
+                    UserName = "noNamedUser"
+                };
+                var noNameUserResult = await _userManager.CreateAsync(noNameUser, "Pa$$w0rd");
+
             }
 
             if (!_context.Items.Any())
