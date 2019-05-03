@@ -74,8 +74,12 @@ namespace WebServer.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUser user)
         {
-            await _userService.RegisterUser(user);
-            return Ok();
+            var result = await _userService.RegisterUser(user);
+            if(result.Succeeded){
+                return Ok();
+            }
+            return(BadRequest(result.Errors));
+            
         }
 
         /// <summary>

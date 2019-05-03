@@ -10,6 +10,7 @@ import {
 } from '@angular/material';
 
 import { NavBarComponent } from './nav-bar.component';
+import { CoreModule } from '../core/core.module';
 
 describe('NavBarComponent', () => {
   let component: NavBarComponent;
@@ -21,11 +22,7 @@ describe('NavBarComponent', () => {
       imports: [
         NoopAnimationsModule,
         LayoutModule,
-        MatButtonModule,
-        MatIconModule,
-        MatListModule,
-        MatSidenavModule,
-        MatToolbarModule,
+        CoreModule
       ]
     }).compileComponents();
   }));

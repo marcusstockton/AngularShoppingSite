@@ -58,9 +58,16 @@ namespace WebServer.Services
             return _userManager.Users.Where(c => string.IsNullOrEmpty(c.FirstName));
         }
 
-        public Task RegisterUser(RegisterUser user)
+        public async Task<IdentityResult> RegisterUser(RegisterUser user)
         {
-            throw new NotImplementedException();
+            var applicationUser = new ApplicationUser{
+                UserName = user.Username,
+                FirstName = user.FirstName,
+                DoB = user.DoB,
+                LastName = user.LastName
+            };
+            
+            return await _userManager.CreateAsync(applicationUser, user.Password);
         }
 
         public async Task<ApplicationUser> ValidateUser(LoginDto userParam)
