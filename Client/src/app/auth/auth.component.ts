@@ -19,7 +19,7 @@ export class AuthComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  registerForm: FormGroup = new FormGroup({
+registerForm: FormGroup = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
     firstName: new FormControl(''),

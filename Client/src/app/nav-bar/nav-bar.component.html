@@ -13,8 +13,13 @@
       <a mat-list-item routerLink="/about">About</a>
     </mat-nav-list>
     <mat-nav-list>
-      <a mat-list-item routerLink="/auth">Login</a>
-      <a mat-list-item routerLink="/" (click)='signOut()'>Logout</a>
+      <div *ngIf="isLoggedIn(); then loggedIn else loggedOut"></div>
+      <ng-template #loggedOut>
+        <a mat-list-item routerLink="/auth">Login</a>
+      </ng-template>
+      <ng-template #loggedIn>
+        <a mat-list-item routerLink="/" (click)='signOut()'>Logout</a>
+      </ng-template>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
