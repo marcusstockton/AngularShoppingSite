@@ -32,7 +32,7 @@ export class ItemsTableComponent implements AfterViewInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
-    }, 1000);
+    });
   }
 
   applyFilter(filterValue: string) {

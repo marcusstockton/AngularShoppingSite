@@ -9,18 +9,19 @@ import { ItemsDashboardComponent } from './items/containers/items-dashboard/item
 import { OrdersDashboardComponent } from './orders/containers/orders-dashboard/orders-dashboard.component';
 import { ReviewsDashboardComponent } from './reviews/containers/reviews-dashboard/reviews-dashboard.component';
 import { ItemDetailComponent } from './items/components/item-detail/item-detail.component';
-import { ItemFormComponent } from './items/components/item-form/item-form.component';
+import { ItemCreateComponent } from './items/components/item-create/item-create.component';
+import { ItemEditComponent } from './items/components/item-edit/item-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {
     path: 'items',
-        children: [
-            { path: '', component: ItemsDashboardComponent },
-            { path: ':id', component: ItemDetailComponent},
-            { path: ':id/edit', component: ItemFormComponent},
-            { path: 'create', component: ItemFormComponent}
-        ],
+    children: [
+      { path: '', component: ItemsDashboardComponent },
+      { path: 'create', component: ItemCreateComponent },
+      { path: ':id', component: ItemDetailComponent },
+      { path: ':id/edit', component: ItemEditComponent }
+    ],
   },
   { path: 'reviews', component: ReviewsDashboardComponent },
   { path: 'account', component: AccountDashboardComponent },

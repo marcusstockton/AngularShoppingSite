@@ -1,0 +1,6 @@
+<p>
+  item-edit works!
+</p>
+<span *ngIf="item">
+  <app-item-form [Item]="item" (editEvent)="onUpdateItem($event)"></app-item-form>
+</span>

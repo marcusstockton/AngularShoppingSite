@@ -10,6 +10,8 @@ import { ItemsTableComponent } from './components/items-table/items-table.compon
 
 import { RouterModule } from '@angular/router';
 import { CoreModule } from '../core/core.module';
+import { ItemCreateComponent } from './components/item-create/item-create.component';
+import { ItemEditComponent } from './components/item-edit/item-edit.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { CoreModule } from '../core/core.module';
     ItemFormComponent,
     ItemViewerComponent,
     ItemsTableComponent,
+    ItemCreateComponent,
+    ItemEditComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +35,8 @@ import { CoreModule } from '../core/core.module';
     ItemFormComponent,
     ItemViewerComponent,
     ItemsTableComponent,
+    ItemCreateComponent,
+    ItemEditComponent
   ]
 })
 export class ItemsModule { }

@@ -12,5 +12,5 @@ export interface IItem {
     id: string;
     createdDate: Date;
     updatedDate: Date;
-    reviews: IReview[],
+    reviews: IReview[];
 }

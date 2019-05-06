@@ -1,7 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { IItem } from '../../models/Item';
-import { ItemsService } from '../../items.service';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { IItem, Item } from '../../models/Item';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -9,7 +7,9 @@ import { FormBuilder } from '@angular/forms';
   templateUrl: './item-form.component.html',
   styleUrls: ['./item-form.component.css']
 })
+
 export class ItemFormComponent implements OnInit {
+
   itemId: string;
   item: IItem;
   itemForm = this.fb.group({
@@ -22,47 +22,36 @@ export class ItemFormComponent implements OnInit {
     updatedDate: [''],
   });
 
-  constructor(private service: ItemsService, private route: ActivatedRoute, private fb: FormBuilder) { }
+  @Input() Item: IItem;
 
-  ngOnInit() {
-    this.itemId = this.route.snapshot.paramMap.get('id');
-    if (this.itemId) {
-      console.log(`We have an id of ${this.itemId}`);
-      // Go get the data...
-      // this.service.getItemById(this.itemId).pipe(map((result) => {
-      //   this.item = result;
-      // }));
-      this.service.getItemById(this.itemId).subscribe((result) => {
-        // Set the form data:
-        this.itemForm.patchValue(
-          {title: result.title,
-            description: result.description,
-            price: result.price,
-            id: result.id,
-            createdDate: result.createdDate,
-            updatedDate: result.updatedDate,
-            name: result.name
-          });
-      });
+  @Output() editEvent: EventEmitter<IItem> = new EventEmitter<IItem>();
+
+  @Output() createEvent: EventEmitter<IItem> = new EventEmitter<IItem>();
+
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    if (this.Item) {
+      this.itemForm.patchValue({
+        id: this.Item.id,
+        title: this.Item.title,
+        name: this.Item.name,
+        description: this.Item.description,
+        price: this.Item.price,
+        createdDate: this.Item.createdDate,
+        updatedDate: this.Item.updatedDate
+    });
     }
   }
 
   onSubmit() {
-    if (this.itemForm.valid) {
-      if (this.itemId) {
-        // Its an update, so put
-        this.service.updateItemById(this.itemId, this.itemForm.value).subscribe((result) => {
-          alert('Sucessfully updated!');
-        }, (error) => {
-          alert('There was an error updating the item: ' + error.error);
-        });
-
-      } else {
-        // Its new, so post
-      }
+    if (this.itemForm.get('id').value) {
+      // Editing:
+      this.editEvent.emit(this.itemForm.value);
     } else {
-      // Form has errors:
+      // Creating:
+      this.createEvent.emit(this.itemForm.value);
     }
-
   }
+
 }

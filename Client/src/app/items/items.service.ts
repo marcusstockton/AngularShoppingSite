@@ -37,7 +37,7 @@ export class ItemsService implements OnInit {
       );
   }
 
-  updateItemById(id: any, body: IItem): Observable<IItem>{
+  updateItemById(id: any, body: IItem): Observable<IItem> {
     return this.httpClient.put<any>(`${this.baseURL}/${id}`, body)
       .pipe(
         tap( // Log the result or error

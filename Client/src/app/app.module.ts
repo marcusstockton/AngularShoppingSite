@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { ErrorInterceptor } from './helpers/error-interceptor/error-interceptor.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotFoundComponent } from './not-found.component';
 import { AuthModule } from './auth/auth.module';
@@ -24,7 +23,6 @@ import { JwtInterceptor } from './helpers/jwt-interceptor';
     AppComponent,
     HomeComponent,
     AboutComponent,
-    NavMenuComponent,
     NotFoundComponent,
     NavBarComponent,
   ],
