@@ -42,10 +42,6 @@ namespace WebServer.Data
                 };
                 var noNameUserResult = await _userManager.CreateAsync(noNameUser, "Pa$$w0rd");
 
-            }
-
-            if (!_context.Items.Any())
-            {
                 _context.Items.Add(new Item
                 {
                     Id = new Guid(),
@@ -54,6 +50,7 @@ namespace WebServer.Data
                     Description = "Some Description",
                     Title = "Some Title",
                     Price = 21.32,
+                    CreatedBy = validUser,
                     Reviews = new List<Review>
                     {
                         new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=3, Title="My First Review", Description = "My First Review Description"}
@@ -67,6 +64,7 @@ namespace WebServer.Data
                     Description = "Some Other Description",
                     Title = "Some Other Title",
                     Price = 123245,
+                    CreatedBy = noNameUser,
                     Reviews = new List<Review>
                     {
                         new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=1, Title="My Second Review", Description = "My Second Review Description"}
@@ -80,6 +78,7 @@ namespace WebServer.Data
                     Description = "Blah blah blah",
                     Title = "Some old guff",
                     Price = 0.12,
+                    CreatedBy = validUser,
                     Reviews = new List<Review>
                     {
                         new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=5, Title="My Third Review", Description = "My Third Review Description"}
@@ -93,6 +92,7 @@ namespace WebServer.Data
                     Description = "The mountain bike of the future, today!",
                     Title = "Worlds Best Mountain Bike",
                     Price = 1220.12,
+                    CreatedBy = noNameUser,
                     Reviews = new List<Review>
                     {
                         new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=4, Title="My Fourth Review", Description = "My Fourth Review Description"}
@@ -106,6 +106,7 @@ namespace WebServer.Data
                     Description = "Acord from an oak tree. 100% Unique, no other like it in the world!",
                     Title = "An Acorn",
                     Price = 1220.12,
+                    CreatedBy = validUser,
                     Reviews = new List<Review>
                     {
                         new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=5, Title="My Fifth Review", Description = "My Fifth Review Description"}
@@ -119,6 +120,7 @@ namespace WebServer.Data
                     Description = "A frizbee thats been used before, usual wear and tear for a used frizbee.",
                     Title = "Used Frizbee",
                     Price = 4.25,
+                    CreatedBy = validUser,
                     Reviews = new List<Review>
                     {
                         new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=2, Title="My Sixth Review", Description = "My Sixth Review Description"}

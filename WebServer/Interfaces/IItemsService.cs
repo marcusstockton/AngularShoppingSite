@@ -11,5 +11,6 @@ namespace WebServer.Interfaces
         Task<IEnumerable<Item>> GetItems();
         Task<Item> GetItemById(Guid Id);
         Task<bool> UpdateItemById(Guid id, Item item);
+        Task<int> CreateItem(Item item);
     }
 }

@@ -17,11 +17,11 @@
             <param name="id">The Item Id.</param>
             <returns>An Item.</returns>
         </member>
-        <member name="M:WebServer.Controllers.ItemsController.Post(System.String)">
+        <member name="M:WebServer.Controllers.ItemsController.Post(WebServer.Models.DTOs.Items.ItemCreate)">
             <summary>
             Creates a new Item
             </summary>
-            <param name="value">The Item data</param>
+            <param name="item">The Item data</param>
         </member>
         <member name="M:WebServer.Controllers.ItemsController.Put(System.String,WebServer.Models.Item)">
             <summary>

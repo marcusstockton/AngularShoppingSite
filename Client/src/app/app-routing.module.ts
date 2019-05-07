@@ -11,6 +11,7 @@ import { ReviewsDashboardComponent } from './reviews/containers/reviews-dashboar
 import { ItemDetailComponent } from './items/components/item-detail/item-detail.component';
 import { ItemCreateComponent } from './items/components/item-create/item-create.component';
 import { ItemEditComponent } from './items/components/item-edit/item-edit.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,9 +19,9 @@ const routes: Routes = [
     path: 'items',
     children: [
       { path: '', component: ItemsDashboardComponent },
-      { path: 'create', component: ItemCreateComponent },
+      { path: 'create', component: ItemCreateComponent, canActivate: [AuthGuard]},
       { path: ':id', component: ItemDetailComponent },
-      { path: ':id/edit', component: ItemEditComponent }
+      { path: ':id/edit', component: ItemEditComponent, canActivate: [AuthGuard] }
     ],
   },
   { path: 'reviews', component: ReviewsDashboardComponent },

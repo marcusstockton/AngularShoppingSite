@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebServer.Data;
 using WebServer.Interfaces;
@@ -31,11 +32,18 @@ namespace WebServer.Services
             if(item.Id == id)
             {
                 // Update the item
+                item.UpdatedDate = DateTime.Now;
                 _context.Entry(item).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
                 return true;
             }
             return false;
         }
+
+        public async Task<int> CreateItem(Item item){
+            var result = await _context.AddAsync(item);
+            return await _context.SaveChangesAsync();
+        }
+
     }
 }

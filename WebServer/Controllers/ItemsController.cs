@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Interfaces;
 using WebServer.Models;
+using WebServer.Models.DTOs.Items;
 
 namespace WebServer.Controllers
 {
@@ -48,14 +51,32 @@ namespace WebServer.Controllers
         }
 
         // POST api/values
-
         /// <summary>
         /// Creates a new Item
         /// </summary>
-        /// <param name="value">The Item data</param>
+        /// <param name="item">The Item data</param>
+        [Authorize]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> Post([FromBody] ItemCreate item)
         {
+            var userid = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var newItem = new Item
+            {
+                Name = item.Name,
+                CreatedById = Guid.Parse(userid),
+                Title = item.Title,
+                Description = item.Description,
+                Price = item.Price,
+                CreatedDate = DateTime.Now
+            };
+            
+            var result = await _service.CreateItem(newItem);
+            if(result > 0)
+            {
+                // Return the number of records added:
+                return Ok(result);
+            }
+            return BadRequest();
         }
 
         // PUT api/values/5
@@ -66,11 +87,14 @@ namespace WebServer.Controllers
         /// <param name="id">The item Id</param>
         /// <param name="item">The Item</param>
         /// <returns>An IActionResult</returns>
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromBody] Item item)
         {
             Guid _id;
             var idGuid = Guid.TryParse(id, out _id);
+            var userid = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            item.UpdatedById = Guid.Parse(userid);
             if (idGuid && item != null)
             {
                 var result = await _service.UpdateItemById(_id, item);
@@ -87,6 +111,7 @@ namespace WebServer.Controllers
         }
 
         // DELETE api/values/5
+        [Authorize]
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IItem } from '../../models/Item';
 import { ItemsService } from '../../items.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-item-create',
@@ -9,14 +10,18 @@ import { ItemsService } from '../../items.service';
 })
 export class ItemCreateComponent implements OnInit {
 
-  constructor(private service: ItemsService) { }
+  constructor(private service: ItemsService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  onCreateItem(event: IItem) {
-    alert(JSON.stringify(event));
-    // TODO: Add in create to service call etc.
+  onCreateItem(item: IItem) {
+    this.service.createItem(item).subscribe((result) => {
+      alert(JSON.stringify(result) + ' record(s) updated!' );
+      this.router.navigate(['items']);
+    }, (error) => {
+      alert(error);
+    });
   }
 
 }
