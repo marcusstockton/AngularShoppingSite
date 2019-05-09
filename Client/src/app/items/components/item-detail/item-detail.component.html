@@ -3,7 +3,7 @@
 <p>{{item?.title}}</p>
 <p>{{item?.description}}</p>
 <p>{{item?.price}}</p>
-<p>{{item?.createdDate}}</p>
+<p>{{item?.createdDate | date:'medium'}}</p>
 <p>{{item?.name}}</p>
 
 <button mat-raised-button color="primary" [routerLink]="['edit']">Edit</button>
@@ -13,5 +13,5 @@
   <p>{{review.title}}</p>
   <p>{{review.description}}</p>
   <p>{{review.rating}} / 5</p>
-  <p>{{review.createdDate}}</p>
+  <p>{{review.createdDate | date:'medium'}}</p>
 </div >

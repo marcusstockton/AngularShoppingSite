@@ -59,11 +59,9 @@ namespace WebServer.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ItemCreate item)
         {
-            var userid = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var newItem = new Item
             {
                 Name = item.Name,
-                CreatedById = Guid.Parse(userid),
                 Title = item.Title,
                 Description = item.Description,
                 Price = item.Price,
@@ -93,8 +91,6 @@ namespace WebServer.Controllers
         {
             Guid _id;
             var idGuid = Guid.TryParse(id, out _id);
-            var userid = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            item.UpdatedById = Guid.Parse(userid);
             if (idGuid && item != null)
             {
                 var result = await _service.UpdateItemById(_id, item);

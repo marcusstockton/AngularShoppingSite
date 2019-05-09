@@ -1,4 +1,5 @@
 import { IReview } from 'src/app/reviews/models/review';
+import { User } from 'src/app/auth/models/user';
 
 export class Item {
 
@@ -13,4 +14,6 @@ export interface IItem {
     createdDate: Date;
     updatedDate: Date;
     reviews: IReview[];
+    createdBy: User;
+    updatedBy: User;
 }

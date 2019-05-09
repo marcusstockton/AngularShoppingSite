@@ -2,9 +2,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebServer.Models;
 
 namespace WebServer.Data
@@ -22,6 +19,7 @@ namespace WebServer.Data
         {
             base.OnModelCreating(builder);
             builder.Entity<ApplicationUser>().Property(p => p.Id).ValueGeneratedOnAdd();
+            
         }
     }
 }

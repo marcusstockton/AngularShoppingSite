@@ -53,7 +53,7 @@ namespace WebServer.Data
                     CreatedBy = validUser,
                     Reviews = new List<Review>
                     {
-                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=3, Title="My First Review", Description = "My First Review Description"}
+                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=3, Title="My First Review", Description = "My First Review Description", CreatedBy=noNameUser}
                     }
                 });
                 _context.Items.Add(new Item
@@ -67,7 +67,7 @@ namespace WebServer.Data
                     CreatedBy = noNameUser,
                     Reviews = new List<Review>
                     {
-                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=1, Title="My Second Review", Description = "My Second Review Description"}
+                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=1, Title="My Second Review", Description = "My Second Review Description", CreatedBy=noNameUser}
                     }
                 });
                 _context.Items.Add(new Item
@@ -81,7 +81,7 @@ namespace WebServer.Data
                     CreatedBy = validUser,
                     Reviews = new List<Review>
                     {
-                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=5, Title="My Third Review", Description = "My Third Review Description"}
+                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=5, Title="My Third Review", Description = "My Third Review Description", CreatedBy=noNameUser}
                     }
                 });
                 _context.Items.Add(new Item
@@ -95,7 +95,7 @@ namespace WebServer.Data
                     CreatedBy = noNameUser,
                     Reviews = new List<Review>
                     {
-                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=4, Title="My Fourth Review", Description = "My Fourth Review Description"}
+                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=4, Title="My Fourth Review", Description = "My Fourth Review Description", CreatedBy=noNameUser}
                     }
                 });
                 _context.Items.Add(new Item
@@ -109,7 +109,7 @@ namespace WebServer.Data
                     CreatedBy = validUser,
                     Reviews = new List<Review>
                     {
-                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=5, Title="My Fifth Review", Description = "My Fifth Review Description"}
+                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=5, Title="My Fifth Review", Description = "My Fifth Review Description", CreatedBy=noNameUser}
                     }
                 });
                 _context.Items.Add(new Item
@@ -123,7 +123,7 @@ namespace WebServer.Data
                     CreatedBy = validUser,
                     Reviews = new List<Review>
                     {
-                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=2, Title="My Sixth Review", Description = "My Sixth Review Description"}
+                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=2, Title="My Sixth Review", Description = "My Sixth Review Description", CreatedBy=noNameUser}
                     }
                 });
                 _context.SaveChanges();

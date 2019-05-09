@@ -33,10 +33,13 @@ namespace WebServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(context => { context.UseInMemoryDatabase("InMemoryDatabase"); });
+            // services.AddDbContext<ApplicationDbContext>(context => { context.UseInMemoryDatabase("InMemoryDatabase"); });
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<DataSeeder>();
             services.AddTransient<IItemsService, ItemsService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddCors(options =>
             {

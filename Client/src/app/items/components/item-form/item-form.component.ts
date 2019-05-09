@@ -20,6 +20,8 @@ export class ItemFormComponent implements OnInit {
     price: [''],
     createdDate: [''],
     updatedDate: [''],
+    createdBy: [''],
+    updatedBy: ['']
   });
 
   @Input() Item: IItem;
@@ -39,7 +41,9 @@ export class ItemFormComponent implements OnInit {
         description: this.Item.description,
         price: this.Item.price,
         createdDate: this.Item.createdDate,
-        updatedDate: this.Item.updatedDate
+        updatedDate: this.Item.updatedDate,
+        createdBy: this.Item.createdBy,
+        updatedBy: this.Item.updatedBy
     });
     }
   }

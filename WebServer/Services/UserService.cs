@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -11,7 +12,6 @@ using System.Threading.Tasks;
 using WebServer.Data;
 using WebServer.Helpers;
 using WebServer.Interfaces;
-using WebServer.Models;
 using WebServer.Models.DTOs.Users;
 
 namespace WebServer.Services
@@ -21,12 +21,14 @@ namespace WebServer.Services
         private readonly AppSettings _appSettings;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IHttpContextAccessor _httpContext;
 
-        public UserService(IOptions<AppSettings> appSettings, ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public UserService(IOptions<AppSettings> appSettings, ApplicationDbContext context, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContext)
         {
             _appSettings = appSettings.Value;
             _context = context;
             _userManager = userManager;
+            _httpContext = httpContext;
         }
         public ApplicationUser Authenticate(ApplicationUser user)
         {
@@ -80,6 +82,16 @@ namespace WebServer.Services
                 return null;
             }
             return user;
+        }
+
+        public Guid GetLoggedInUserId()
+        {
+            var userId = _httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if(!string.IsNullOrEmpty(userId))
+            {
+                return Guid.Parse(userId);
+            }
+            return Guid.Empty;
         }
     }
 }

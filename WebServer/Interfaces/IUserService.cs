@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using WebServer.Models;
 using WebServer.Models.DTOs.Users;
-using Microsoft.AspNetCore.Identity;
 
 namespace WebServer.Interfaces
 {
@@ -14,5 +12,6 @@ namespace WebServer.Interfaces
         IEnumerable<ApplicationUser> GetAllUsersWithoutFirstName();
         Task<IdentityResult> RegisterUser(RegisterUser user);
         Task<ApplicationUser> ValidateUser(LoginDto userParam);
+        Guid GetLoggedInUserId();
     }
 }
