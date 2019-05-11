@@ -59,4 +59,16 @@ export class ItemsService implements OnInit {
       );
   }
 
+  deleteItem(id: string): Observable<any>{
+    const config = new HttpHeaders().set('Content-Type', 'application/json')
+    .set('Accept', 'application/json');
+    return this.httpClient.delete<any>(`${this.baseURL}/${id}`, { headers: config })
+      .pipe(
+        tap( // Log the result or error
+          // data => console.log(data),
+          // error => console.log(error)
+        )
+      );
+  }
+
 }

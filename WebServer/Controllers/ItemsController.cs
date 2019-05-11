@@ -107,10 +107,26 @@ namespace WebServer.Controllers
         }
 
         // DELETE api/values/5
+
+        /// <summary>
+        /// Deletes an Item
+        /// </summary>
+        /// <param name="id">The Id of the Item</param>
+        /// <returns></returns>
         [Authorize]
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
+            if(!string.IsNullOrEmpty(id))
+            {
+                Guid itemId;
+                Guid.TryParse(id, out itemId);
+                var result = await _service.DeleteItemById(itemId);
+                if(result){
+                    return Ok();
+                }
+            }
+            return BadRequest();
         }
     }
 }

@@ -50,5 +50,18 @@ namespace WebServer.Services
             return await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> DeleteItemById(Guid id)
+        {
+            var item = await _context.Items.FindAsync(id);
+            try 
+            {
+                _context.Items.Remove(item);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

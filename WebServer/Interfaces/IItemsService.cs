@@ -12,5 +12,6 @@ namespace WebServer.Interfaces
         Task<Item> GetItemById(Guid Id);
         Task<bool> UpdateItemById(Guid id, Item item);
         Task<int> CreateItem(Item item);
+         Task<bool> DeleteItemById(Guid id);
     }
 }

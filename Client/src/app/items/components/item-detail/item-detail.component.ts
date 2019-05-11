@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ItemsService } from '../../items.service';
 import { IItem } from '../../models/Item';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-item-detail',
@@ -12,17 +13,28 @@ export class ItemDetailComponent implements OnInit {
 
   private itemId: string;
   item: IItem;
-  constructor(private service: ItemsService, private route: ActivatedRoute) { }
+  constructor(private service: ItemsService, private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.itemId = this.route.snapshot.paramMap.get('id');
-    console.log(`Item ID is ${this.itemId}`);
 
     this.service.getItemById(this.itemId).subscribe((result) => {
       this.item = result;
     }, (error) => {
       alert(error);
     });
+  }
+
+  delete(item: IItem) {
+    let result = confirm('Are you sure to delete ' + item.name);
+    if (result) {
+      this.service.deleteItem(item.id).subscribe((result) => {
+        this.snackBar.open('Item Deleted Sucessfully');
+        this.router.navigate(['/items']);
+      }, (error) => {
+        console.log(error);
+      });
+    }
   }
 
 }

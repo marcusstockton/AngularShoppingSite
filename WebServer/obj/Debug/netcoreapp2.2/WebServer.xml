@@ -31,6 +31,13 @@
             <param name="item">The Item</param>
             <returns>An IActionResult</returns>
         </member>
+        <member name="M:WebServer.Controllers.ItemsController.Delete(System.String)">
+            <summary>
+            Deletes an Item
+            </summary>
+            <param name="id">The Id of the Item</param>
+            <returns></returns>
+        </member>
         <member name="M:WebServer.Controllers.UsersController.Authenticate(WebServer.Models.DTOs.Users.LoginDto)">
              <summary>
              End point for authenticating individual user account.

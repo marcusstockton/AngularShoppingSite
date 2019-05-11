@@ -57,5 +57,4 @@ export class ItemFormComponent implements OnInit {
       this.createEvent.emit(this.itemForm.value);
     }
   }
-
 }
