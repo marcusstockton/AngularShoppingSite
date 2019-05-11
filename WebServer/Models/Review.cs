@@ -15,7 +15,7 @@ namespace WebServer.Models
         public string Title { get; set; }
         public string Description { get; set; }
 
-        public virtual Guid ItemId { get; set; }
+        public Guid ItemId { get; set; }
 
     }
 }

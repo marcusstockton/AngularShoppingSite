@@ -16,4 +16,6 @@ export interface IItem {
     reviews: IReview[];
     createdBy: User;
     updatedBy: User;
+    createdById: string;
+    updatedById: string;
 }

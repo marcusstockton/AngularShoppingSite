@@ -34,11 +34,20 @@ namespace WebServer.Services
             {
                 item.UpdatedById = _userService.GetLoggedInUserId();
                 item.UpdatedDate = DateTime.Now;
-                _context.Update(item);
 
-                await _context.SaveChangesAsync();
-                                
-                return true;
+                _context.Items.Attach(item);
+
+                _context.Entry(item).State = EntityState.Modified;
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.Write(ex);
+                    throw;
+                }
             }
             return false;
         }

@@ -51,6 +51,7 @@ namespace WebServer.Data
                     Title = "Some Title",
                     Price = 21.32,
                     CreatedBy = validUser,
+                    CreatedById = validUser.Id,
                     Reviews = new List<Review>
                     {
                         new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=3, Title="My First Review", Description = "My First Review Description", CreatedBy=noNameUser}
@@ -65,6 +66,7 @@ namespace WebServer.Data
                     Title = "Some Other Title",
                     Price = 123245,
                     CreatedBy = noNameUser,
+                    CreatedById = noNameUser.Id,
                     Reviews = new List<Review>
                     {
                         new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=1, Title="My Second Review", Description = "My Second Review Description", CreatedBy=noNameUser}
@@ -79,6 +81,7 @@ namespace WebServer.Data
                     Title = "Some old guff",
                     Price = 0.12,
                     CreatedBy = validUser,
+                    CreatedById =validUser.Id,
                     Reviews = new List<Review>
                     {
                         new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=5, Title="My Third Review", Description = "My Third Review Description", CreatedBy=noNameUser}
@@ -93,6 +96,7 @@ namespace WebServer.Data
                     Title = "Worlds Best Mountain Bike",
                     Price = 1220.12,
                     CreatedBy = noNameUser,
+                    CreatedById = noNameUser.Id,
                     Reviews = new List<Review>
                     {
                         new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=4, Title="My Fourth Review", Description = "My Fourth Review Description", CreatedBy=noNameUser}
@@ -107,6 +111,7 @@ namespace WebServer.Data
                     Title = "An Acorn",
                     Price = 1220.12,
                     CreatedBy = validUser,
+                    CreatedById = validUser.Id,
                     Reviews = new List<Review>
                     {
                         new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=5, Title="My Fifth Review", Description = "My Fifth Review Description", CreatedBy=noNameUser}
@@ -121,6 +126,7 @@ namespace WebServer.Data
                     Title = "Used Frizbee",
                     Price = 4.25,
                     CreatedBy = validUser,
+                    CreatedById = validUser.Id,
                     Reviews = new List<Review>
                     {
                         new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=2, Title="My Sixth Review", Description = "My Sixth Review Description", CreatedBy=noNameUser}
