@@ -56,6 +56,7 @@ namespace WebServer.Services
             try 
             {
                 _context.Items.Remove(item);
+                await _context.SaveChangesAsync();
                 return true;
             }
             catch(Exception ex)
