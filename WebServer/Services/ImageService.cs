@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,9 +22,9 @@ namespace WebServer.Services
             _appEnvironment = appEnvironment;
         }
 
-        public async Task<int> UploadImages(List<IFormFile> files, Guid parentId)
+        public async Task UploadImages(List<IFormFile> files, Guid parentId)
         {
-            return await WriteFile(files, parentId);
+            await WriteFile(files, parentId);
         }
 
         /// <summary>

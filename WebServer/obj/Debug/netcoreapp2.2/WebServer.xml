@@ -87,7 +87,6 @@
             </summary>
             <param name="files"></param>
             <param name="parentId"></param>
-            <returns></returns>
         </member>
     </members>
 </doc>

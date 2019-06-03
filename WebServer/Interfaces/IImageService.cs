@@ -8,6 +8,6 @@ namespace WebServer.Interfaces
 {
     public interface IImageService
     {
-        Task<int> UploadImages(List<IFormFile> file, Guid parentId);
+        Task UploadImages(List<IFormFile> file, Guid parentId);
     }
 }
