@@ -24,7 +24,13 @@ const routes: Routes = [
       { path: ':id/edit', component: ItemEditComponent, canActivate: [AuthGuard] }
     ],
   },
-  { path: 'reviews', component: ReviewsDashboardComponent },
+  { path: 'reviews',
+      children: [
+      { path: '', component: ReviewsDashboardComponent },
+      // { path: 'create', component: ItemCreateComponent, canActivate: [AuthGuard]},
+      // { path: ':id', component: ItemDetailComponent },
+      // { path: ':id/edit', component: ItemEditComponent, canActivate: [AuthGuard] }
+  ], },
   { path: 'account', component: AccountDashboardComponent },
   { path: 'orders', component: OrdersDashboardComponent },
   { path: 'about', component: AboutComponent },

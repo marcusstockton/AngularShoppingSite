@@ -18,4 +18,5 @@ export interface IItem {
     updatedBy: User;
     createdById: string;
     updatedById: string;
+    images: Array<File>;
 }

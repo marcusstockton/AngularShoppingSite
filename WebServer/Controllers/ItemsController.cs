@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WebServer.Interfaces;
 using WebServer.Models;
 using WebServer.Models.DTOs.Items;
@@ -17,10 +21,12 @@ namespace WebServer.Controllers
     public class ItemsController : ControllerBase
     {
         private readonly IItemsService _service;
+        private readonly IImageService _imageService;
 
-        public ItemsController(IItemsService service)
+        public ItemsController(IItemsService service, IImageService imageService)
         {
             _service = service;
+            _imageService = imageService;
         }
 
         // GET api/values
@@ -59,16 +65,7 @@ namespace WebServer.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ItemCreate item)
         {
-            var newItem = new Item
-            {
-                Name = item.Name,
-                Title = item.Title,
-                Description = item.Description,
-                Price = item.Price,
-                CreatedDate = DateTime.Now
-            };
-            
-            var result = await _service.CreateItem(newItem);
+            var result = await _service.CreateItem(item);
             if(result > 0)
             {
                 // Return the number of records added:
@@ -84,25 +81,37 @@ namespace WebServer.Controllers
         /// </summary>
         /// <param name="id">The item Id</param>
         /// <param name="item">The Item</param>
+        /// <param name="fileArray">The Files</param>
         /// <returns>An IActionResult</returns>
-        [Authorize]
+        [DisableRequestSizeLimit]
+        [Consumes("application/json", "application/json-patch+json", "multipart/form-data")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, [FromBody] Item item)
+        [Authorize]
+        public async Task<IActionResult> Put(string id, [ModelBinder(BinderType = typeof(JsonModelBinder))] ItemEdit item, List<IFormFile> fileArray)
         {
             Guid _id;
             var idGuid = Guid.TryParse(id, out _id);
+
             if (idGuid && item != null)
             {
+                // Check if the request contains multipart/form-data.
+                if (fileArray.Any())
+                {
+                    // we have files...
+                    await _imageService.UploadImages(fileArray, _id);
+                }
+
                 var result = await _service.UpdateItemById(_id, item);
-                if(result){
+                if (result)
+                {
                     return NoContent();
-                } 
-                else 
+                }
+                else
                 {
                     return BadRequest("Invalid Data");
                 }
             }
-            
+
             return BadRequest("Empty Item record passed down doofus!");
         }
 

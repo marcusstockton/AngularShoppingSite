@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,12 +13,13 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using WebServer.Data;
 using WebServer.Helpers;
 using WebServer.Interfaces;
+using WebServer.Mappings;
 using WebServer.Services;
 
 namespace WebServer
@@ -40,12 +43,14 @@ namespace WebServer
             services.AddTransient<DataSeeder>();
             services.AddTransient<IItemsService, ItemsService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IImageService, ImageService>();
 
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", policy =>
                 {
                     policy.AllowAnyOrigin()
+                        .AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
@@ -106,8 +111,18 @@ namespace WebServer
             });
 
             services.AddTransient<IUserService, UserService>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
+
+
+            services.AddMvc(options =>
+                {
+                    var jsonInputFormatter = options.InputFormatters.OfType<JsonInputFormatter>().First();
+                    jsonInputFormatter.SupportedMediaTypes.Add("multipart/form-data");
+                }
+                ).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

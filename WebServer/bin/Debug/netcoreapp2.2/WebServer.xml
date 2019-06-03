@@ -23,12 +23,13 @@
             </summary>
             <param name="item">The Item data</param>
         </member>
-        <member name="M:WebServer.Controllers.ItemsController.Put(System.String,WebServer.Models.Item)">
+        <member name="M:WebServer.Controllers.ItemsController.Put(System.String,WebServer.Models.DTOs.Items.ItemEdit,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
             <summary>
             Updates a cerain Item
             </summary>
             <param name="id">The item Id</param>
             <param name="item">The Item</param>
+            <param name="fileArray">The Files</param>
             <returns>An IActionResult</returns>
         </member>
         <member name="M:WebServer.Controllers.ItemsController.Delete(System.String)">
@@ -78,6 +79,14 @@
             <summary>
             Gets all users who don't have a first name set
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebServer.Services.ImageService.WriteFile(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile},System.Guid)">
+            <summary>
+            Method to write file onto the disk
+            </summary>
+            <param name="files"></param>
+            <param name="parentId"></param>
             <returns></returns>
         </member>
     </members>

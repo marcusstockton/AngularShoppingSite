@@ -38,7 +38,24 @@ export class ItemsService implements OnInit {
   }
 
   updateItemById(id: any, body: IItem): Observable<IItem> {
-    return this.httpClient.put<any>(`${this.baseURL}/${id}`, body)
+    // const config = new HttpHeaders().set('Accept', 'application/json');
+
+    const formData: FormData = new FormData();
+    if (body.images.length > 0) {
+      for (let image of body.images) {
+        formData.append('fileArray', image, image.name);
+      }
+    }
+     formData.append('item', JSON.stringify(body));
+
+    // const posting = {
+    //   item: JSON.stringify(body),
+    //   fileArray: formData
+    // };
+
+    // const options = { headers: config };
+
+    return this.httpClient.put<any>(`${this.baseURL}/${id}`, formData)
       .pipe(
         tap( // Log the result or error
           // data => console.log(data),
@@ -48,9 +65,8 @@ export class ItemsService implements OnInit {
   }
 
   createItem(body: IItem): Observable<IItem> {
-    const config = new HttpHeaders().set('Content-Type', 'application/json')
-                                .set('Accept', 'application/json');
-    return this.httpClient.post<any>(`${this.baseURL}`, body,{ headers: config })
+    const config = new HttpHeaders().set('Content-Type', 'application/json').set('Accept', 'application/json');
+    return this.httpClient.post<any>(`${this.baseURL}`, body, { headers: config })
       .pipe(
         tap( // Log the result or error
           // data => console.log(data),
