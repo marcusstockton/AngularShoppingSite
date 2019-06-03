@@ -33,8 +33,7 @@ namespace WebServer.Services
         /// </summary>
         /// <param name="files"></param>
         /// <param name="parentId"></param>
-        /// <returns></returns>
-        public async Task<int> WriteFile(List<IFormFile> files, Guid parentId)
+        public async Task WriteFile(List<IFormFile> files, Guid parentId)
         {
             try
             {
@@ -52,12 +51,10 @@ namespace WebServer.Services
                             Type = extension,
                             CreatedById = _userService.GetLoggedInUserId(),
                             CreatedDate = DateTime.Now,
-                            ParentId = parentId,
+                            ParentId = parentId
                         });
                     }
                 }
-                return await _context.SaveChangesAsync();
-
             }
             catch (Exception e)
             {
