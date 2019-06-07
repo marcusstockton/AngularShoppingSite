@@ -49,11 +49,33 @@ namespace WebServer.Controllers
         /// <param name="id">The Item Id.</param>
         /// <returns>An Item.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Item>> Get(string id)
+        public async Task<ActionResult<ItemDetails>> Get(string id)
         {
             var idGuid = Guid.Parse(id);
             var item = await _service.GetItemById(idGuid);
-            return Ok(item);
+            var imageUrls = new List<Uri>();
+
+            // Need to think about how to host the images...
+            if (item.Images.Any())
+            {
+                imageUrls = await _imageService.GetFiles(item.Images);
+            }
+
+            var itemDetails = new ItemDetails
+            {
+                Description = item.Description,
+                Images = imageUrls,
+                Name = item.Name,
+                Price = item.Price,
+                Reviews = item.Reviews,
+                Title = item.Title,
+                CreatedBy = item.CreatedBy,
+                Id = item.Id,
+                UpdatedBy = item.UpdatedBy,
+                UpdatedDate = item.UpdatedDate
+            };
+
+            return Ok(itemDetails);
         }
 
         // POST api/values
@@ -91,6 +113,7 @@ namespace WebServer.Controllers
         {
             Guid _id;
             var idGuid = Guid.TryParse(id, out _id);
+            var images = new List<Image>();
 
             if (idGuid && item != null)
             {
@@ -98,10 +121,10 @@ namespace WebServer.Controllers
                 if (fileArray.Any())
                 {
                     // we have files...
-                    await _imageService.UploadImages(fileArray, _id);
+                    images = await _imageService.UploadImages(fileArray, _id);
                 }
-
-                var result = await _service.UpdateItemById(_id, item);
+                
+                var result = await _service.UpdateItemById(_id, item, images);
                 if (result)
                 {
                     return NoContent();

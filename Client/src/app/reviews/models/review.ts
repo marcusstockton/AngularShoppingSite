@@ -1,4 +1,4 @@
-export interface IReview{
+export interface IReview {
     Rating: number;
     Title: string;
     Description: string;

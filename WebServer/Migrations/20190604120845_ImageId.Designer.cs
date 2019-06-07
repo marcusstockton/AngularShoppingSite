@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebServer.Data;
 
 namespace WebServer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190604120845_ImageId")]
+    partial class ImageId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,7 +189,7 @@ namespace WebServer.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("ItemId");
+                    b.Property<Guid?>("ItemId");
 
                     b.Property<string>("Path");
 
@@ -323,10 +325,9 @@ namespace WebServer.Migrations
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("WebServer.Models.Item", "Item")
+                    b.HasOne("WebServer.Models.Item")
                         .WithMany("Images")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ItemId");
 
                     b.HasOne("ApplicationUser", "UpdatedBy")
                         .WithMany()

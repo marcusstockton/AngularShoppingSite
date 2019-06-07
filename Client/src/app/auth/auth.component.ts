@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { MatSnackBar } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -13,6 +14,7 @@ export class AuthComponent implements OnInit {
 
   registerErrorList: any[] = [];
   loginErrorList: string[] = [];
+  returnUrl: string;
 
   loginForm: FormGroup = new FormGroup({
     username: new FormControl(''),
@@ -27,23 +29,27 @@ registerForm: FormGroup = new FormGroup({
     dob: new FormControl(''),
   });
 
-  constructor(private service: AuthService, private snackBar: MatSnackBar) {
+  constructor(private service: AuthService, private snackBar: MatSnackBar, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
+
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams.get('returnUrl') || '/';
   }
 
   login() {
     if (this.loginForm.valid) {
       this.service.login(this.loginForm.value).subscribe((result) => {
         this.snackBar.open(result);
+        this.router.navigateByUrl(this.returnUrl);
       }, (error) => {
         if (error.error.length > 1) {
           this.loginErrorList = [];
           for (let err of error.error) {
             this.loginErrorList.push(err.description);
           }
-          alert(this.loginErrorList.join("\n"));
+          alert(this.loginErrorList.join('\n'));
         } else {
           this.snackBar.open(error.statusText);
         }

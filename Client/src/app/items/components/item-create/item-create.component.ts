@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IItem } from '../../models/Item';
+import { IItem, IItemCreate } from '../../models/Item';
 import { ItemsService } from '../../items.service';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class ItemCreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  onCreateItem(item: IItem) {
+  onCreateItem(item: IItemCreate) {
     this.service.createItem(item).subscribe((result) => {
       alert(JSON.stringify(result) + ' record(s) updated!' );
       this.router.navigate(['items']);

@@ -20,3 +20,19 @@ export interface IItem {
     updatedById: string;
     images: Array<File>;
 }
+
+export interface IItemCreate {
+    name: string;
+    title: string;
+    description: string;
+    price: number;
+}
+
+export interface IItemDetails {
+    name: string;
+    title: string;
+    description: string;
+    price: number;
+    reviews: Array<IReview>;
+    images: Array<string>;
+}

@@ -20,7 +20,10 @@ namespace WebServer.Data
         {
             base.OnModelCreating(builder);
             builder.Entity<ApplicationUser>().Property(p => p.Id).ValueGeneratedOnAdd();
-            
+            builder.Entity<Item>().Property(p=>p.Id).ValueGeneratedOnAdd();
+            builder.Entity<Image>().Property(p=>p.Id).ValueGeneratedOnAdd();
+
+            builder.Entity<Image>().HasOne(x=>x.Item).WithMany(x=>x.Images).HasForeignKey(x=>x.ItemId);
         }
     }
 }

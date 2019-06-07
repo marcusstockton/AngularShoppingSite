@@ -10,6 +10,7 @@ namespace WebServer.Models
     {
         public string Path { get; set; }
         public string Type { get; set; }
-        public Guid ParentId { get; set; }
+        public Guid ItemId { get; set; }
+        public virtual Item Item { get; set; }
     }
 }

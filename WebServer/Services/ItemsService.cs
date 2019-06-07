@@ -32,18 +32,19 @@ namespace WebServer.Services
         public async Task<Item> GetItemById(Guid Id){
             return await _context.Items
                 .Include(x=>x.Reviews)
+                .Include(x=>x.Images)
                 .Include(x=>x.CreatedBy)
                 .Include(x=>x.UpdatedBy)
                 .Where(i=>i.Id == Id).FirstOrDefaultAsync();
         }
 
-        public async Task<bool> UpdateItemById(Guid id, ItemEdit itemdto){
+        public async Task<bool> UpdateItemById(Guid id, ItemEdit itemdto, List<Image> images){
             if(itemdto.Id == id)
             {
                 var item = _mapper.Map<Item>(itemdto);
                 item.UpdatedById = _userService.GetLoggedInUserId();
                 item.UpdatedDate = DateTime.Now;
-
+                item.Images = images;
                 _context.Items.Attach(item);
 
                 _context.Entry(item).State = EntityState.Modified;
@@ -61,7 +62,8 @@ namespace WebServer.Services
             return false;
         }
 
-        public async Task<int> CreateItem(ItemCreate itemdto){
+        public async Task<int> CreateItem(ItemCreate itemdto)
+        {
             var item = _mapper.Map<Item>(itemdto);
             item.CreatedById = _userService.GetLoggedInUserId();
             item.CreatedDate = DateTime.Now;

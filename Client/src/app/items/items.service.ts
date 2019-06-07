@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { IItem } from './models/Item';
+import { IItem, IItemCreate, IItemDetails } from './models/Item';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,7 @@ export class ItemsService implements OnInit {
       );
   }
 
-  getItemById(id: any): Observable<IItem> {
+  getItemById(id: any): Observable<IItemDetails> {
     return this.httpClient.get<any>(`${this.baseURL}/${id}`)
       .pipe(
         tap( // Log the result or error
@@ -48,13 +48,6 @@ export class ItemsService implements OnInit {
     }
      formData.append('item', JSON.stringify(body));
 
-    // const posting = {
-    //   item: JSON.stringify(body),
-    //   fileArray: formData
-    // };
-
-    // const options = { headers: config };
-
     return this.httpClient.put<any>(`${this.baseURL}/${id}`, formData)
       .pipe(
         tap( // Log the result or error
@@ -64,7 +57,7 @@ export class ItemsService implements OnInit {
       );
   }
 
-  createItem(body: IItem): Observable<IItem> {
+  createItem(body: IItemCreate): Observable<IItem> {
     const config = new HttpHeaders().set('Content-Type', 'application/json').set('Accept', 'application/json');
     return this.httpClient.post<any>(`${this.baseURL}`, body, { headers: config })
       .pipe(

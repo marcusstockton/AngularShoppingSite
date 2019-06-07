@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ItemsService } from '../../items.service';
-import { IItem } from '../../models/Item';
+import { IItem, IItemDetails } from '../../models/Item';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material';
 export class ItemDetailComponent implements OnInit {
 
   private itemId: string;
-  item: IItem;
+  item: IItemDetails;
   constructor(private service: ItemsService, private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {

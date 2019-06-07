@@ -16,3 +16,8 @@
   <p>{{review.rating}} / 5</p>
   <p>{{review.createdDate | date:'medium'}}</p>
 </div >
+
+<legend>Images:</legend>
+<div *ngFor="let image of item?.images">
+  <p>{{image}}</p>
+</div>

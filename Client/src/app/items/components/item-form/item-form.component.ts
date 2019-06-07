@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { IItem, Item } from '../../models/Item';
+import { IItem, Item, IItemCreate } from '../../models/Item';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -19,7 +19,7 @@ export class ItemFormComponent implements OnInit {
 
   @Output() editEvent: EventEmitter<IItem> = new EventEmitter<IItem>();
 
-  @Output() createEvent: EventEmitter<IItem> = new EventEmitter<IItem>();
+  @Output() createEvent: EventEmitter<IItemCreate> = new EventEmitter<IItemCreate>();
 
   constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
     this.itemForm = this.createFormComponent();
@@ -52,13 +52,9 @@ export class ItemFormComponent implements OnInit {
       name: [''],
       description: [''],
       price: [''],
-      createdDate: [''],
-      updatedDate: [''],
-      createdBy: [''],
-      updatedBy: [''],
-      updatedById: [''],
+      images: [''],
       createdById: [''],
-      images: ['']
+      createdDate: [''],
     });
   }
 
