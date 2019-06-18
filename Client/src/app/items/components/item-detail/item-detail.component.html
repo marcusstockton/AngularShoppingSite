@@ -18,6 +18,8 @@
 </div >
 
 <legend>Images:</legend>
-<div *ngFor="let image of item?.images">
-  <img mat-card-sm-image src="data:image/jpeg;base64,{{image}}" id="photo-id" class="figure-img img-fluid rounded shadow-lg" height="200"/>
+<div *ngFor="let image of item?.images" class="row">
+  <span class="col-sm-4">
+    <img src="data:image/jpeg;base64,{{image}}" id="{{image}}" class="figure-img img-fluid rounded shadow-lg" />
+  </span>
 </div>
