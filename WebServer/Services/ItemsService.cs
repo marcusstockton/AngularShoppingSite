@@ -40,12 +40,13 @@ namespace WebServer.Services
 
         public async Task<bool> UpdateItemById(Guid id, ItemEdit itemdto, List<Image> images){
             if(itemdto.Id == id)
-            {
+            {               
                 var item = _mapper.Map<Item>(itemdto);
                 item.UpdatedById = _userService.GetLoggedInUserId();
                 item.UpdatedDate = DateTime.Now;
                 item.Images = images;
-                _context.Items.Attach(item);
+
+                _context.Items.Update(item);
 
                 _context.Entry(item).State = EntityState.Modified;
                 try
@@ -80,7 +81,7 @@ namespace WebServer.Services
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return false;
             }

@@ -19,5 +19,5 @@
 
 <legend>Images:</legend>
 <div *ngFor="let image of item?.images">
-  <p>{{image}}</p>
+  <img mat-card-sm-image src="data:image/jpeg;base64,{{image}}" id="photo-id" class="figure-img img-fluid rounded shadow-lg" height="200"/>
 </div>

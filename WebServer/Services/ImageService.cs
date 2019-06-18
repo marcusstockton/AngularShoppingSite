@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Mime;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,20 +29,22 @@ namespace WebServer.Services
             return await WriteFile(files, parentId);
         }
 
-        public async Task<List<Uri>> GetFiles(List<Image> files)
+        public List<byte[]> GetImagesByItemId(Guid itemId)
         {
-            var images = new List<Uri>();
-            string webRootPath = _appEnvironment.WebRootPath;
-            string contentRootPath = _appEnvironment.ContentRootPath;
+            var imageList = new List<byte[]>();
+            var files = _context.Images.Where(x => x.ItemId == itemId);
 
-            foreach (var image in files)
+            foreach (var item in files)
             {
-                images.Add(new Uri(image.Path));
+                var path = _appEnvironment.ContentRootFileProvider.GetFileInfo(item.Path)?.PhysicalPath;
+                if (File.Exists(path))
+                {
+                    imageList.Add(System.IO.File.ReadAllBytes(path));
+                }
             }
 
-            return images;
+            return imageList;
         }
-
 
         /// <summary>
         /// Method to write file onto the disk
@@ -51,20 +53,37 @@ namespace WebServer.Services
         /// <param name="parentId"></param>
         private async Task<List<Image>> WriteFile(List<IFormFile> files, Guid parentId)
         {
+            var reservedWords = new[]
+            {
+                "CON", "PRN", "AUX", "CLOCK$", "NUL", "COM0", "COM1", "COM2", "COM3", "COM4",
+                "COM5", "COM6", "COM7", "COM8", "COM9", "LPT0", "LPT1", "LPT2", "LPT3", "LPT4",
+                "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"
+            };
+            
             try
             {
                 var images = new List<Image>();
+                var imageFolder = "Uploads\\img";
                 foreach (var file in files)
                 {
-                    var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                    foreach (string x in reservedWords)
+                    {
+                        if (file.FileName.Contains(x))
+                        {
+                            file.FileName.Replace(x, "");
+                        }
+                    }
+
+                    var invalids = Path.GetInvalidFileNameChars();
+                    var fileName = String.Join("_", file.FileName.Split(invalids, StringSplitOptions.RemoveEmptyEntries)).TrimEnd('.');
                     var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
-                    var uploads = Path.Combine(_appEnvironment.ContentRootPath, "Uploads\\img");
+                    var uploads = Path.Combine(_appEnvironment.ContentRootPath, imageFolder);
                     using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
                     {
                         await file.CopyToAsync(fileStream);
                         var img = new Image
                         {
-                            Path = Path.Combine(uploads, fileName),
+                            Path = Path.Combine(imageFolder, fileName),
                             Type = extension,
                             CreatedById = _userService.GetLoggedInUserId(),
                             CreatedDate = DateTime.Now,
@@ -74,7 +93,7 @@ namespace WebServer.Services
                 }
                 return images;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 throw;
             }

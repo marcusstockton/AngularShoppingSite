@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ItemsService } from '../../items.service';
-import { Item, IItem, IItemDetails } from '../../models/Item';
+import { IItem, IItemDetails } from '../../models/Item';
 
 @Component({
   selector: 'app-item-edit',
@@ -23,8 +23,8 @@ export class ItemEditComponent implements OnInit {
     }
   }
 
-  onUpdateItem(event: IItem) {
-    this.service.updateItemById(event.id, event).subscribe((result: IItem) => {
+  onUpdateItem(item: IItem) {
+    this.service.updateItemById(item.id, item).subscribe((result: IItem) => {
       alert('Updated Sucessfully');
       this.router.navigate(['items', this.itemId]);
     }, (error) => {

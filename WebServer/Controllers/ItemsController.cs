@@ -54,17 +54,13 @@ namespace WebServer.Controllers
             var idGuid = Guid.Parse(id);
             var item = await _service.GetItemById(idGuid);
             var imageUrls = new List<Uri>();
-
-            // Need to think about how to host the images...
-            if (item.Images.Any())
-            {
-                imageUrls = await _imageService.GetFiles(item.Images);
-            }
+            
+            var images = _imageService.GetImagesByItemId(idGuid);
 
             var itemDetails = new ItemDetails
             {
                 Description = item.Description,
-                Images = imageUrls,
+                Images = images,
                 Name = item.Name,
                 Price = item.Price,
                 Reviews = item.Reviews,
@@ -72,7 +68,9 @@ namespace WebServer.Controllers
                 CreatedBy = item.CreatedBy,
                 Id = item.Id,
                 UpdatedBy = item.UpdatedBy,
-                UpdatedDate = item.UpdatedDate
+                UpdatedDate = item.UpdatedDate,
+                CreatedById = item.CreatedById,
+                UpdatedById = item.UpdatedById,
             };
 
             return Ok(itemDetails);
