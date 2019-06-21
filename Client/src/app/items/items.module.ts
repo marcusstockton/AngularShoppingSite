@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { CoreModule } from '../core/core.module';
 import { ItemCreateComponent } from './components/item-create/item-create.component';
 import { ItemEditComponent } from './components/item-edit/item-edit.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ItemEditComponent } from './components/item-edit/item-edit.component';
     ReviewsModule,
     CoreModule,
     RouterModule,
+    NgbModule,
   ],
   exports: [
     ItemsDashboardComponent,

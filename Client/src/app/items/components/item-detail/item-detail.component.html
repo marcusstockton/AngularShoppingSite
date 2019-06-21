@@ -1,25 +1,32 @@
-<legend>Item</legend>
-<p>{{item?.id}}</p>
-<p>{{item?.title}}</p>
-<p>{{item?.description}}</p>
-<p>{{item?.price}}</p>
-<p>{{item?.createdDate | date:'medium'}}</p>
-<p>{{item?.name}}</p>
+<div class="row">
+<div class="col-md-6">
+  <legend>Item</legend>
+  <p>{{item?.id}}</p>
+  <p>{{item?.title}}</p>
+  <p>{{item?.description}}</p>
+  <p>{{item?.price}}</p>
+  <p>{{item?.createdDate | date:'medium'}}</p>
+  <p>{{item?.name}}</p>
 
-<button mat-raised-button color="primary" [routerLink]="['edit']">Edit</button>
-<button mat-raised-button color="primary" (click)="delete(item)">Delete</button>
-<hr>
-<legend>Reviews:</legend>
-<div  *ngFor="let review of item?.reviews">
-  <p>{{review.title}}</p>
-  <p>{{review.description}}</p>
-  <p>{{review.rating}} / 5</p>
-  <p>{{review.createdDate | date:'medium'}}</p>
-</div >
-
-<legend>Images:</legend>
-<div *ngFor="let image of item?.images" class="row">
-  <span class="col-sm-4">
-    <img src="data:image/jpeg;base64,{{image}}" id="{{image}}" class="figure-img img-fluid rounded shadow-lg" />
-  </span>
+  <button mat-raised-button color="primary" [routerLink]="['edit']">Edit</button>
+  <button mat-raised-button color="primary" (click)="delete(item)">Delete</button>
+  <hr>
+  <legend>Reviews:</legend>
+  <div *ngFor="let review of item?.reviews">
+    <p>{{review.title}}</p>
+    <p>{{review.description}}</p>
+    <p>{{review.rating}} / 5</p>
+    <p>{{review.createdDate | date:'medium'}}</p>
+  </div>
+</div>
+<div class="col-md-6">
+  <legend>Images:</legend>
+  <ngb-carousel class="col-md-6">
+    <span *ngFor="let image of item?.images">
+      <ng-template ngbSlide>
+        <img class="figure-img img-fluid" src="data:image/jpeg;base64,{{image}}" width="100%" alt="{{image}}">
+      </ng-template>
+    </span>
+  </ngb-carousel>
+</div>
 </div>

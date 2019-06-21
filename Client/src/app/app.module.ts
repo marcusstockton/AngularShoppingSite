@@ -17,6 +17,8 @@ import { CoreModule } from './core/core.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { JwtInterceptor } from './helpers/jwt-interceptor';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { JwtInterceptor } from './helpers/jwt-interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbModule.forRoot(),
     AuthModule,
     ItemsModule,
     OrdersModule,
