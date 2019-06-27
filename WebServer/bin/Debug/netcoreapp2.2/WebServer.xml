@@ -17,11 +17,12 @@
             <param name="id">The Item Id.</param>
             <returns>An Item.</returns>
         </member>
-        <member name="M:WebServer.Controllers.ItemsController.Post(WebServer.Models.DTOs.Items.ItemCreate)">
+        <member name="M:WebServer.Controllers.ItemsController.Post(WebServer.Models.DTOs.Items.ItemCreate,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
             <summary>
             Creates a new Item
             </summary>
             <param name="item">The Item data</param>
+            <param name="fileArray">An array of files</param>
         </member>
         <member name="M:WebServer.Controllers.ItemsController.Put(System.String,WebServer.Models.DTOs.Items.ItemEdit,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
             <summary>
@@ -81,12 +82,11 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WebServer.Services.ImageService.WriteFile(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile},System.Guid)">
+        <member name="M:WebServer.Services.ImageService.WriteFile(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
             <summary>
             Method to write file onto the disk
             </summary>
             <param name="files"></param>
-            <param name="parentId"></param>
         </member>
     </members>
 </doc>

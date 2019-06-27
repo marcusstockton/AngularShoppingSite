@@ -24,9 +24,9 @@ namespace WebServer.Services
             _appEnvironment = appEnvironment;
         }
 
-        public async Task<List<Image>> UploadImages(List<IFormFile> files, Guid parentId)
+        public async Task<List<Image>> UploadImages(List<IFormFile> files)
         {
-            return await WriteFile(files, parentId);
+            return await WriteFile(files);
         }
 
         public List<byte[]> GetImagesByItemId(Guid itemId)
@@ -50,8 +50,7 @@ namespace WebServer.Services
         /// Method to write file onto the disk
         /// </summary>
         /// <param name="files"></param>
-        /// <param name="parentId"></param>
-        private async Task<List<Image>> WriteFile(List<IFormFile> files, Guid parentId)
+        private async Task<List<Image>> WriteFile(List<IFormFile> files)
         {
             var reservedWords = new[]
             {

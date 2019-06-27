@@ -81,10 +81,17 @@ namespace WebServer.Controllers
         /// Creates a new Item
         /// </summary>
         /// <param name="item">The Item data</param>
+        /// <param name="fileArray">An array of files</param>
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] ItemCreate item)
+        public async Task<ActionResult> Post([ModelBinder(BinderType = typeof(JsonModelBinder))] ItemCreate item, List<IFormFile> fileArray)
         {
+            var images = new List<Image>();
+            if (fileArray.Any())
+            {
+                images = await _imageService.UploadImages(fileArray);
+            }
+            item.Images = images;
             var result = await _service.CreateItem(item);
             if(result > 0)
             {
@@ -119,7 +126,7 @@ namespace WebServer.Controllers
                 if (fileArray.Any())
                 {
                     // we have files...
-                    images = await _imageService.UploadImages(fileArray, _id);
+                    images = await _imageService.UploadImages(fileArray);
                 }
                 
                 var result = await _service.UpdateItemById(_id, item, images);
