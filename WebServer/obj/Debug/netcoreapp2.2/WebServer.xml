@@ -8,7 +8,7 @@
             <summary>
             Gets a list of all Items.
             </summary>
-            <returns>An Ienumerable of Items.</returns>
+            <returns>An IEnumerable of Items.</returns>
         </member>
         <member name="M:WebServer.Controllers.ItemsController.Get(System.String)">
             <summary>
@@ -23,6 +23,7 @@
             </summary>
             <param name="item">The Item data</param>
             <param name="fileArray">An array of files</param>
+            <returns>The created Item.</returns>
         </member>
         <member name="M:WebServer.Controllers.ItemsController.Put(System.String,WebServer.Models.DTOs.Items.ItemEdit,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
             <summary>
@@ -31,14 +32,14 @@
             <param name="id">The item Id</param>
             <param name="item">The Item</param>
             <param name="fileArray">The Files</param>
-            <returns>An IActionResult</returns>
+            <returns>The updated item.</returns>
         </member>
         <member name="M:WebServer.Controllers.ItemsController.Delete(System.String)">
             <summary>
             Deletes an Item
             </summary>
             <param name="id">The Id of the Item</param>
-            <returns></returns>
+            <returns>200 If Sucessful</returns>
         </member>
         <member name="M:WebServer.Controllers.UsersController.Authenticate(WebServer.Models.DTOs.Users.LoginDto)">
              <summary>
@@ -80,7 +81,7 @@
             <summary>
             Gets all users who don't have a first name set
             </summary>
-            <returns></returns>
+            <returns>A IEnumerable of ApplicationUsers without a first name.</returns>
         </member>
         <member name="M:WebServer.Services.ImageService.WriteFile(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
             <summary>

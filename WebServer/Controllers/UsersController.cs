@@ -85,7 +85,7 @@ namespace WebServer.Controllers
         /// <summary>
         /// Gets all users who don't have a first name set
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A IEnumerable of ApplicationUsers without a first name.</returns>
         [HttpGet]
         public IActionResult GetAllUsersWithoutFirstName()
         {

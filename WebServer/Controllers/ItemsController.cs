@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using WebServer.Interfaces;
 using WebServer.Models;
 using WebServer.Models.DTOs.Items;
@@ -30,12 +27,12 @@ namespace WebServer.Controllers
         }
 
         // GET api/values
-		// curl https://localhost:5001/api/Items --insecure | python -mjson.tool
+        // curl https://localhost:5001/api/Items --insecure | python -mjson.tool
 
         /// <summary>
         /// Gets a list of all Items.
         /// </summary>
-        /// <returns>An Ienumerable of Items.</returns>
+        /// <returns>An IEnumerable of Items.</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Item>>> Get()
         {
@@ -49,10 +46,18 @@ namespace WebServer.Controllers
         /// <param name="id">The Item Id.</param>
         /// <returns>An Item.</returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ItemDetails>> Get(string id)
         {
             var idGuid = Guid.Parse(id);
             var item = await _service.GetItemById(idGuid);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+
             var imageUrls = new List<Uri>();
             
             var images = _imageService.GetImagesByItemId(idGuid);
@@ -82,8 +87,11 @@ namespace WebServer.Controllers
         /// </summary>
         /// <param name="item">The Item data</param>
         /// <param name="fileArray">An array of files</param>
+        /// <returns>The created Item.</returns>
         [Authorize]
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Post([ModelBinder(BinderType = typeof(JsonModelBinder))] ItemCreate item, List<IFormFile> fileArray)
         {
             var images = new List<Image>();
@@ -93,10 +101,9 @@ namespace WebServer.Controllers
             }
             item.Images = images;
             var result = await _service.CreateItem(item);
-            if(result > 0)
+            if(result.Id != Guid.Empty)
             {
-                // Return the number of records added:
-                return Ok(result);
+                return CreatedAtAction("Get", new { id = result.Id });
             }
             return BadRequest();
         }
@@ -109,9 +116,7 @@ namespace WebServer.Controllers
         /// <param name="id">The item Id</param>
         /// <param name="item">The Item</param>
         /// <param name="fileArray">The Files</param>
-        /// <returns>An IActionResult</returns>
-        [DisableRequestSizeLimit]
-        [Consumes("application/json", "application/json-patch+json", "multipart/form-data")]
+        /// <returns>The updated item.</returns>
         [HttpPut("{id}")]
         [Authorize]
         public async Task<IActionResult> Put(string id, [ModelBinder(BinderType = typeof(JsonModelBinder))] ItemEdit item, List<IFormFile> fileArray)
@@ -130,9 +135,9 @@ namespace WebServer.Controllers
                 }
                 
                 var result = await _service.UpdateItemById(_id, item, images);
-                if (result)
+                if (result != null)
                 {
-                    return NoContent();
+                    return RedirectToAction("Get", new { id = result.Id });
                 }
                 else
                 {
@@ -149,7 +154,7 @@ namespace WebServer.Controllers
         /// Deletes an Item
         /// </summary>
         /// <param name="id">The Id of the Item</param>
-        /// <returns></returns>
+        /// <returns>200 If Sucessful</returns>
         [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)

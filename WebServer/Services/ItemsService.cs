@@ -26,7 +26,7 @@ namespace WebServer.Services
 
         public async Task<IEnumerable<Item>> GetItems()
         {
-            return await _context.Items.ToListAsync();
+            return await _context.Items.OrderByDescending(x=>x.CreatedDate).ToListAsync();
         }
 
         public async Task<Item> GetItemById(Guid Id){
@@ -38,7 +38,7 @@ namespace WebServer.Services
                 .Where(i=>i.Id == Id).FirstOrDefaultAsync();
         }
 
-        public async Task<bool> UpdateItemById(Guid id, ItemEdit itemdto, List<Image> images){
+        public async Task<Item> UpdateItemById(Guid id, ItemEdit itemdto, List<Image> images){
             if(itemdto.Id == id)
             {               
                 var item = _mapper.Map<Item>(itemdto);
@@ -52,7 +52,7 @@ namespace WebServer.Services
                 try
                 {
                     await _context.SaveChangesAsync();
-                    return true;
+                    return item;
                 }
                 catch (Exception ex)
                 {
@@ -60,16 +60,17 @@ namespace WebServer.Services
                     throw;
                 }
             }
-            return false;
+            return null;
         }
 
-        public async Task<int> CreateItem(ItemCreate itemdto)
+        public async Task<Item> CreateItem(ItemCreate itemdto)
         {
             var item = _mapper.Map<Item>(itemdto);
             item.CreatedById = _userService.GetLoggedInUserId();
             item.CreatedDate = DateTime.Now;
-            var result = await _context.AddAsync(item);
-            return await _context.SaveChangesAsync();
+            await _context.AddAsync(item);
+            await _context.SaveChangesAsync();
+            return item;
         }
 
         public async Task<bool> DeleteItemById(Guid id)
