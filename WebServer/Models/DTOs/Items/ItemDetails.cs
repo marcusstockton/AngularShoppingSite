@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using WebServer.Models.DTOs.Reviews;
+using WebServer.Models.DTOs.Users;
 
 namespace WebServer.Models.DTOs.Items
 {
@@ -12,13 +11,11 @@ namespace WebServer.Models.DTOs.Items
         public string Title { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
-        public virtual List<Review> Reviews { get; set; }
+        public virtual List<ReviewDetails> Reviews { get; set; }
         public virtual IList<byte[]> Images { get; set; }
-        public ApplicationUser CreatedBy { get; internal set; }
+        public UserDetails CreatedBy { get; internal set; }
         public Guid Id { get; internal set; }
-        public ApplicationUser UpdatedBy { get; internal set; }
+        public UserDetails UpdatedBy { get; internal set; }
         public DateTime? UpdatedDate { get; internal set; }
-        public Guid CreatedById { get; internal set; }
-        public Guid? UpdatedById { get; internal set; }
     }
 }

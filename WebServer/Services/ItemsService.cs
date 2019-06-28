@@ -24,18 +24,23 @@ namespace WebServer.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Item>> GetItems()
+        public async Task<IEnumerable<ItemDetails>> GetItems()
         {
-            return await _context.Items.OrderByDescending(x=>x.CreatedDate).ToListAsync();
+            var items = await _context.Items.OrderByDescending(x=>x.CreatedDate).ToListAsync();
+            //return Mapper.Map<ItemDetails[], IEnumerable<ItemDetails>>(items);
+            return Mapper.Map<IEnumerable<Item>, IEnumerable<ItemDetails>>(items);
+
         }
 
-        public async Task<Item> GetItemById(Guid Id){
-            return await _context.Items
+        public async Task<ItemDetails> GetItemById(Guid Id){
+            var result = await _context.Items
                 .Include(x=>x.Reviews)
                 .Include(x=>x.Images)
                 .Include(x=>x.CreatedBy)
                 .Include(x=>x.UpdatedBy)
                 .Where(i=>i.Id == Id).FirstOrDefaultAsync();
+
+            return _mapper.Map<ItemDetails>(result);
         }
 
         public async Task<Item> UpdateItemById(Guid id, ItemEdit itemdto, List<Image> images){

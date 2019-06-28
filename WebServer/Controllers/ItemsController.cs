@@ -62,23 +62,9 @@ namespace WebServer.Controllers
             
             var images = _imageService.GetImagesByItemId(idGuid);
 
-            var itemDetails = new ItemDetails
-            {
-                Description = item.Description,
-                Images = images,
-                Name = item.Name,
-                Price = item.Price,
-                Reviews = item.Reviews,
-                Title = item.Title,
-                CreatedBy = item.CreatedBy,
-                Id = item.Id,
-                UpdatedBy = item.UpdatedBy,
-                UpdatedDate = item.UpdatedDate,
-                CreatedById = item.CreatedById,
-                UpdatedById = item.UpdatedById,
-            };
+            item.Images = images;
 
-            return Ok(itemDetails);
+            return Ok(item);
         }
 
         // POST api/values

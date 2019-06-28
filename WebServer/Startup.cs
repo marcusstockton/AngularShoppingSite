@@ -113,9 +113,13 @@ namespace WebServer
             services.AddTransient<IUserService, UserService>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
-
-
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile(new ItemProfile());
+                cfg.AddProfile(new UserProfile());
+                cfg.AddProfile(new ReviewProfile());
+            });
+            
             services.AddMvc(options =>
                 {
                     var jsonInputFormatter = options.InputFormatters.OfType<JsonInputFormatter>().First();
