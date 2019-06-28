@@ -32,9 +32,9 @@ namespace WebServer.Controllers
         /// <summary>
         /// Gets a list of all Items.
         /// </summary>
-        /// <returns>An IEnumerable of Items.</returns>
+        /// <returns>An IEnumerable of Item details.</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Item>>> Get()
+        public async Task<ActionResult<IEnumerable<ItemDetails>>> Get()
         {
             return Ok(await _service.GetItems());
         }

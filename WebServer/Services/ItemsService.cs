@@ -26,8 +26,11 @@ namespace WebServer.Services
 
         public async Task<IEnumerable<ItemDetails>> GetItems()
         {
-            var items = await _context.Items.OrderByDescending(x=>x.CreatedDate).ToListAsync();
-            //return Mapper.Map<ItemDetails[], IEnumerable<ItemDetails>>(items);
+            var items = await _context.Items
+                .Include(x=>x.CreatedBy)
+                .Include(x=>x.UpdatedBy)
+                .OrderByDescending(x=>x.CreatedDate)
+                .ToListAsync();
             return Mapper.Map<IEnumerable<Item>, IEnumerable<ItemDetails>>(items);
 
         }

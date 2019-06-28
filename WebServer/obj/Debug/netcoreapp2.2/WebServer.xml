@@ -8,7 +8,7 @@
             <summary>
             Gets a list of all Items.
             </summary>
-            <returns>An IEnumerable of Items.</returns>
+            <returns>An IEnumerable of Item details.</returns>
         </member>
         <member name="M:WebServer.Controllers.ItemsController.Get(System.String)">
             <summary>
