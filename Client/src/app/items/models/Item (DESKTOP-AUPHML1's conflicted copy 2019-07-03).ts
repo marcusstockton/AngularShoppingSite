@@ -6,6 +6,7 @@ export class Item {
 }
 
 export interface IItem {
+    createdBy: User;
     name: string;
     title: string;
     description: string;
@@ -13,8 +14,6 @@ export interface IItem {
     id: string;
     createdDate: Date;
     updatedDate: Date;
-    createdBy: User;
-    updatedBy: User;
     reviews: IReview[];
     images: Array<File>;
 }
@@ -24,7 +23,6 @@ export interface IItemCreate {
     title: string;
     description: string;
     price: number;
-    images: Array<File>;
 }
 
 export interface IItemDetails {
@@ -35,5 +33,5 @@ export interface IItemDetails {
     reviews: Array<IReview>;
     images: Array<string>;
     createdBy: User;
-    updatedBy: User;
+    createdDate: Date;
 }

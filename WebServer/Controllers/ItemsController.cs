@@ -57,9 +57,7 @@ namespace WebServer.Controllers
             {
                 return NotFound();
             }
-
-            var imageUrls = new List<Uri>();
-            
+           
             var images = _imageService.GetImagesByItemId(idGuid);
 
             item.Images = images;
@@ -85,11 +83,11 @@ namespace WebServer.Controllers
             {
                 images = await _imageService.UploadImages(fileArray);
             }
-            item.Images = images;
-            var result = await _service.CreateItem(item);
+            var result = await _service.CreateItem(item, images);
             if(result.Id != Guid.Empty)
             {
-                return CreatedAtAction("Get", new { id = result.Id });
+                return CreatedAtAction(nameof(Get), new { id = result.Id.ToString() }, result);
+                //return Ok(result);
             }
             return BadRequest();
         }
@@ -123,7 +121,7 @@ namespace WebServer.Controllers
                 var result = await _service.UpdateItemById(_id, item, images);
                 if (result != null)
                 {
-                    return RedirectToAction("Get", new { id = result.Id });
+                    return NoContent();
                 }
                 else
                 {

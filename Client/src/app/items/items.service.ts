@@ -58,8 +58,15 @@ export class ItemsService implements OnInit {
   }
 
   createItem(body: IItemCreate): Observable<IItem> {
-    const config = new HttpHeaders().set('Content-Type', 'application/json').set('Accept', 'application/json');
-    return this.httpClient.post<any>(`${this.baseURL}`, body, { headers: config })
+    const formData: FormData = new FormData();
+    if (body.images.length > 0) {
+      for (let image of body.images) {
+        formData.append('fileArray', image, image.name);
+      }
+    }
+    formData.append('item', JSON.stringify(body));
+
+    return this.httpClient.post<any>(`${this.baseURL}`, formData)
       .pipe(
         tap( // Log the result or error
           // data => console.log(data),

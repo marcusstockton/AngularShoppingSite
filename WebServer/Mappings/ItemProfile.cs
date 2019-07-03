@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using WebServer.Models;
 using WebServer.Models.DTOs.Items;
@@ -12,9 +14,32 @@ namespace WebServer.Mappings
     {
         public ItemProfile()
         {
-            CreateMap<ItemCreate, Item>().ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Images)).ReverseMap();
+            AllowNullCollections = true;
+
+            CreateMap<ItemCreate, Item>().ReverseMap();
             CreateMap<ItemEdit, Item>().ReverseMap();
-            CreateMap<ItemDetails, Item>().ReverseMap();
+            //CreateMap<ItemDetails, Item>().ReverseMap();
+
+            /* AutoMapper created this type map for you, 
+             * but your types cannot be mapped using the current configuration. 
+             * Image -> Byte[] (Destination member list) 
+             * WebServer.Models.Image -> System.Byte[] (Destination member list)
+             */
+            CreateMap<Item, ItemDetails>()
+                .ForMember(d=> d.CreatedBy, opt=>opt.MapFrom(src=>src.CreatedBy))
+               .ForMember(d => d.Images, opt => opt.MapFrom((s,d) => {
+                   MemoryStream target = new MemoryStream();
+                   if (s.Images != null)
+                   {
+                       s.Images.ForEach(x =>
+                       {
+                           FileStream file = File.Open(x.Path, FileMode.Open);
+                           file.CopyTo(target);
+                       });
+                       return target.ToArray();
+                   }
+                   return null;
+               }));
         }
     }
 }

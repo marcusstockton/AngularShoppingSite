@@ -37,9 +37,8 @@ export class ItemFormComponent implements OnInit {
         createdDate: this.Item.createdDate,
         updatedDate: this.Item.updatedDate,
         createdBy: this.Item.createdBy,
-        updatedBy: this.Item.updatedBy,
         images: null,
-      });
+    });
     }
   }
 
@@ -51,14 +50,14 @@ export class ItemFormComponent implements OnInit {
       description: [''],
       price: [''],
       images: [''],
-      createdBy: [''],
       createdDate: [''],
+      createdBy: [''],
     });
   }
 
   onSubmit() {
-    this.itemForm.controls.images.setValue(this.images);
     // Not passing the image in this.itemForm.value...
+    this.itemForm.controls.images.setValue(this.images);
     if (this.itemForm.get('id').value) {
       // Editing:
       this.editEvent.emit(this.itemForm.value);

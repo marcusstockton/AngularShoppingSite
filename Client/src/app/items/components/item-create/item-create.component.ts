@@ -17,8 +17,7 @@ export class ItemCreateComponent implements OnInit {
 
   onCreateItem(item: IItemCreate) {
     this.service.createItem(item).subscribe((result) => {
-      alert(JSON.stringify(result) + ' record(s) updated!' );
-      this.router.navigate(['items']);
+      this.router.navigate(['items', result.id]);
     }, (error) => {
       alert(error);
     });

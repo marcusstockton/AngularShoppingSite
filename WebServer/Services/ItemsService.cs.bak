@@ -50,8 +50,6 @@ namespace WebServer.Services
         public async Task<Item> UpdateItemById(Guid id, ItemEdit itemdto, List<Image> images){
             if(itemdto.Id == id)
             {
-                var mappedItem = _mapper.Map<Item>(itemdto);
-
                 var item = await _context.Items
                     .Include(x=>x.CreatedBy)
                     .Include(x=>x.Images)
@@ -70,12 +68,11 @@ namespace WebServer.Services
             return null;
         }
 
-        public async Task<Item> CreateItem(ItemCreate itemdto, List<Image> images)
+        public async Task<Item> CreateItem(ItemCreate itemdto)
         {
             var item = _mapper.Map<Item>(itemdto);
             item.CreatedById = _userService.GetLoggedInUserId();
             item.CreatedDate = DateTime.Now;
-            item.Images.AddRange(images);
             await _context.AddAsync(item);
             await _context.SaveChangesAsync();
             return item;
