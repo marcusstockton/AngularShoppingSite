@@ -102,6 +102,8 @@ namespace WebServer.Controllers
         /// <param name="fileArray">The Files</param>
         /// <returns>The updated item.</returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize]
         public async Task<IActionResult> Put(string id, [ModelBinder(BinderType = typeof(JsonModelBinder))] ItemEdit item, List<IFormFile> fileArray)
         {
@@ -141,6 +143,8 @@ namespace WebServer.Controllers
         /// <returns>200 If Sucessful</returns>
         [Authorize]
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Delete(string id)
         {
             if(!string.IsNullOrEmpty(id))
@@ -149,7 +153,7 @@ namespace WebServer.Controllers
                 Guid.TryParse(id, out itemId);
                 var result = await _service.DeleteItemById(itemId);
                 if(result){
-                    return Ok();
+                    return NoContent();
                 }
             }
             return BadRequest();

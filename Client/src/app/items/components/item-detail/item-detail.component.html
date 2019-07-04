@@ -9,7 +9,7 @@
   <p>{{item?.name}}</p>
 
   <button mat-raised-button color="primary" [routerLink]="['edit']">Edit</button>
-  <button mat-raised-button color="primary" (click)="delete(item)">Delete</button>
+  <button mat-raised-button color="warn" (click)="delete(item)">Delete</button>
   <hr>
   <legend>Reviews:</legend>
   <div *ngFor="let review of item?.reviews">
