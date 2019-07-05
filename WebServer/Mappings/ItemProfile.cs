@@ -18,13 +18,6 @@ namespace WebServer.Mappings
 
             CreateMap<ItemCreate, Item>().ReverseMap();
             CreateMap<ItemEdit, Item>().ReverseMap();
-            //CreateMap<ItemDetails, Item>().ReverseMap();
-
-            /* AutoMapper created this type map for you, 
-             * but your types cannot be mapped using the current configuration. 
-             * Image -> Byte[] (Destination member list) 
-             * WebServer.Models.Image -> System.Byte[] (Destination member list)
-             */
             CreateMap<Item, ItemDetails>()
                 .ForMember(d=> d.CreatedBy, opt=>opt.MapFrom(src=>src.CreatedBy))
                .ForMember(d => d.Images, opt => opt.MapFrom((s,d) => {
