@@ -2,7 +2,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using WebServer.Interfaces;
 using WebServer.Models.DTOs.Items;
-using WebServer.Models;
 using System.Collections.Generic;
 using WebServer.Controllers;
 using System.Threading.Tasks;
@@ -14,27 +13,39 @@ namespace WebServer.Test
     [TestClass]
     public class ItemControllerTests
     {
-        public ItemControllerTests()
+
+        [TestInitialize]
+        public void Setup()
         {
-            
+             // Runs before each test. (Optional)
         }
+        
+        [TestCleanup]
+        public void TearDown()
+        { 
+            // Runs after each test. (Optional)
+        }
+
         [TestMethod]
-        public void Test_Create_New_Item()
+        public async Task Test_Index_Works()
         {
             // arrange
             var mockRepo = new Mock<IItemsService>();
             var mockImageService = new Mock<IImageService>();
-            mockRepo.Setup(repo => repo.GetItems())
-                .Returns(GetTestSessions());
+            mockRepo.Setup(repo => repo.GetItems()).Returns(GetTestSessions());
             var controller = new ItemsController(mockRepo.Object, mockImageService.Object);
 
             // act
-            var result = await controller.Get();
+            ActionResult<IEnumerable<ItemDetails>> result = await controller.Get();
 
             // assert
-            //var viewResult = Assert.IsType<ActionResult<IEnumerable<ItemDetails>>>(result);
-            //var model = Assert.IsAssignableFrom<IEnumerable<ItemDetails>>(viewResult);
-            //Assert.Equal(2, model.Count());
+            Assert.IsNotNull(result);
+
+            Assert.IsInstanceOfType(result.Result, typeof(OkObjectResult));
+            OkObjectResult okResult = result.Result as OkObjectResult;
+
+            List<ItemDetails> items = okResult.Value as List<ItemDetails>;
+            Assert.AreEqual(2, items.Count);
         }
 
         private async Task<IEnumerable<ItemDetails>> GetTestSessions()
