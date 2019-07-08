@@ -4,21 +4,17 @@ using WebServer.Interfaces;
 using WebServer.Models.DTOs.Items;
 using System.Collections.Generic;
 using WebServer.Controllers;
-using WebServer.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
-
+using WebServer.Models;
 
 namespace WebServer.Test
 {
     [TestClass]
     public class ItemControllerTests
     {
-        private Mock<IItemsService> repo;
-        private Mock<IImageService> mockImageService;
-
         [TestInitialize]
         public void Setup()
         {
@@ -34,86 +30,114 @@ namespace WebServer.Test
         [TestMethod]
         public async Task Test_Index_Works()
         {
-            // arrange
-            var mockRepo = new Mock<IItemsService>();
-            var mockImageService = new Mock<IImageService>();
-            mockRepo.Setup(repo => repo.GetItems()).Returns(GetItems());
-            var controller = new ItemsController(mockRepo.Object, mockImageService.Object);
+            // Arrange
+            var mockRepository = new Mock<IItemsService>();
+            mockRepository.Setup(x => x.GetItems())
+                .ReturnsAsync(new List<ItemDetails>{ new ItemDetails{Price = 12.34, Name = "Test 1"}, new ItemDetails{Price = 34.32, Name = "Test 2"}});
+            var imageService = new Mock<IImageService>();
+            var controller = new ItemsController(mockRepository.Object, imageService.Object);
 
-            // act
-            ActionResult<IEnumerable<ItemDetails>> result = await controller.Get();
+            // Act
+            var actionResult = await controller.Get();
 
-            // assert
-            Assert.IsNotNull(result);
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.IsInstanceOfType(actionResult.Result, typeof(OkObjectResult));
+            var okresult = actionResult.Result as OkObjectResult;
+            Assert.AreEqual(okresult.StatusCode, (int)HttpStatusCode.OK);
+            var values = okresult.Value as List<ItemDetails>;
+            Assert.AreEqual(values.Count, 2);
 
-            Assert.IsInstanceOfType(result.Result, typeof(OkObjectResult));
-            OkObjectResult okResult = result.Result as OkObjectResult;
-
-            List<ItemDetails> items = okResult.Value as List<ItemDetails>;
-            Assert.AreEqual(2, items.Count);
         }
 
         [TestMethod]
         public async Task Test_Get_Item_By_Id()
         {
             // Arrange
-            var mockRepo = new Mock<IItemsService>();
-            var mockImageService = new Mock<IImageService>();
-            mockRepo.Setup(x => x.GetItemById(new Guid("c8bdd28c-caf0-459b-b46c-5d3c45a38ba6"))).ReturnsAsync(new ItemDetails { Title = "Demo", Description = "Test Description", Price = 123.43});
-            var controller = new ItemsController(mockRepo.Object, mockImageService.Object);
-
+            var mockRepository = new Mock<IItemsService>();
+            mockRepository.Setup(x => x.GetItemById(It.IsAny<Guid>()))
+                .ReturnsAsync(new ItemDetails{Price = 12.34, Name = "Test 1"});
+            var imageService = new Mock<IImageService>();
+            var controller = new ItemsController(mockRepository.Object, imageService.Object);
            
             // Act
-            ActionResult<ItemDetails> result = await controller.Get("c8bdd28c-caf0-459b-b46c-5d3c45a38ba6");
+            var actionResult = await controller.Get(Guid.NewGuid().ToString());
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(actionResult);
+            Assert.IsInstanceOfType(actionResult.Result, typeof(OkObjectResult));
 
-            OkObjectResult okResult = result.Result as OkObjectResult;
-            Assert.AreEqual((int)HttpStatusCode.OK, okResult.StatusCode);
+            var okresult = actionResult.Result as OkObjectResult;
+            Assert.AreEqual(okresult.StatusCode, (int)HttpStatusCode.OK);
+
+            var value = okresult.Value as ItemDetails;
+            Assert.AreEqual(value.Name, "Test 1");
         }
 
         [TestMethod]
         public async Task Test_Get_Item_By_Id_With_Invalid_Id_Returns_404()
         {
             // Arrange
-            var mockRepo = new Mock<IItemsService>();
-            var mockImageService = new Mock<IImageService>();
-            mockRepo.Setup(x => x.GetItemById(new Guid("c8bdd28c-caf0-459b-b46c-5d3c45a38ba6"))).ReturnsAsync(new ItemDetails { Title = "Demo", Description = "Test Description", Price = 123.43});
-            var controller = new ItemsController(mockRepo.Object, mockImageService.Object);
-
+            var mockRepository = new Mock<IItemsService>();
+            mockRepository.Setup(x => x.GetItemById(new Guid("f34722c9-7d74-4e13-8bc1-3c7e1c0d984f")))
+                .ReturnsAsync(new ItemDetails{Price = 12.34, Name = "Test 1"});
+            var imageService = new Mock<IImageService>();
+            var controller = new ItemsController(mockRepository.Object, imageService.Object);
            
             // Act
-            ActionResult<ItemDetails> result = await controller.Get("c8bdd28c-caf0-459b-b46c-5d3c45a38ba5");
+            var actionResult = await controller.Get("f34722c9-7d74-4e13-8bc1-3c7e1c0d984A");
 
             // Assert
-            Assert.IsNotNull(result);
-            NotFoundResult errorResult = result.Result as NotFoundResult;
-
-            Assert.AreEqual((int)HttpStatusCode.NotFound, errorResult.StatusCode);
+            Assert.IsNotNull(actionResult);
+            var notFoundResult = actionResult.Result as NotFoundResult;
+            Assert.AreEqual(notFoundResult.StatusCode, (int)HttpStatusCode.NotFound);
         }
 
-        private async Task<IEnumerable<ItemDetails>> GetItems()
+        [TestMethod]
+        public async Task Test_Update_Item_By_Id_Returns_NoContentResult()
         {
-            var sessions = new List<ItemDetails>();
-            sessions.Add(new ItemDetails()
-            {
-                Title = "Some test title",
-                CreatedDate = new System.DateTime(2019,01,12),
-                Description = "Some Long winded description",
-                Name = "Name",
-                Price = 12.34,
-            });
-            sessions.Add(new ItemDetails()
-            {
-                Title = "Some Second test title",
-                CreatedDate = new System.DateTime(2019,01,15),
-                Description = "Some Second Long winded description",
-                Name = "Second Name",
-                Price = 43.21,
-            });
+            // Arrange
+            var mockRepository = new Mock<IItemsService>();
+            mockRepository.Setup(x=>x.UpdateItemById(It.IsAny<Guid>(), It.IsAny<ItemEdit>(), It.IsAny<List<Image>>())).ReturnsAsync(new Item{ Description = "Fluff" });
+            var imageService = new Mock<IImageService>();
+            var controller = new ItemsController(mockRepository.Object, imageService.Object);
+
+            var guid = Guid.NewGuid();
+
+            // Act
+            var actionResult = await controller.Put(guid.ToString(), new ItemEdit { Id = guid, Name = "Product" }, new List<Microsoft.AspNetCore.Http.IFormFile>());
+            var contentResult = actionResult as NoContentResult;
+
+            // Assert
+            Assert.IsNotNull(contentResult);
+            Assert.AreEqual(contentResult.StatusCode, (int)HttpStatusCode.NoContent);
             
-            return sessions;
+        }
+
+        [TestMethod]
+        public async Task Test_Update_Item_By_Id_With_Invalid_Data_Returns_BadRequest()
+        {
+            // Arrange
+            var itemEdit = new ItemEdit{
+                Id = new Guid("f34722c9-7d74-4e13-8bc1-3c7e1c0d984f"),
+                Title = "Super Crap Title"
+            };
+
+            var alternativeId = new Guid("f34722c9-7d74-4e13-8bc1-3c7e1c0d984A");
+
+            var mockRepository = new Mock<IItemsService>();
+            mockRepository.Setup(x=>x.UpdateItemById(itemEdit.Id, itemEdit, It.IsAny<List<Image>>())).ReturnsAsync(new Item{ Description = "Fluff" });
+            var imageService = new Mock<IImageService>();
+            var controller = new ItemsController(mockRepository.Object, imageService.Object);
+
+            // Act
+            var actionResult = await controller.Put(alternativeId.ToString(), itemEdit, new List<Microsoft.AspNetCore.Http.IFormFile>());
+            var contentResult = actionResult as BadRequestObjectResult;
+
+            // Assert
+            Assert.IsNotNull(contentResult);
+            Assert.AreEqual(contentResult.StatusCode, (int)HttpStatusCode.BadRequest);
+            Assert.AreEqual(contentResult.Value, "Invalid Data");
         }
     }
 }

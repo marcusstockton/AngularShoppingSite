@@ -1,37 +1,41 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj": {}
+    "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj": {
+    "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj",
+        "projectUniqueName": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj",
         "projectName": "WebServer.Test",
-        "projectPath": "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj",
-        "packagesPath": "C:\\Users\\MarcusS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\obj\\",
+        "projectPath": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj",
+        "packagesPath": "C:\\Users\\mstockton\\.nuget\\packages\\",
+        "outputPath": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\MarcusS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mstockton\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 18.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\DevExpress 19.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {
-                "projectPath": "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj"
+              "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {
+                "projectPath": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj"
               }
             }
           }
@@ -104,26 +108,30 @@
         }
       }
     },
-    "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {
+    "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
+        "projectUniqueName": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
         "projectName": "WebServer",
-        "projectPath": "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
-        "packagesPath": "C:\\Users\\MarcusS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\obj\\",
+        "projectPath": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
+        "packagesPath": "C:\\Users\\mstockton\\.nuget\\packages\\",
+        "outputPath": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\MarcusS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mstockton\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 18.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\DevExpress 19.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
