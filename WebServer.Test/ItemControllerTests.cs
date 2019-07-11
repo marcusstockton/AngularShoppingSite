@@ -51,7 +51,7 @@ namespace WebServer.Test
         }
 
         [TestMethod]
-        public async Task Test_Get_Item_By_Id()
+        public async Task Test_Get_Item_By_Id_With_Valid_Id_Returns_The_Item()
         {
             // Arrange
             var mockRepository = new Mock<IItemsService>();
@@ -138,6 +138,70 @@ namespace WebServer.Test
             Assert.IsNotNull(contentResult);
             Assert.AreEqual(contentResult.StatusCode, (int)HttpStatusCode.BadRequest);
             Assert.AreEqual(contentResult.Value, "Invalid Data");
+        }
+
+        [TestMethod]
+        public async Task Test_Create_Item_With_Valid_Data_Works()
+        {
+            // Arrange
+            var item = new ItemCreate{
+                Description = "New Description",
+                Name = "New Name",
+                Price = 43.21,
+                Title = "New Title"
+            };
+            var mockRepository = new Mock<IItemsService>();
+            var newGuidId = Guid.NewGuid();
+            mockRepository.Setup(x=>x.CreateItem(It.IsAny<ItemCreate>(), It.IsAny<List<Image>>())).ReturnsAsync(new Item{Id = newGuidId, Description = "New Description"});
+            var imageService = new Mock<IImageService>();
+            var controller = new ItemsController(mockRepository.Object, imageService.Object);
+
+            // Act
+            var actionResult = await controller.Post(item, new List<Microsoft.AspNetCore.Http.IFormFile>());
+            var contentResult = actionResult as CreatedAtActionResult;
+
+            Assert.IsNotNull(contentResult);
+            Assert.AreEqual(contentResult.StatusCode, (int)HttpStatusCode.Created);
+            var value = contentResult.Value as Item;
+            Assert.AreEqual(value.Id, newGuidId);
+            Assert.AreEqual(value.Description, "New Description");
+        }
+
+        [TestMethod]
+        public async Task Test_Delete_Item_With_Valid_Id_Works()
+        {
+            // Arrange
+            var newGuidId = Guid.NewGuid();
+            var mockRepository = new Mock<IItemsService>();
+            mockRepository.Setup(x=>x.DeleteItemById(newGuidId)).ReturnsAsync(true);
+            var imageService = new Mock<IImageService>();
+            var controller = new ItemsController(mockRepository.Object, imageService.Object);
+
+            // Act
+            var actionResult = await controller.Delete(newGuidId.ToString());
+            var contentResult = actionResult as NoContentResult;
+
+            // Assert
+            Assert.IsNotNull(contentResult);
+            Assert.AreEqual(contentResult.StatusCode, (int)HttpStatusCode.NoContent);
+        }
+
+        [TestMethod]
+        public async Task Test_Delete_With_Invalid_Id_Returns_404()
+        {
+            // Arrange
+            var mockRepository = new Mock<IItemsService>();
+            mockRepository.Setup(x=>x.DeleteItemById(Guid.NewGuid())).ReturnsAsync(false);
+            var imageService = new Mock<IImageService>();
+            var controller = new ItemsController(mockRepository.Object, imageService.Object);
+
+            // Act
+            var actionResult = await controller.Delete(Guid.NewGuid().ToString());
+            var contentResult = actionResult as BadRequestResult;
+
+            // Assert
+            Assert.IsNotNull(contentResult);
+            Assert.AreEqual(contentResult.StatusCode, (int)HttpStatusCode.BadRequest);
         }
     }
 }
