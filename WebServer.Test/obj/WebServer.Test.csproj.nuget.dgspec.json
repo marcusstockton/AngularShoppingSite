@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj": {}
+    "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj": {}
   },
   "projects": {
-    "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj": {
+    "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj",
+        "projectUniqueName": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj",
         "projectName": "WebServer.Test",
-        "projectPath": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj",
+        "projectPath": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj",
         "packagesPath": "C:\\Users\\mstockton\\.nuget\\packages\\",
-        "outputPath": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\obj\\",
+        "outputPath": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -34,8 +34,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {
-                "projectPath": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj"
+              "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {
+                "projectPath": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj"
               }
             }
           }
@@ -108,14 +108,14 @@
         }
       }
     },
-    "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {
+    "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
+        "projectUniqueName": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
         "projectName": "WebServer",
-        "projectPath": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
+        "projectPath": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
         "packagesPath": "C:\\Users\\mstockton\\.nuget\\packages\\",
-        "outputPath": "D:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\obj\\",
+        "outputPath": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

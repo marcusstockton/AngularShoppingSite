@@ -4,6 +4,7 @@ import { ReviewDetailComponent } from './components/review-detail/review-detail.
 import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { ReviewViewerComponent } from './containers/review-viewer/review-viewer.component';
 import { ReviewsDashboardComponent } from './containers/reviews-dashboard/reviews-dashboard.component';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ReviewsDashboardComponent } from './containers/reviews-dashboard/review
     ReviewsDashboardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    CoreModule
   ],
   exports: [
     ReviewDetailComponent,

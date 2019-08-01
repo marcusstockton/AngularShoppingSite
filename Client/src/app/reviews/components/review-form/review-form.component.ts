@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { IReview } from '../../models/review';
 
 @Component({
   selector: 'app-review-form',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewFormComponent implements OnInit {
 
-  constructor() { }
+  reviewForm: FormGroup;
+  review: IReview;
+
+  constructor(private fb: FormBuilder) {
+    this.reviewForm = this.createFormComponent();
+   }
 
   ngOnInit() {
   }
 
+  createFormComponent() {
+    return this.fb.group({
+      title: [''],
+      rating: [''],
+      description: [''],
+    });
+  }
+
+  onSubmit() {
+    console.log(this.reviewForm.value);
+  }
 }

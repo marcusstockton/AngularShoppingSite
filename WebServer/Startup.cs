@@ -42,6 +42,7 @@ namespace WebServer
 
             services.AddTransient<DataSeeder>();
             services.AddTransient<IItemsService, ItemsService>();
+            services.AddTransient<IReviewService, ReviewService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IImageService, ImageService>();
 

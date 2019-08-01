@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System;
 using WebServer.Models.DTOs.Users;
 
 namespace WebServer.Models.DTOs.Reviews
 {
-    public class ReviewDetails
+    public class ReviewEdit
     {
         public Guid Id { get; set; }
         public int Rating { get; set; }
@@ -14,7 +11,5 @@ namespace WebServer.Models.DTOs.Reviews
         public string Description { get; set; }
         public UserDetails CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime? UpdatedDate { get; set; }
-        public UserDetails UpdatedBy { get; set; }
     }
 }

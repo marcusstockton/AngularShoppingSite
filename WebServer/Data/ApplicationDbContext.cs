@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,6 +15,7 @@ namespace WebServer.Data
 
         public DbSet<Item> Items { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

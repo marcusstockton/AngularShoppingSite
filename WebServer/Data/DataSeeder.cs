@@ -30,7 +30,9 @@ namespace WebServer.Data
                     Id = Guid.NewGuid(),
                     Email = "test@test.com",
                     UserName = "testUser",
-                    FirstName = "Marcus"
+                    FirstName = "Marcus",
+                    LastName = "Stockton",
+                    DoB = new DateTime(1985, 4,12)
                 };
                 var validUserResult = await _userManager.CreateAsync(validUser, "Pa$$w0rd");
 
@@ -38,7 +40,8 @@ namespace WebServer.Data
                 {
                     Id = Guid.NewGuid(),
                     Email = "someShit@test.com",
-                    UserName = "noNamedUser"
+                    UserName = "noNamedUser",
+                    DoB = new DateTime(1993, 1, 16)
                 };
                 var noNameUserResult = await _userManager.CreateAsync(noNameUser, "Pa$$w0rd");
 
@@ -54,7 +57,8 @@ namespace WebServer.Data
                     CreatedById = validUser.Id,
                     Reviews = new List<Review>
                     {
-                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=3, Title="My First Review", Description = "My First Review Description", CreatedBy=noNameUser}
+                        new Review{Id = new Guid(), CreatedDate = DateTime.Now, Rating=3, Title="My First Review", Description = "My First Review Description", CreatedBy=noNameUser},
+                        new Review{Id = new Guid(), CreatedDate = DateTime.Now.AddDays(-3), Rating=4, Title="Meh", Description = "It's Ok...", CreatedBy=noNameUser}
                     }
                 });
                 _context.Items.Add(new Item
