@@ -41,7 +41,10 @@ registerForm: FormGroup = new FormGroup({
   login() {
     if (this.loginForm.valid) {
       this.service.login(this.loginForm.value).subscribe((result) => {
-        this.snackBar.open("Logged in sucessfully.");
+
+        this.snackBar.open('Logged in sucessfully.', 'OK', {
+          duration: 3000
+        });
         this.router.navigateByUrl(this.returnUrl);
       }, (error) => {
         if (error.error.length > 1) {

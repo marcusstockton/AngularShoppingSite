@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-nav-bar',
@@ -17,7 +18,12 @@ export class NavBarComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private auth: AuthService, private router: Router) {
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private auth: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+    ) {
     this.isLoggedIn();
   }
 
@@ -31,6 +37,9 @@ export class NavBarComponent {
 
   signOut() {
     this.auth.logout();
+    this.snackBar.open('Logged out sucessfully.', 'OK', {
+      duration: 3000
+    });
     this.router.navigate(['/']);
   }
 
