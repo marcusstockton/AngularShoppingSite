@@ -156,11 +156,11 @@ namespace WebServer
             
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions
-                    {
-                        FileProvider = new PhysicalFileProvider(
-                            Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
-                        RequestPath = "/Uploads"
-                    });
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
+                RequestPath = "/api/Uploads"
+            });
 
             app.UseHttpsRedirection();
             app.UseAuthentication();

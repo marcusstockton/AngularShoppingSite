@@ -4,6 +4,7 @@ import { ItemsService } from '../../items.service';
 import { IItem, IItemDetails } from '../../models/Item';
 import { MatSnackBar } from '@angular/material';
 import { AuthService } from 'src/app/auth/auth.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-item-detail',
@@ -16,6 +17,7 @@ export class ItemDetailComponent implements OnInit {
   item: IItemDetails;
   showAddReviewForm = false;
   addReviewButtonText = 'Add a Review';
+  env = environment;
 
   constructor(private service: ItemsService,
               private route: ActivatedRoute,
