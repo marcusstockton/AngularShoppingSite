@@ -66,6 +66,7 @@ namespace WebServer.Services
                         var img = new Image
                         {
                             Path = Path.Combine(imageFolder, fileName),
+                            FileName = fileName,
                             Type = extension,
                             CreatedById = _userService.GetLoggedInUserId(),
                             CreatedDate = DateTime.Now,
