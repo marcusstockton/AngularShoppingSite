@@ -24,7 +24,7 @@
     <ngb-carousel class="col-md-6">
       <span *ngFor="let image of item?.images">
         <ng-template ngbSlide>
-          <img class="figure-img img-fluid" src="data:image/jpeg;base64,{{image}}" width="100%" alt="{{image}}">
+          <img class="figure-img img-fluid" src="https://localhost:5001/{{image.path}}" width="100%" alt="{{image}}">
         </ng-template>
       </span>
     </ngb-carousel>

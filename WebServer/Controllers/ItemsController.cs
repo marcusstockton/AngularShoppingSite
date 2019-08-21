@@ -58,10 +58,6 @@ namespace WebServer.Controllers
                 return NotFound();
             }
            
-            var images = _imageService.GetImagesByItemId(idGuid);
-
-            item.Images = images;
-
             return Ok(item);
         }
 

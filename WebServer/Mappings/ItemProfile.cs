@@ -20,19 +20,7 @@ namespace WebServer.Mappings
             CreateMap<ItemEdit, Item>().ReverseMap();
             CreateMap<Item, ItemDetails>()
                 .ForMember(d=> d.CreatedBy, opt=>opt.MapFrom(src=>src.CreatedBy))
-               .ForMember(d => d.Images, opt => opt.MapFrom((s,d) => {
-                   MemoryStream target = new MemoryStream();
-                   if (s.Images != null)
-                   {
-                       s.Images.ForEach(x =>
-                       {
-                           FileStream file = File.Open(x.Path, FileMode.Open);
-                           file.CopyTo(target);
-                       });
-                       return target.ToArray();
-                   }
-                   return null;
-               }));
+                .ForMember(d => d.Images, opt => opt.MapFrom(src => src.Images));
         }
     }
 }

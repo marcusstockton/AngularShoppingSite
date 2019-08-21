@@ -10,6 +10,6 @@ namespace WebServer.Interfaces
     public interface IImageService
     {
         Task<List<Image>> UploadImages(List<IFormFile> file);
-        List<byte[]> GetImagesByItemId(Guid itemId);
+        // List<byte[]> GetImagesByItemId(Guid itemId);
     }
 }

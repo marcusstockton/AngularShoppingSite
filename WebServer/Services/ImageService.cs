@@ -28,24 +28,7 @@ namespace WebServer.Services
         {
             return await WriteFile(files);
         }
-
-        public List<byte[]> GetImagesByItemId(Guid itemId)
-        {
-            var imageList = new List<byte[]>();
-            var files = _context.Images.Where(x => x.ItemId == itemId);
-
-            foreach (var item in files)
-            {
-                var path = _appEnvironment.ContentRootFileProvider.GetFileInfo(item.Path)?.PhysicalPath;
-                if (File.Exists(path))
-                {
-                    imageList.Add(System.IO.File.ReadAllBytes(path));
-                }
-            }
-
-            return imageList;
-        }
-
+        
         /// <summary>
         /// Method to write file onto the disk
         /// </summary>

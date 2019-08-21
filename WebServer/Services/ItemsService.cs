@@ -39,6 +39,7 @@ namespace WebServer.Services
         public async Task<ItemDetails> GetItemById(Guid Id){
             var result = await _context.Items
                 .Include(x=>x.Reviews)
+                .Include(x=>x.Images)
                 .Include(x=>x.CreatedBy)
                 .Include(x=>x.UpdatedBy)
                 .Where(i=>i.Id == Id)
