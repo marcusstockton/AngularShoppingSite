@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using WebServer.Models;
+using WebServer.Models.Items;
 
 namespace WebServer.Data
 {
@@ -14,6 +15,9 @@ namespace WebServer.Data
         { }
 
         public DbSet<Item> Items { get; set; }
+        public DbSet<ItemCondition> ItemConditions {get;set;}
+        public DbSet<ItemCategory> ItemCategories {get;set;}
+        public DbSet<DeliveryOption> DeliveryOptions {get;set;}
         public DbSet<Image> Images { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
@@ -22,7 +26,9 @@ namespace WebServer.Data
             base.OnModelCreating(builder);
             builder.Entity<ApplicationUser>().Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Entity<Item>().Property(p=>p.Id).ValueGeneratedOnAdd();
-            builder.Entity<Image>().Property(p=>p.Id).ValueGeneratedOnAdd();
+            builder.Entity<ItemCondition>().Property(p=>p.Id).ValueGeneratedOnAdd();
+            builder.Entity<ItemCategory>().Property(p=>p.Id).ValueGeneratedOnAdd();
+            builder.Entity<DeliveryOption>().Property(p=>p.Id).ValueGeneratedOnAdd();
 
             builder.Entity<Image>().HasOne(x=>x.Item).WithMany(x=>x.Images).HasForeignKey(x=>x.ItemId);
         }

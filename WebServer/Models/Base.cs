@@ -13,6 +13,8 @@ namespace WebServer.Models
         public Guid CreatedById { get; set; }
         public Guid? UpdatedById { get; set; }
 
+        public bool Active { get; set; }
+
         [ForeignKey("CreatedById")]
         public ApplicationUser CreatedBy { get; set; }
 

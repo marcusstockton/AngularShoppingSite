@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebServer.Models
+namespace WebServer.Models.Items
 {
     public class Item : Base
     {
@@ -24,6 +24,14 @@ namespace WebServer.Models
 
         [Required, DataType(DataType.Currency)]
         public double Price { get; set; }
+
+        public bool Sold{get;set;}
+
+        public virtual ItemCondition ItemCondition{get;set;}
+
+        public virtual ItemCategory ItemCategory { get; set; }
+
+        public virtual DeliveryOption DeliveryOption{get;set;}
 
         public virtual List<Review> Reviews { get; set; }
 

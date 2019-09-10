@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using WebServer.Interfaces;
 using WebServer.Models;
 using WebServer.Models.DTOs.Items;
+using WebServer.Models.Items;
 
 namespace WebServer.Controllers
 {
@@ -50,15 +51,21 @@ namespace WebServer.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ItemDetails>> Get(string id)
         {
-            var idGuid = Guid.Parse(id);
-            var item = await _service.GetItemById(idGuid);
-
-            if (item == null)
+            var guidId = new Guid();
+            var success = Guid.TryParse(id, out guidId);
+            if(success)
             {
-                return NotFound();
+                var item = await _service.GetItemById(guidId);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+            
+                return Ok(item);
             }
-           
-            return Ok(item);
+            else{
+                return BadRequest();
+            }
         }
 
         // POST api/values

@@ -8,6 +8,7 @@ using WebServer.Data;
 using WebServer.Interfaces;
 using WebServer.Models;
 using WebServer.Models.DTOs.Items;
+using WebServer.Models.Items;
 
 namespace WebServer.Services
 {
