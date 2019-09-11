@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using WebServer.Models.DTOs.Reviews;
 using WebServer.Models.DTOs.Users;
+using WebServer.Models.Items;
 
 
 namespace WebServer.Models.DTOs.Items
@@ -17,5 +18,8 @@ namespace WebServer.Models.DTOs.Items
         public DateTime CreatedDate { get; set; }
         public UserDetails UpdatedBy { get; set; }
         public virtual List<ReviewDetails> Reviews { get; set; }
+        public virtual ItemCategory ItemCategory { get; set; }
+        public virtual ItemCondition ItemCondition { get; set; }
+        public virtual DeliveryOption DeliveryOption { get; set; }
     }
 }

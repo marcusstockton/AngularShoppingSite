@@ -10,6 +10,7 @@ using WebServer.Models;
 using WebServer.Models.DTOs.Items;
 using WebServer.Models.Items;
 
+
 namespace WebServer.Services
 {
     public class ItemsService : IItemsService
@@ -43,6 +44,7 @@ namespace WebServer.Services
                 .Include(x=>x.Images)
                 .Include(x=>x.CreatedBy)
                 .Include(x=>x.UpdatedBy)
+                .Include(x=>x.ItemCategory)
                 .Where(i=>i.Id == Id)
                 .SingleOrDefaultAsync();
 

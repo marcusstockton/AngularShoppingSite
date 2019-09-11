@@ -21,7 +21,8 @@ namespace WebServer.Mappings
             CreateMap<ItemEdit, Item>().ReverseMap();
             CreateMap<Item, ItemDetails>()
                 .ForMember(d=> d.CreatedBy, opt=>opt.MapFrom(src=>src.CreatedBy))
-                .ForMember(d => d.Images, opt => opt.MapFrom(src => src.Images));
+                .ForMember(d => d.Images, opt => opt.MapFrom(src => src.Images))
+                .ForMember(d => d.ItemCategory, opt => opt.MapFrom(src => src.ItemCategory));
         }
     }
 }

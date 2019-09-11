@@ -1,5 +1,6 @@
 import { IReview } from 'src/app/reviews/models/review';
 import { User } from 'src/app/auth/models/user';
+import {IItemCategory} from 'src/app/items/models/ItemCategory';
 
 export class Item {
 
@@ -17,6 +18,7 @@ export interface IItem {
     updatedBy: User;
     reviews: IReview[];
     images: Array<File>;
+    itemCategory: IItemCategory;
 }
 
 export interface IItemCreate {

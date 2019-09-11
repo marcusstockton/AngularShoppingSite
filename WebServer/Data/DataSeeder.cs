@@ -71,12 +71,14 @@ namespace WebServer.Data
                     CreatedById = _context.Users.FirstOrDefault().Id,
                     CreatedDate = DateTime.Now,
                     Id = new Guid(),
+                    Active = true,
                     ParentCategory = new ItemCategory
                     {
                         Description = "Bicycles",
                         CreatedBy = _context.Users.FirstOrDefault(),
                         CreatedById = _context.Users.FirstOrDefault().Id,
                         CreatedDate = DateTime.Now,
+                        Active = true,
                         Id = new Guid(),
                     }
                 });

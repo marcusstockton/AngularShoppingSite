@@ -1,12 +1,22 @@
 <div class="row">
   <div class="col-md-6">
-    <legend>Item</legend>
-    <p>{{item?.id}}</p>
-    <p>{{item?.title}}</p>
-    <p>{{item?.description}}</p>
-    <p>{{item?.price}}</p>
-    <p>{{item?.createdDate | date:'medium'}}</p>
-    <p>{{item?.name}}</p>
+    <legend>{{item?.name}}</legend>
+    <dl class="row">
+      <dt class="col-sm-3">Title</dt>
+      <dd class="col-sm-9">{{item?.title}}</dd>
+    
+      <dt class="col-sm-3">Description</dt>
+      <dd class="col-sm-9">{{item?.description}}</dd>
+    
+      <dt class="col-sm-3">Price</dt>
+      <dd class="col-sm-9">{{item?.price}}</dd>
+    
+      <dt class="col-sm-3">Category</dt>
+      <dd class="col-sm-9">{{item?.itemCategory.description}}</dd>
+    
+      <dt class="col-sm-3">Created</dt>
+      <dd class="col-sm-9"> {{item?.createdDate | date:'medium'}}</dd>
+    </dl>
 
     <button mat-raised-button color="primary" [routerLink]="['edit']">Edit</button>
     <button mat-raised-button color="warn" (click)="delete(item)">Delete</button>
