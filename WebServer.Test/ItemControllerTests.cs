@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
 using WebServer.Models;
+using WebServer.Models.Items;
 
 namespace WebServer.Test
 {
