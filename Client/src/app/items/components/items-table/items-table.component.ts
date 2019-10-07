@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./items-table.component.css']
 })
 export class ItemsTableComponent implements AfterViewInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   dataSource: MatTableDataSource<IItem>;
   ItemList: IItem[]  = [];
 
