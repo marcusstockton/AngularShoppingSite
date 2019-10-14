@@ -46,7 +46,7 @@ export class ItemsService implements OnInit {
         formData.append('fileArray', image, image.name);
       }
     }
-     formData.append('item', JSON.stringify(body));
+    formData.append('item', JSON.stringify(body));
 
     return this.httpClient.put<any>(`${this.baseURL}/${id}`, formData)
       .pipe(
