@@ -134,3 +134,5 @@ C:\Users\MarcusS\Dropbox\Angular Projects\AngularShoppingSite\BlazorWAClient\bin
 C:\Users\MarcusS\Dropbox\Angular Projects\AngularShoppingSite\BlazorWAClient\obj\Debug\netstandard2.0\blazor\linker\Microsoft.AspNetCore.Components.Authorization.dll
 C:\Users\MarcusS\Dropbox\Angular Projects\AngularShoppingSite\BlazorWAClient\obj\Debug\netstandard2.0\RazorDeclaration\Pages\Items\Item-List.razor.g.cs
 C:\Users\MarcusS\Dropbox\Angular Projects\AngularShoppingSite\BlazorWAClient\obj\Debug\netstandard2.0\Razor\Pages\Items\Item-List.razor.g.cs
+C:\Users\MarcusS\Dropbox\Angular Projects\AngularShoppingSite\BlazorWAClient\obj\Debug\netstandard2.0\RazorDeclaration\Pages\Items\Item-detail.razor.g.cs
+C:\Users\MarcusS\Dropbox\Angular Projects\AngularShoppingSite\BlazorWAClient\obj\Debug\netstandard2.0\Razor\Pages\Items\Item-detail.razor.g.cs
