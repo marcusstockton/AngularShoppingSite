@@ -1,0 +1,33 @@
+@page "/login"
+@using BlazorWAClient.Shared;
+@inject HttpClient Http
+
+
+<div class="container">
+    <h1>Log in to JWT Authenication</h1>
+    <div class="form-group">
+        <label for="email">Username</label>
+        <input type="text" name="email" placeholder="Username" class="form-control" @bind="Username"/>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="Password" class="form-control" @bind="Password"/>
+    </div>
+    <button @onclick="SubmitForm">Submit</button>
+</div>
+
+@functions  {
+    public string Username {get;set;} = "";
+    public string Password{get;set;} = "";
+
+    private async Task SubmitForm()
+    {
+        var vm = new TokenViewModel {
+            Username = Username,
+            Password = Password
+        };
+
+        var response = await Http.PostJsonAsync<object>("https://localhost:5001/api/users/authenticate", vm);
+        Console.WriteLine(response);
+    }
+}
