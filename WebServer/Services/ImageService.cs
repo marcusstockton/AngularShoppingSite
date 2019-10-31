@@ -15,9 +15,9 @@ namespace WebServer.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IUserService _userService;
-        private readonly IHostingEnvironment _appEnvironment;
+        private readonly IWebHostEnvironment _appEnvironment;
 
-        public ImageService(ApplicationDbContext context, IUserService userService, IHostingEnvironment appEnvironment)
+        public ImageService(ApplicationDbContext context, IUserService userService, IWebHostEnvironment appEnvironment)
         {
             _context = context;
             _userService = userService;

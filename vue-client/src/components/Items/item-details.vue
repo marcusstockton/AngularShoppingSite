@@ -1,7 +1,9 @@
 <template>
-    <div>
+	<div v-if="isLoading" >
+		<p>Loading</p>
+	</div>
+    <div v-else>
         <fieldset class="border p-2">
-            <!-- <h1>Item Details</h1> -->
             <legend class="w-auto">Item Details</legend>
             <dl>
                 <dt>Name</dt>
@@ -71,6 +73,7 @@ Vue.use(Vue2Filters);
 
 export default Vue.extend({
     // code here
+	props: {isLoading: Boolean,},
     data() {
         return {
             itemDetails: {} as any,
@@ -78,13 +81,16 @@ export default Vue.extend({
     },
     mounted() {
         const itemId = this.$route.params.id;
+		this.isLoading = true;
         axios.get('https://localhost:5001/api/Items/' + itemId)
             .then((response) => {
+				this.isLoading = false;
                 this.itemDetails = response.data;
                 console.log(this.itemDetails);
             })
             .catch(err => {
                 console.log(err); 
+				this.isLoading = false;
             });
     },
     

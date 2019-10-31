@@ -51,13 +51,13 @@ export default Vue.extend({
         if(itemId){
             axios.get('https://localhost:5001/api/Items/' + itemId)
                 .then((response) => {
-                    this.itemDetails = response.data;
-                    this.form.title = this.itemDetails.title;
-                    this.form.description = this.itemDetails.description;
-                    this.form.price = this.itemDetails.price;
+                    let itemDetails = response.data;
+                    this.form.title = itemDetails.title;
+                    this.form.description = itemDetails.description;
+                    this.form.price = itemDetails.price;
                 })
-                .catch(err => {
-                    console.log(err); 
+                .catch((err) => {
+                    console.log(err);
                 });
         }
     },

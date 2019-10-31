@@ -1,20 +1,14 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
-using Swashbuckle.AspNetCore.Swagger;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using WebServer.Data;
@@ -22,6 +16,10 @@ using WebServer.Helpers;
 using WebServer.Interfaces;
 using WebServer.Mappings;
 using WebServer.Services;
+using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace WebServer
 {
@@ -37,7 +35,8 @@ namespace WebServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddDbContext<ApplicationDbContext>(context => { context.UseInMemoryDatabase("InMemoryDatabase"); });
+            //services.AddDbContext<ApplicationDbContext>(context => { context.UseInMemoryDatabase(databaseName: "InMemoryDatabase"); });
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -65,26 +64,12 @@ namespace WebServer
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
-
-                // Swagger 2.+ support
-                var security = new Dictionary<string, IEnumerable<string>>
-                {
-                    {"Bearer", new string[] { }},
-                };
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey"
-                });
-                c.AddSecurityRequirement(security);
             });
 
             // configure strongly typed settings objects
@@ -122,17 +107,20 @@ namespace WebServer
                 cfg.AddProfile(new ReviewProfile());
             });
             
-            services.AddMvc(options =>
-                {
-                    var jsonInputFormatter = options.InputFormatters.OfType<JsonInputFormatter>().First();
-                    jsonInputFormatter.SupportedMediaTypes.Add("multipart/form-data");
-                }
-                ).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers()
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            // services.AddRazorPages();
+            // services.AddMvc(options =>
+            //     {
+            //         var jsonInputFormatter = options.InputFormatters.OfType<JsonInputFormatter>().First();
+            //         jsonInputFormatter.SupportedMediaTypes.Add("multipart/form-data");
+            //     }
+            //);
             
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DataSeeder seeder)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataSeeder seeder)
         {
             if (env.IsDevelopment())
             {
@@ -164,7 +152,10 @@ namespace WebServer
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+            });
 
             seeder.SeedData();
         }
