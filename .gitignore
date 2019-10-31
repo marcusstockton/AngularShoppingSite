@@ -4,3 +4,5 @@ WebServer.Test/bin
 WebServer.Test/obj
 WebServer/bin
 WebServer/obj
+WebServer/*.pdb
+WebServer/*.dll

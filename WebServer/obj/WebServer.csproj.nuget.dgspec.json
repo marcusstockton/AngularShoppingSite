@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {}
   },
   "projects": {
@@ -13,33 +12,13 @@
         "projectPath": "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
         "packagesPath": "C:\\Users\\marcus.stockton\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer\\obj\\",
-=======
-    "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
-        "projectName": "WebServer",
-        "projectPath": "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
-        "packagesPath": "C:\\Users\\MarcusS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MarcusS\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\obj\\",
->>>>>>> 6a15eee83e0ff7fefbff2a639d3ee3475350991a
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-<<<<<<< HEAD
           "C:\\Users\\marcus.stockton\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-=======
-          "C:\\Users\\MarcusS\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
->>>>>>> 6a15eee83e0ff7fefbff2a639d3ee3475350991a
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
@@ -126,7 +105,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-<<<<<<< HEAD
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -135,8 +113,6 @@
               "privateAssets": "all"
             }
           },
-=======
->>>>>>> 6a15eee83e0ff7fefbff2a639d3ee3475350991a
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
