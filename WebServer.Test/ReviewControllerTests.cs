@@ -51,5 +51,28 @@ namespace WebServer.Test
             var values = okresult.Value as List<ReviewDetails>;
             Assert.AreEqual(values.Count, 2);
         }
+
+        [TestMethod]
+        public async Task Get_Review_For_Item_By_Review_Id_With_Correct_Id_Returns_Review()
+        {
+            // Arrange
+            var mockRepository = new Mock<IReviewService>();
+            var reviewId = Guid.NewGuid();
+            mockRepository.Setup(x => x.GetReviewById(It.IsAny<Guid>(), reviewId))
+                .ReturnsAsync(new ReviewDetails{ Rating = 5, Description = "Some Description", Title = "Some Title", Id=reviewId});
+            var controller = new ReviewController(mockRepository.Object);
+
+            // Act
+            var actionResult = await controller.GetReviewById(Guid.NewGuid(), reviewId);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.IsInstanceOfType(actionResult, typeof(OkObjectResult));
+            var okresult = actionResult as OkObjectResult;
+            Assert.AreEqual(okresult.StatusCode, (int)HttpStatusCode.OK);
+            var value = okresult.Value as ReviewDetails;
+            Assert.AreEqual(value.Id, reviewId);
+            Assert.AreEqual(value.Description, "Some Description");
+        }
     }
 }

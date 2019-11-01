@@ -1,41 +1,38 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj": {}
+    "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj": {}
   },
   "projects": {
-    "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj": {
+    "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj",
+        "projectUniqueName": "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj",
         "projectName": "WebServer.Test",
-        "projectPath": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj",
-        "packagesPath": "C:\\Users\\mstockton\\.nuget\\packages\\",
-        "outputPath": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\obj\\",
+        "projectPath": "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\WebServer.Test.csproj",
+        "packagesPath": "C:\\Users\\marcus.stockton\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer.Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\mstockton\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.2.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.1.config",
+          "C:\\Users\\marcus.stockton\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp2.2"
+          "netcoreapp3.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 18.2\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files (x86)\\DevExpress 19.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.8tech.co.uk/nuget": {}
         },
         "frameworks": {
-          "netcoreapp2.2": {
+          "netcoreapp3.0": {
             "projectReferences": {
-              "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {
-                "projectPath": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj"
+              "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {
+                "projectPath": "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj"
               }
             }
           }
@@ -47,7 +44,7 @@
         }
       },
       "frameworks": {
-        "netcoreapp2.2": {
+        "netcoreapp3.0": {
           "dependencies": {
             "MSTest.TestAdapter": {
               "target": "Package",
@@ -89,54 +86,56 @@
               "target": "Package",
               "version": "[16.0.1, )"
             },
-            "Microsoft.NETCore.App": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.2.0, )",
-              "autoReferenced": true
-            },
             "Moq": {
               "target": "Package",
               "version": "[4.12.0, )"
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {
+    "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
+        "projectUniqueName": "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
         "projectName": "WebServer",
-        "projectPath": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
-        "packagesPath": "C:\\Users\\mstockton\\.nuget\\packages\\",
-        "outputPath": "d:\\Dropbox\\Angular Projects\\AngularShoppingSite\\WebServer\\obj\\",
+        "projectPath": "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer\\WebServer.csproj",
+        "packagesPath": "C:\\Users\\marcus.stockton\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\marcus.stockton\\OneDrive\\Documents\\Angular Projects\\AngularShoppingSite\\WebServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\mstockton\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.2.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.1.config",
+          "C:\\Users\\marcus.stockton\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp2.2"
+          "netcoreapp3.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 18.2\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files (x86)\\DevExpress 19.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.8tech.co.uk/nuget": {}
         },
         "frameworks": {
-          "netcoreapp2.2": {
+          "netcoreapp3.0": {
             "projectReferences": {}
           }
         },
@@ -147,7 +146,7 @@
         }
       },
       "frameworks": {
-        "netcoreapp2.2": {
+        "netcoreapp3.0": {
           "dependencies": {
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
@@ -157,17 +156,11 @@
               "target": "Package",
               "version": "[1.0.1, )"
             },
-            "Microsoft.AspNetCore.App": {
-              "suppressParent": "All",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[2.2.0, )",
-              "autoReferenced": true
+              "version": "[3.0.0, )"
             },
             "Microsoft.AspNetCore.Cors": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "Microsoft.AspNetCore.Identity": {
               "target": "Package",
               "version": "[2.2.0, )"
             },
@@ -175,8 +168,15 @@
               "target": "Package",
               "version": "[2.2.0, )"
             },
-            "Microsoft.AspNetCore.Razor.Design": {
-              "suppressParent": "All",
+            "Microsoft.AspNetCore.Mvc.Formatters.Json": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.AspNetCore.WebUtilities": {
               "target": "Package",
               "version": "[2.2.0, )"
             },
@@ -188,26 +188,38 @@
               "target": "Package",
               "version": "[2.2.4, )"
             },
-            "Microsoft.NETCore.App": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.2.0, )",
-              "autoReferenced": true
-            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[2.2.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[4.0.1, )"
+              "version": "[5.0.0-rc4, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[5.6.0, )"
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -60,8 +60,8 @@ namespace WebServer.Controllers
                 {
                     return NotFound();
                 }
-                return item;
-                //return Ok(item);
+                //return item;
+                return Ok(item);
             }
             else{
                 return BadRequest();

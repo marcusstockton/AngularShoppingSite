@@ -1,8 +1,8 @@
 node_modules
 
-WebServer.Test/bin
-WebServer.Test/obj
-WebServer/bin
-WebServer/obj
-WebServer/*.pdb
-WebServer/*.dll
+**/bin/*
+**/obj/*
+**/*.pdb
+**/*.dll
+vue-client/package-DEVELOPER-06.json
+vue-client/package-lock-DEVELOPER-06.json

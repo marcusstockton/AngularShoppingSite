@@ -29,7 +29,7 @@
       <p>{{review.createdDate | date:'medium'}}</p>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6" *ngIf="item?.images.length > 0">
     <legend>Images:</legend>
     <ngb-carousel class="col-md-6">
       <span *ngFor="let image of item?.images">
@@ -39,13 +39,14 @@
       </span>
     </ngb-carousel>
   </div>
-  <div class="col-md-6">
-    <button (click)="addReview()" mat-raised-button color="accent" [disabled]="!isLoggedIn()">
-      {{addReviewButtonText}}
-    </button>
+  
+</div>
+<div class="col-md-6 row">
+  <button (click)="addReview()" mat-raised-button color="accent" [disabled]="!isLoggedIn()">
+    {{addReviewButtonText}}
+  </button>
 
-    <ng-container *ngIf="showAddReviewForm">
-      <app-review-form></app-review-form>
-    </ng-container>
-  </div>
+  <ng-container *ngIf="showAddReviewForm">
+    <app-review-form></app-review-form>
+  </ng-container>
 </div>
