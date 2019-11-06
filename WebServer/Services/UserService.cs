@@ -93,5 +93,15 @@ namespace WebServer.Services
             }
             return Guid.Empty;
         }
+
+        public async Task<ApplicationUser> GetUserById(string id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if(user != null)
+            {
+                return user;
+            }
+            return null;
+        }
     }
 }

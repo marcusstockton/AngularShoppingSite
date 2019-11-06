@@ -154,7 +154,7 @@ namespace WebServer
             app.UseAuthentication();
             app.UseRouting();
             app.UseEndpoints(endpoints => {
-                endpoints.MapControllers();
+                endpoints.MapControllers().RequireCors("CorsPolicy");;
             });
 
             seeder.SeedData();

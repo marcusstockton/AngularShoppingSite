@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebServer.Interfaces;
 using WebServer.Models.DTOs.Users;
@@ -91,6 +92,15 @@ namespace WebServer.Controllers
         {
             var users = _userService.GetAllUsersWithoutFirstName();
             return Ok(users);
+        }
+
+        
+        [HttpGet]
+        public IActionResult GetLoggedInUserDetails()
+        {
+            var user_id = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _userService.GetUserById(user_id);
+            return Ok(user);
         }
     }
 }

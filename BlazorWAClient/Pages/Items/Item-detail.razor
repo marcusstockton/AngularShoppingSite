@@ -8,16 +8,29 @@
     @if(item == null){
         <p>Loading....</p>
     }
-    else{
+    else
+    {
         <p>The response is @item</p>
         <p>@item.Title</p>
         <p>@item.Description</p>
         <p>@item.Price</p>
-        @foreach (var image in item.Images)
-        {
-            <p>@image.Path></p>
-            <img src="@image.Path" alt="@image.FileName"/>
-        }
+        <p># of images @item.Images.Count</p>
+
+        <!-- Carousel -->
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                @for (int i = 0; i < item.Images.Count; i++)
+                {
+                    var img = item.Images[i];
+                    var itemClass = i == 0 ? "carousel-item active" : "carousel-item";
+                    <div class="@itemClass">
+                        <img src='@($"https://localhost:5001/api/{img.Path}")' alt="img.FileName" class="d-block" width="150">
+                    </div>
+                }
+            </div>
+        </div>
+
+        <NavLink href = "@($"/item-form/{item.Id}")" class="btn btn-primary">Edit</NavLink>
     }
     
 </div>

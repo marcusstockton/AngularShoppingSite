@@ -1,0 +1,64 @@
+@page "/item-form/"
+@page "/item-form/{Id}"
+@inject HttpClient Http
+@using BlazorWAClient.Pages.Items;
+
+<div class="container">
+    <p>You made it!</p>
+    @if(!string.IsNullOrEmpty(Id))
+    {
+        <p>The id is @Id</p>
+    } 
+
+    <EditForm Model="@item" OnValidSubmit="@HandleValidSubmit">  
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        <p>
+            <label for="title">Title: </label>
+            <InputText id="title" @bind-Value="item.Title" class="form-control" />
+        </p>
+        <p>
+            <label for="description">Description: </label>
+            <InputTextArea id="description" @bind-Value="item.Description" class="form-control" />
+        </p>
+        <p>
+            <label for="price">Price: </label>
+            <InputNumber id="price" @bind-Value="item.Price" class="form-control" />
+        </p>
+        <p>
+            <label for="name">Name: </label>
+            <InputText id="name" @bind-Value="item.Name" class="form-control" />
+        </p>
+        
+        <button type="submit">Submit</button>
+    </EditForm>
+</div>
+
+@code
+{
+    [Parameter]
+    public string Id { get; set; }
+    ItemModel item = new ItemModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if(!String.IsNullOrEmpty(Id))
+        {
+            item = await Http.GetJsonAsync<ItemModel>($"https://localhost:5001/api/Items/{Id}");
+        }        
+    }
+
+    private void HandleValidSubmit(EditContext editContext)
+    {
+		
+        Console.WriteLine("Does Anything get output?");
+        Console.WriteLine("Context: ", editContext);
+        bool formIsValid = editContext.Validate();
+        Console.WriteLine("Valid?: ", formIsValid);
+        Console.WriteLine("Name:   ", this.item.Name);
+        Console.WriteLine("Desc:   ", item.Description);
+        Console.WriteLine("Price:  ", item.Price);
+        Console.WriteLine("Title:  ", item.Title);
+    }
+
+}
