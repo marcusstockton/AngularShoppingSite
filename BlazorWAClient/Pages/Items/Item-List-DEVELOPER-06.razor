@@ -9,6 +9,7 @@
         <p>Loading...</p>
     }
     else{
+        <div><NavLink href = "@($"/item-form/")" class="btn btn-primary">Create</NavLink></div>
         foreach (var item in response)
         {
             <!-- <h5>@item.Name</h5> -->
@@ -21,7 +22,8 @@
     }
 </div>
 
-@code {
+@code 
+{
     ItemModel[] response;
     protected override async Task OnInitializedAsync()
     {

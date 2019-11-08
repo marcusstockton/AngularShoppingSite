@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -35,6 +36,7 @@ namespace WebServer.Controllers
         /// </summary>
         /// <returns>An IEnumerable of Item details.</returns>
         [HttpGet]
+        [EnableCors]
         public async Task<ActionResult<IEnumerable<ItemDetails>>> Get()
         {
             return Ok(await _service.GetItems());

@@ -18,7 +18,12 @@ export class ItemsService implements OnInit {
   }
 
   getItems(): Observable<IItem[]> {
-    return this.httpClient.get<any[]>(`${this.baseURL}`)
+    const headers = new HttpHeaders()
+      .append("Content-Type", "application/json")
+      .append("Access-Control-Allow-Headers", "Content-Type")
+      .append("Access-Control-Allow-Methods", "GET")
+      .append('Access-Control-Allow-Origin', '*');
+    return this.httpClient.get<any[]>(`${this.baseURL}`, {headers})
       .pipe(
         tap( // Log the result or error
           // data => console.log(data),

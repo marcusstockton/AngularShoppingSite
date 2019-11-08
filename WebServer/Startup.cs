@@ -50,8 +50,7 @@ namespace WebServer
             {
                 options.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyOrigin()
-                        .AllowAnyOrigin()
+                    policy.WithOrigins("http://localhost:4200", "http://localhost:8080", "http://localhost:5050")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
@@ -153,6 +152,7 @@ namespace WebServer
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseRouting();
+            app.UseCors();
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers().RequireCors("CorsPolicy");;
             });
