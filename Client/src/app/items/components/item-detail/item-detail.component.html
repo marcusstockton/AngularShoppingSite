@@ -41,12 +41,15 @@
   </div>
   
 </div>
-<div class="col-md-6 row">
-  <button (click)="addReview()" mat-raised-button color="accent" [disabled]="!isLoggedIn()">
-    {{addReviewButtonText}}
-  </button>
-
-  <ng-container *ngIf="showAddReviewForm">
-    <app-review-form></app-review-form>
-  </ng-container>
+<div class="col-md-6">
+  <span class="row">
+    <button (click)="addReview()" mat-raised-button color="accent" [disabled]="!isLoggedIn()">
+      {{addReviewButtonText}}
+    </button>
+  </span>
+  <span class="row">
+    <ng-container *ngIf="showAddReviewForm">
+      <app-review-form></app-review-form>
+    </ng-container>
+  </span>
 </div>

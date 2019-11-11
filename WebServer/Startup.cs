@@ -20,6 +20,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace WebServer
 {
@@ -69,6 +70,7 @@ namespace WebServer
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
 
             // configure strongly typed settings objects
@@ -151,6 +153,7 @@ namespace WebServer
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseRouting();
             app.UseCors();
             app.UseEndpoints(endpoints => {

@@ -1,4 +1,4 @@
-<form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" *ngIf="reviewForm">
+<form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" *ngIf="reviewForm" class="form">
   <div>
     <mat-form-field>
       <mat-label>Title</mat-label>
@@ -17,6 +17,7 @@
       <input matInput formControlName="rating" type="number">
     </mat-form-field>
   </div>
-
-  <button mat-raised-button color="primary" type="submit">Submit!</button>
+  <div>
+    <button mat-raised-button color="primary" type="submit">Submit!</button>
+  </div>
 </form>
