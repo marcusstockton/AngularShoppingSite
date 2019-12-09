@@ -32,7 +32,7 @@ namespace WebServer.Services
             await _context.AddAsync(review);
             await _context.SaveChangesAsync();
 
-            return Mapper.Map<ReviewDetails>(review);;
+            return Mapper.Map<ReviewDetails>(review);
         }
 
         public async Task<bool> DeleteReviewById(Guid id)

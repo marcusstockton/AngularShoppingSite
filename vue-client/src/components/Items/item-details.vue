@@ -32,16 +32,16 @@
             <div class="col-md-6">
                 <fieldset class="border p-2" v-if="itemDetails.images">
                     <legend class="w-auto">Images</legend>
+                        <div style="max-width:100%; height:auto;">
                             <b-carousel
                                 id="carousel-fade"
                                 style="text-shadow: 0px 0px 2px #000"
                                 fade
                                 controls
-                                indicators
-                                img-width="1024"
-                                img-height="480">
+                                indicators>
                                 <b-carousel-slide v-for="image in itemDetails.images" :key="image.fileName" v-bind:img-src="'https://localhost:5001/api/' + image.path" v-bind:img-alt="image.filename"></b-carousel-slide>
                             </b-carousel>
+                        </div>
                 </fieldset>
             </div>
             <div class="col-md-6">
@@ -67,16 +67,17 @@
 <script lang="ts">
 import Vue from 'vue';
 import axios from 'axios';
-import Vue2Filters from 'vue2-filters'
+import Vue2Filters from 'vue2-filters';
 
 Vue.use(Vue2Filters);
 
 export default Vue.extend({
     // code here
-	props: {isLoading: Boolean,},
+	props: { },
     data() {
         return {
             itemDetails: {} as any,
+            isLoading: Boolean
         };
     },
     mounted() {

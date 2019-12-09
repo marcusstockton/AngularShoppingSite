@@ -47,7 +47,7 @@ export default Vue.extend({
     },
 });
 
-Vue.filter('formatDate', function(value: any) {
+Vue.filter('formatDate', (value: any) => {
   if (value) {
     return moment(String(value)).format('DD MMM YYYY hh:mm');
   }

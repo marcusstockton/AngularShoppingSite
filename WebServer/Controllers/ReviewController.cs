@@ -44,7 +44,7 @@ namespace WebServer.Controllers
         public async Task<IActionResult> CreateReview( ReviewCreate review)
         {
             var result = await _service.CreateReview(review);
-            return Ok();
+            return Ok(result);
         }
 
         [Authorize]
