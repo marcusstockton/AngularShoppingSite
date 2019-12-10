@@ -6,3 +6,4 @@ node_modules
 **/*.dll
 vue-client/package-DEVELOPER-06.json
 vue-client/package-lock-DEVELOPER-06.json
+BlazorWAClient/bin/*

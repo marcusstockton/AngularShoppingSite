@@ -36,7 +36,7 @@ namespace BlazorWAClient.Pages.Items
         public decimal Price{get;set;}
         public UserModel CreatedBy{get;set;}
         public DateTime CreatedDate{get;set;}
-        public DateTime UpdatedDate{get;set;}
+        public DateTime? UpdatedDate{get;set;}
         public UserModel UpdatedBy{get;set;}
         public virtual List<ImageModel> Images{get;set;}
         public virtual List<ReviewModel> Reviews{get;set;}

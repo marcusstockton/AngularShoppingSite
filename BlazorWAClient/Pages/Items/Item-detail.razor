@@ -17,30 +17,33 @@
                 <p>@item.CreatedBy.Username</p>
                 <p>@item.CreatedDate</p>
             </div>
-            <div class="col-sm-6">
-                <fieldset>
-                    <legend> Images</legend>
-                    @foreach (var image in item.Images)
-                    {
-                        <img src="https://localhost:5001/api/@image.Path" alt="@image.FileName" width="200">
-                    }
-                </fieldset>
-            </div>
-        </div>
-        
-        <fieldset>
-            <legend>Reviews</legend>
-            @foreach(var review in item.Reviews)
-            {
-                <p>@review.Rating / 5</p>
-                <p>@review.Title</p>
-                <p>@review.Description</p>
-                <p>@review.CreatedBy.Username</p>
+            @if(item.Images.Any()){
+                <div class="col-sm-6">
+                    <fieldset>
+                        <legend> Images</legend>
+                        @foreach (var image in item.Images)
+                        {
+                            <img src="https://localhost:5001/api/@image.Path" alt="@image.FileName" width="200">
+                        }
+                    </fieldset>
+                </div>
             }
-        </fieldset>
-        
+            
+        </div>
+        @if(item.Reviews.Any()){
+            <fieldset>
+                <legend>Reviews</legend>
+                @foreach(var review in item.Reviews)
+                {
+                    <p>@review.Rating / 5</p>
+                    <p>@review.Title</p>
+                    <p>@review.Description</p>
+                    <p>@review.CreatedBy.Username</p>
+                }
+            </fieldset>
+        }
     }
-    
+    <NavLink href = "@($"/item-form/{Id}")" class="btn btn-info">Edit</NavLink>
 </div>
 
 @code{

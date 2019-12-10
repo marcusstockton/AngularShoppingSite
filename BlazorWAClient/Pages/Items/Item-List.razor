@@ -3,7 +3,15 @@
 @using BlazorWAClient.Pages.Items;
 
 <div class="container">
-    <h1>Items</h1>
+    <div class="row">
+        <span class="col-sm-6">
+            <h5>Items</h5>
+        </span>
+        <span class="col-sm-6 pull-right">
+            <NavLink href = "@($"/item-form/")" class="btn btn-primary">Create New</NavLink>
+        </span>
+    </div>
+    
     @if (response == null)
     {
         <p>Loading...</p>
@@ -19,6 +27,8 @@
             <hr/>
         }
     }
+
+    
 </div>
 
 @code {
