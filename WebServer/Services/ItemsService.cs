@@ -61,6 +61,7 @@ namespace WebServer.Services
                     .Include(x=>x.Images)
                     .Include(x => x.Reviews)
                     .Include(x=>x.UpdatedBy)
+                    .Include(x=>x.ItemCategory)
                     .SingleOrDefaultAsync(x=>x.Id == id);
 
                 item.UpdatedById = _userService.GetLoggedInUserId();

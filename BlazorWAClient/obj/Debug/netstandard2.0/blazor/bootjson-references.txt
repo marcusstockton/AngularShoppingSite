@@ -1,3 +1,5 @@
+BlazorWAClient-DESKTOP-AUPHML1.dll
+BlazorWAClient-DEVELOPER-06.dll
 Microsoft.AspNetCore.Authorization.dll
 Microsoft.AspNetCore.Blazor.dll
 Microsoft.AspNetCore.Blazor.HttpClient.dll
@@ -13,14 +15,21 @@ Microsoft.Extensions.Logging.Abstractions.dll
 Microsoft.Extensions.Options.dll
 Microsoft.Extensions.Primitives.dll
 Microsoft.JSInterop.dll
+Mono.Security-DESKTOP-AUPHML1.dll
+Mono.Security-DEVELOPER-06.dll
 Mono.Security.dll
 Mono.WebAssembly.Interop.dll
+mscorlib-DEVELOPER-06.dll
 mscorlib.dll
+System-DESKTOP-AUPHML1.dll
+System-DEVELOPER-06.dll
 System.Buffers.dll
 System.ComponentModel.Annotations.dll
+System.Core-DEVELOPER-06.dll
 System.Core.dll
 System.dll
 System.Memory.dll
+System.Net.Http-DEVELOPER-06.dll
 System.Net.Http.dll
 System.Numerics.Vectors.dll
 System.Runtime.CompilerServices.Unsafe.dll

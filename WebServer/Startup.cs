@@ -71,6 +71,7 @@ namespace WebServer
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                c.OperationFilter<FormFileSwaggerFilter>(); // Register file upload operation filter
             });
 
             // configure strongly typed settings objects

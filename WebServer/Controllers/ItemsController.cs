@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,10 +77,10 @@ namespace WebServer.Controllers
         /// <param name="fileArray">An array of files</param>
         /// <returns>The created Item.</returns>
         [Authorize]
-        [HttpPost]
+        [HttpPost, DisableRequestSizeLimit]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> Post([ModelBinder(BinderType = typeof(JsonModelBinder))] ItemCreate item, List<IFormFile> fileArray)
+        public async Task<ActionResult> Post(ItemCreate item, List<IFormFile> fileArray)
         {
             var images = new List<Image>();
             if (fileArray.Any())
@@ -106,11 +105,11 @@ namespace WebServer.Controllers
         /// <param name="item">The Item</param>
         /// <param name="fileArray">The Files</param>
         /// <returns>The updated item.</returns>
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), DisableRequestSizeLimit]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize]
-        public async Task<IActionResult> Put(string id, [ModelBinder(BinderType = typeof(JsonModelBinder))] ItemEdit item, List<IFormFile> fileArray)
+        public async Task<IActionResult> Put(string id, ItemEdit item, List<IFormFile> fileArray)
         {
             Guid _id;
             var idGuid = Guid.TryParse(id, out _id);
