@@ -30,9 +30,17 @@
 					<li class="nav-item">
 						<router-link to="/register" class="nav-link">Register</router-link>
 					</li>
-					<li class="nav-item">
-						<router-link to="/login" class="nav-link">Log In</router-link>
-					</li>
+					<span v-if="isLoggedIn">
+						<li class="nav-item">
+							<a v-on:click="logout" class="nav-link">Logout</a>
+						</li>
+					</span>
+					<span v-else>
+						<li class="nav-item">
+							<router-link to="/login" class="nav-link">Log In</router-link>
+						</li>
+					</span>
+					
 				</ul>
 			</div>
 		</nav>
@@ -63,3 +71,18 @@
   color: #42b983;
 }
 </style>
+<script lang="ts">
+import Vue from 'vue'
+import {authService} from './components/auth/auth.service';
+export default Vue.extend({
+	props:{ },
+	computed: {
+		isLoggedIn: function(){return authService.CurrentUser()}
+	},
+	methods: {
+		logout: function(){
+			authService.logOut();
+		}
+	}
+})
+</script>
