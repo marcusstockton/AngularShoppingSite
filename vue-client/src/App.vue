@@ -1,14 +1,45 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> | 
-      <router-link to="/items">Items</router-link>
-    </div>
-    <span class="container">
-      <router-view/>
-    </span>
-  </div>
+	<div id="app">
+		<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+			<router-link to="/" class="navbar-brand"><img alt="Vue logo" src="./assets/logo.png" height="25"> EBay Ripoff</router-link>
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb" aria-expanded="true">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+			<div id="navb" class="navbar-collapse collapse hide">
+				<ul class="navbar-nav">
+					<li class="nav-item active">
+						<router-link to="/" class="nav-link">Home</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link to="/items" class="nav-link">Items</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link to="/about" class="nav-link">About</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link to="/item-condition" class="nav-link">Item Conditions</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link to="/item-category" class="nav-link">Item Category</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link to="/delivery-option" class="nav-link">Delivery Options</router-link>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav ml-auto">
+					<li class="nav-item">
+						<router-link to="/register" class="nav-link">Register</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link to="/login" class="nav-link">Log In</router-link>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<span class="container">
+			<router-view/>
+		</span>
+	</div>
 </template>
 
 <style>

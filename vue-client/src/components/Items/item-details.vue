@@ -1,103 +1,88 @@
 <template>
-	<div v-if="isLoading" >
-		<p>Loading</p>
-	</div>
-    <div v-else>
-        <fieldset class="border p-2">
-            <legend class="w-auto">Item Details</legend>
-            <dl>
-                <dt>Name</dt>
-                <dd>{{ itemDetails.name }}</dd>
-                <dt>Title</dt>
-                <dd>{{ itemDetails.title }}</dd>
-                <dt>Description</dt>
-                <dd>{{ itemDetails.description }}</dd>
-                <dt>Price</dt>
-                <dd>{{ itemDetails.price | currency('£')}}</dd>
-                <dt>Created Date</dt>
-                <dd>{{ itemDetails.createdDate | formatDate }}</dd>
-                <dt>Created By</dt>
-                <dd>{{ itemDetails.createdBy.username }}</dd>
-                <span v-if="itemDetails.updatedDate">
-                    <dt>Updated Date</dt>
-                    <dd>{{ itemDetails.updatedDate | formatDate }}</dd>
-                </span>
-                <span v-if="itemDetails.updatedBy">
-                    <dt>Updated By</dt>
-                    <dd>{{ itemDetails.updatedBy.username }}</dd>
-                </span>
-            </dl>
-        </fieldset>
-        <div class="row">
-            <div class="col-md-6">
-                <fieldset class="border p-2" v-if="itemDetails.images">
-                    <legend class="w-auto">Images</legend>
-                        <div style="max-width:100%; height:auto;">
-                            <b-carousel
-                                id="carousel-fade"
-                                style="text-shadow: 0px 0px 2px #000"
-                                fade
-                                controls
-                                indicators>
-                                <b-carousel-slide v-for="image in itemDetails.images" :key="image.fileName" v-bind:img-src="'https://localhost:5001/api/' + image.path" v-bind:img-alt="image.filename"></b-carousel-slide>
-                            </b-carousel>
-                        </div>
-                </fieldset>
-            </div>
-            <div class="col-md-6">
-                <fieldset class="border p-2" v-if="itemDetails.reviews.length">
-                    <legend class="w-auto">Reviews</legend>
-                    <span v-for="review in itemDetails.reviews" :key="review.id">
-                        <dl>
-                            <dt>Rating</dt>
-                            <dd>{{ review.rating }} / 5</dd>
-                            <dt>Title</dt>
-                            <dd>{{ review.title }}</dd>
-                            <dt>Description</dt>
-                            <dd>{{ review.description }}</dd>
-                            <dt>Created Date</dt>
-                            <dd>{{ review.createdDate | formatDate }}</dd>
-                        </dl>
-                    </span>
-                </fieldset>
-            </div>
+  <div class="editarea">
+    <div>
+      <div class="editfields">
+        <div>
+          <label>Id: </label>
+          <input v-if="addingItem" type="number" v-model="editingItem.id" ref="id" placeholder="id" />
+          <label v-if="!addingItem" class="value">{{editingItem.id}}</label>
         </div>
+        <div>
+          <label>Name: </label>
+          <input v-model="editingItem.name" ref="name" placeholder="name" />
+        </div>
+        <div>
+          <label>Description: </label>
+          <input v-model="editingItem.description" placeholder="description" @keyup.enter="save"/>
+        </div>
+        <div>
+          <label>Price: </label>
+          <input v-model="editingItem.price" placeholder="price" @keyup.enter="save"/>
+        </div>
+        <div>
+          <label>Category: </label>
+          <input v-model="editingItem.itemCategory" placeholder="category" @keyup.enter="save"/>
+        </div>
+      </div>
+      <button @click="clear">Cancel</button>
+      <button @click="save">Save</button>
     </div>
+  </div>
 </template>
+
 <script lang="ts">
 import Vue from 'vue';
-import axios from 'axios';
-import Vue2Filters from 'vue2-filters';
-
-Vue.use(Vue2Filters);
-
-export default Vue.extend({
-    // code here
-	props: { },
-    data() {
-        return {
-            itemDetails: {} as any,
-            isLoading: Boolean
-        };
-    },
-    mounted() {
-        const itemId = this.$route.params.id;
-		this.isLoading = true;
-        axios.get('https://localhost:5001/api/Items/' + itemId)
-            .then((response) => {
-				this.isLoading = false;
-                this.itemDetails = response.data;
-                console.log(this.itemDetails);
-            })
-            .catch(err => {
-                console.log(err); 
-				this.isLoading = false;
-            });
-    },
-    
-});
+import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
+import { Item } from './item';
+@Component({})
+export default class ItemDetail extends Vue {
+  @Prop() item: Item;
+  addingItem = !this.item;
+  editingItem: Item | null;
+  @Watch('item') onItemChanged(value: string, oldValue: string) {
+    this.editingItem = this.cloneIt();
+  }
+  $refs: {
+    id: HTMLElement;
+    name: HTMLElement;
+  };
+  addItem() {
+    const item = this.editingItem as Item;
+    this.emitRefresh('add', item);
+  }
+  @Emit('unselect') clear() {
+    this.editingItem = null;
+  }
+  cloneIt() {
+    return Object.assign({}, this.item);
+  }
+  created() {
+    this.editingItem = this.cloneIt();
+  }
+  @Emit('itemChanged') emitRefresh(mode: string, item: Item) {
+    this.clear();
+  }
+  mounted() {
+    if (this.addingItem && this.editingItem) {
+      this.$refs.id.focus();
+    } else {
+      this.$refs.name.focus();
+    }
+  }
+  save() {
+    if (this.addingItem) {
+      this.addItem();
+    } else {
+      this.updateItem();
+    }
+  }
+  updateItem() {
+    const item = this.editingItem as Item;
+    this.emitRefresh('update', item);
+  }
+}
 </script>
 
-<style>
+<style scoped>
 
 </style>

@@ -100,15 +100,8 @@ namespace WebServer
             });
 
             services.AddTransient<IUserService, UserService>();
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(typeof(Startup));
 
-            Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile(new ItemProfile());
-                cfg.AddProfile(new UserProfile());
-                cfg.AddProfile(new ReviewProfile());
-            });
-            
             services.AddControllers()
                 .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             // services.AddRazorPages();
@@ -154,9 +147,9 @@ namespace WebServer
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
-            app.UseAuthorization();
             app.UseRouting();
             app.UseCors();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers().RequireCors("CorsPolicy");;
             });

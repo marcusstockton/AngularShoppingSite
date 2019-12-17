@@ -32,7 +32,7 @@ namespace WebServer.Services
             await _context.AddAsync(review);
             await _context.SaveChangesAsync();
 
-            return Mapper.Map<ReviewDetails>(review);
+            return _mapper.Map<ReviewDetails>(review);
         }
 
         public async Task<bool> DeleteReviewById(Guid id)
@@ -61,7 +61,7 @@ namespace WebServer.Services
                 .Include(x=>x.UpdatedBy)
                 .FirstOrDefaultAsync(x=>x.ItemId == itemId && x.Id == reviewId);
 
-            return Mapper.Map<ReviewDetails>(review);
+            return _mapper.Map<ReviewDetails>(review);
         }
 
         public async Task<IEnumerable<ReviewDetails>> GetReviewsForItem(Guid itemid)
@@ -74,7 +74,7 @@ namespace WebServer.Services
                 .AsNoTracking()
                 .ToListAsync();
 
-            return Mapper.Map<IEnumerable<Review>, IEnumerable<ReviewDetails>>(reviews);
+            return _mapper.Map<IEnumerable<Review>, IEnumerable<ReviewDetails>>(reviews);
         }
 
         public async Task<ReviewDetails> UpdateReviewById(Guid id, ReviewEdit reviewdto)
@@ -92,7 +92,7 @@ namespace WebServer.Services
 
                 await _context.SaveChangesAsync();
 
-                return Mapper.Map<ReviewDetails>(review);
+                return _mapper.Map<ReviewDetails>(review);
             }
             return null;
         }

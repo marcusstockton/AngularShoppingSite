@@ -34,7 +34,7 @@ namespace WebServer.Services
                 .OrderByDescending(x=>x.CreatedDate)
                 .AsNoTracking()
                 .ToListAsync();
-            return Mapper.Map<IEnumerable<Item>, IEnumerable<ItemDetails>>(items);
+            return _mapper.Map<IEnumerable<Item>, IEnumerable<ItemDetails>>(items);
 
         }
 

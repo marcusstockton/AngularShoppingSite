@@ -44,78 +44,9 @@
 import Vue from 'vue';
 import axios from 'axios';
 
-export default Vue.extend({
+export default class ItemForm extends Vue {
 
-    data() {
-        return {
-            form : {
-                title: '',  
-                description: '',
-                price: '',
-                images: [],
-            },
-            errors: []
-        };
-    },
-    props: ['item'],
-    mounted() {
-        const itemId = this.$route.params.id;
-        if(itemId) {
-            axios.get('https://localhost:5001/api/Items/' + itemId)
-                .then((response) => {
-                    let itemDetails = response.data;
-                    this.form.title = itemDetails.title;
-                    this.form.description = itemDetails.description;
-                    this.form.price = itemDetails.price;
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        }
-    },
-    methods: {
-        // Handles a file upload
-        handleFileUploads(){
-            this.form.images = this.$refs.images.images;
-        },
-
-        // Submits the form to the server.
-        submitNewItem() {
-            let formData = new FormData();
-            formData.append('title', this.form.title);
-            formData.append('description', this.form.description);
-            formData.append('price', this.form.price);
-
-            this.form.images.forEach((element) => {
-                formData.append('images', element);
-            });
-            
-            for(let pair of formData.entries()){
-                console.log(pair);
-            }
-            
-        },
-
-        checkForm: function(e) {
-            this.errors = [];
-
-            if (this.form.title && this.form.desc && this.form.price) {
-                return true;
-            }
-
-            if (!this.form.title) {
-                this.errors.push('Title required.');
-            }
-            if (!this.form.desc) {
-                this.errors.push('Description required.');
-            }
-            if (!this.form.price) {
-                this.errors.push('Price required.');
-            }
-            e.preventDefault();
-        },
-    },
-});
+}
 </script>
 <style>
 

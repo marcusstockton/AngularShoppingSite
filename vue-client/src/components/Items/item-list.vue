@@ -1,58 +1,94 @@
 <template>
-<div>
-    <h1>item list</h1>
-    <router-link v-bind:to="'/items/create'" class="btn btn-primary">Create New</router-link>
-    <div class="card-deck">
-    <div v-for="item in itemList" :key="item.id" class="card mb-4 mr-3" style="min-width: 18rem;">
-        <div class="card-body">
-            <h4 class="card-header">{{ item.name | capitalize({ onlyFirstLetter: true })}}</h4>
-            <router-link v-bind:to="'/items/' + item.id" class="btn btn-primary">Details</router-link>
-            <p class="card-text">{{ item.title | capitalize({ onlyFirstLetter: true })}}</p>
-            <p class="card-text">{{ item.description | truncate(100)}}</p>
-            <p class="card-text">Price: {{ item.price | currency('£')}}</p>
-            <p class="card-text">Created By: {{ item.createdBy.username }}</p>
-            <p class="card-text">Created: {{ item.createdDate | formatDate }}</p>
-            
-        </div>
-        <div class="card-footer" v-if=item.updatedDate>
-            <small class="text-muted">Last updated {{ item.updatedDate | formatDate }}</small>
-        </div>
+  <div>
+    <div class="button-group">
+      <button @click="getItems">Refresh</button>
+      <button @click="enableAddMode" v-if="!addingItem && !selectedItem">Add</button>
     </div>
-    </div>
-</div>
+    <transition name="fade">
+      <ul class="items" v-if="items && items.length">
+        <li v-for="item in items" :key="item.id"
+          class="item-container"
+          :class="{selected: item === selectedItem}">
+          <div class="item-element">
+            <div class="badge" >{{item.id}}</div>
+            <div class="item-text" @click="onSelect(item)">
+              <div class="form-label">{{item.name}}</div>
+              <div class="form-label">{{item.title}}</div>
+              <div class="form-label">{{item.description}}</div>
+              <div class="form-label">{{item.price}}</div>
+              <div class="form-label">{{item.createdDate}}</div>
+              <span v-if="item.itemCategory">
+                <div class="form-label">{{item.itemCategory.description}}</div>
+              </span>
+              
+            </div>
+          </div>
+          <button class="delete-button" @click="deleteItem(item)">Delete</button>
+        </li>
+      </ul>
+    </transition>
+    <transition name="fade">
+    <ItemDetail
+      v-if="selectedItem || addingItem"
+      :item="selectedItem"
+      @unselect="unselect"
+      @itemChanged="itemChanged"></ItemDetail>
+    </transition>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import axios from 'axios';
-import Vue2Filters from 'vue2-filters';
-import moment from 'moment';
-
-Vue.use(Vue2Filters);
-
-export default Vue.extend({
-    data() {
-        return {
-            itemList: [] as any,
-        };
-    },
-    mounted() {
-        axios.get('https://localhost:5001/api/Items')
-            .then((response) => {
-                this.itemList = [...response.data];
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    },
-});
-
-Vue.filter('formatDate', (value: any) => {
-  if (value) {
-    return moment(String(value)).format('DD MMM YYYY hh:mm');
+import { Component, Prop, Watch } from 'vue-property-decorator';
+import ItemDetail from './item-details.vue';
+import { itemService } from './item.service';
+import { Item } from './item';
+@Component({
+  components: { ItemDetail },
+})
+export default class ItemList extends Vue {
+  addingItem = false;
+  selectedItem: Item | null = null;
+  items: Item[] = [];
+  created() {
+    this.getItems();
   }
-});
-
+  deleteItem(item: Item) {
+    return itemService.deleteItem(item).then(() => {
+      this.items = this.items.filter((h) => h !== item);
+      if (this.selectedItem === item) {
+        this.selectedItem = null;
+      }
+    });
+  }
+  enableAddMode() {
+    this.addingItem = true;
+    this.selectedItem = null;
+  }
+  getItems() {
+    this.items = [];
+    this.selectedItem = null;
+    return itemService.getItems().then((response) => (this.items = response.data));
+  }
+  itemChanged(mode: string, item: Item) {
+    console.log('item changed', item);
+    if (mode === 'add') {
+      itemService.addItem(item).then(() => this.items.push(item));
+    } else {
+      itemService.updateItem(item).then(() => {
+        const index = this.items.findIndex((h) => item.id === h.id);
+        this.items.splice(index, 1, item);
+      });
+    }
+  }
+  onSelect(item: Item) {
+    this.selectedItem = item;
+  }
+  unselect() {
+    this.addingItem = false;
+    this.selectedItem = null;
+  }
+}
 </script>
 
 <style scoped>
