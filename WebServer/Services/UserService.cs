@@ -56,7 +56,6 @@ namespace WebServer.Services
 
         public IEnumerable<ApplicationUser> GetAllUsersWithoutFirstName()
         {
-            // return users without passwords
             return _userManager.Users.Where(c => string.IsNullOrEmpty(c.FirstName));
         }
 

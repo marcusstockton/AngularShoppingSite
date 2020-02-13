@@ -68,7 +68,9 @@ export default class ItemList extends Vue {
   getItems() {
     this.items = [];
     this.selectedItem = null;
-    return itemService.getItems().then((response) => (this.items = response.data));
+    return itemService.getItems()
+      .then((response) => (this.items = response.data))
+      .catch((error)=> (console.log(error)));
   }
   itemChanged(mode: string, item: Item) {
     console.log('item changed', item);

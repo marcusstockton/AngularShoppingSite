@@ -94,7 +94,10 @@ namespace WebServer.Controllers
             return Ok(users);
         }
 
-        
+        /// <summary>
+        /// Gets the logged in user record
+        /// </summary>
+        /// <returns>ApplicationUser record</returns>
         [HttpGet]
         public IActionResult GetLoggedInUserDetails()
         {

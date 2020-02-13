@@ -10,8 +10,6 @@ namespace WebServer.Models
     {
         [Range(0,5)]
         public int Rating { get; set; }
-
-        [MaxLength(250)]
         public string Title { get; set; }
         public string Description { get; set; }
 

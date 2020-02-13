@@ -31,6 +31,15 @@ namespace WebServer.Data
             builder.Entity<DeliveryOption>().Property(p=>p.Id).ValueGeneratedOnAdd();
 
             builder.Entity<Image>().HasOne(x=>x.Item).WithMany(x=>x.Images).HasForeignKey(x=>x.ItemId);
+            
+            builder.Entity<Review>().HasOne(x=>x.Item).WithMany();
+
+            builder.Entity<Item>().Property(x=>x.Name).HasMaxLength(100).HasMinLength(6).IsRequired();
+            builder.Entity<Item>().Property(x=>x.Title).HasMaxLength(100).HasMinLength(3000).IsRequired();
+            builder.Entity<Item>().Property(x=>x.Description).HasMaxLength(100).HasMinLength(3000).IsRequired();
+            builder.Entity<Item>().Property(x=>x.Price).IsRequired();
+
+            builder.Entity<Review>.Property(x=>x.Title).HasMaxLength(250);
         }
     }
 }
