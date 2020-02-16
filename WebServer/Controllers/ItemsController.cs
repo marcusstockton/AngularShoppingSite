@@ -48,7 +48,7 @@ namespace WebServer.Controllers
         /// <param name="id">The Item Id.</param>
         /// <returns>An Item.</returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ItemDetails), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ItemDetails>> Get(string id)
         {

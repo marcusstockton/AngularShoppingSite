@@ -159,21 +159,21 @@ namespace WebServer.Migrations
                 table: "ItemConditions",
                 column: "UpdatedById");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Items_DeliveryOptions_DeliveryOptionId",
-                table: "Items",
-                column: "DeliveryOptionId",
-                principalTable: "DeliveryOptions",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_Items_DeliveryOptions_DeliveryOptionId",
+            //    table: "Items",
+            //    column: "DeliveryOptionId",
+            //    principalTable: "DeliveryOptions",
+            //    principalColumn: "Id",
+            //    onDelete: ReferentialAction.Restrict);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Items_ItemConditions_ItemConditionId",
-                table: "Items",
-                column: "ItemConditionId",
-                principalTable: "ItemConditions",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_Items_ItemConditions_ItemConditionId",
+            //    table: "Items",
+            //    column: "ItemConditionId",
+            //    principalTable: "ItemConditions",
+            //    principalColumn: "Id",
+            //    onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

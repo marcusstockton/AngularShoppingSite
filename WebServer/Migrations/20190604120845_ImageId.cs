@@ -6,10 +6,10 @@ namespace WebServer.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "ParentId",
-                table: "Images",
-                newName: "ItemId");
+            //migrationBuilder.RenameColumn(
+            //    name: "ParentId",
+            //    table: "Images",
+            //    newName: "ItemId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

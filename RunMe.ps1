@@ -1,23 +1,25 @@
-﻿
-#Set-Location -Path $Currentlocation.path += 'Client'
-$path = Get-Location;
-$fullpath = join-path -path $path -childpath 'Client'
-Set-Location -Path $fullpath
-echo $fullpath
-
-#cmd.exe --% /c ng build 
-
-#$command = cmd.exe /C ng build
-#Invoke-Expression $command
-
-#cmd.exe /c "ng build"
+﻿$app1ProjectFolder = $PSScriptRoot + '\WebServer'
+$app2ProjectFolder = './src/App2'
 
 
+Write-Host "STARTING WebServer" -foreground Green
 
-$fullpath = join-path -path $path -childpath 'WebServer'
-#Set-Location -Path $Currentlocation.path += 'WebServer'
-Set-Location -Path $fullpath
-echo $fullpath
+Push-Location $app1ProjectFolder
 
+$dotnetRunCommandApp1 = 'watch run'
+$app1Process = Start-Process dotnet -ArgumentList $dotnetRunCommandApp1 -PassThru
 
-Read-Host -Prompt “Press Enter to exit”
+Pop-Location
+Write-Host "Opening Browser" -forground Green
+Start 'https://localhost:5001'
+
+#Write-Host "STARTING APP2" -foreground Green
+
+#Push-Location $app2ProjectFolder 
+
+#$dotnetRunCommandApp2 = 'run'
+#$app2Process = Start-Process dotnet -ArgumentList $dotnetRunCommandApp2 -PassThru
+
+#Pop-Location
+
+#Read-Host -Prompt “Press Enter to exit”

@@ -53,13 +53,13 @@ namespace WebServer.Migrations
                 table: "Items",
                 column: "ItemCategoryId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Items_ItemCategories_ItemCategoryId",
-                table: "Items",
-                column: "ItemCategoryId",
-                principalTable: "ItemCategories",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_Items_ItemCategories_ItemCategoryId",
+            //    table: "Items",
+            //    column: "ItemCategoryId",
+            //    principalTable: "ItemCategories",
+            //    principalColumn: "Id",
+            //    onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

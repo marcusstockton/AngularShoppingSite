@@ -18,7 +18,6 @@ namespace WebServer.Migrations
                     UpdatedById = table.Column<Guid>(nullable: true),
                     Path = table.Column<string>(nullable: true),
                     Type = table.Column<string>(nullable: true),
-                    ParentId = table.Column<Guid>(nullable: false),
                     ItemId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
