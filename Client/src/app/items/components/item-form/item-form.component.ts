@@ -28,6 +28,7 @@ export class ItemFormComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.Item) {
+      this.images = this.Item.images;
       this.itemForm.patchValue({
         id: this.Item.id,
         title: this.Item.title,

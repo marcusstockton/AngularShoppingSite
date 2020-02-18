@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,27 +19,35 @@ namespace WebServer.Services
         private readonly ApplicationDbContext _context;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly ILogger _logger;
 
-        public ItemsService(ApplicationDbContext context, IUserService userService, IMapper mapper)
+        public ItemsService(ApplicationDbContext context, IUserService userService, IMapper mapper, ILoggerFactory logger)
         {
             _context = context;
             _userService = userService;
             _mapper = mapper;
+            _logger = logger.CreateLogger( "ItemsService" );
         }
 
         public async Task<IEnumerable<ItemDetails>> GetItems()
         {
+            _logger.LogInformation("Calling Get Items");
             var items = await _context.Items
                 .Include(x=>x.CreatedBy)
                 .Include(x=>x.UpdatedBy)
                 .OrderByDescending(x=>x.CreatedDate)
                 .AsNoTracking()
                 .ToListAsync();
+            if(items == null)
+            {
+                _logger.LogWarning( "No items found" );
+            }
             return _mapper.Map<IEnumerable<Item>, IEnumerable<ItemDetails>>(items);
 
         }
 
         public async Task<ItemDetails> GetItemById(Guid Id){
+            _logger.LogInformation( $"Calling Get Item with Id {Id}" );
             var result = await _context.Items
                 .Include(x=>x.Reviews)
                 .Include(x=>x.Images)
@@ -47,7 +56,10 @@ namespace WebServer.Services
                 .Include(x=>x.ItemCategory)
                 .Where(i=>i.Id == Id)
                 .SingleOrDefaultAsync();
-
+            if(result == null)
+            {
+                _logger.LogWarning( $"No item found with id {Id}" );
+            }
             return _mapper.Map<ItemDetails>(result);
         }
 

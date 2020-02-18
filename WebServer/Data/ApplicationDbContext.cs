@@ -32,7 +32,7 @@ namespace WebServer.Data
 
             builder.Entity<Image>().HasOne(x=>x.Item).WithMany(x=>x.Images).HasForeignKey(x=>x.ItemId);
             
-            builder.Entity<Review>().HasOne(x=>x.Item).WithMany().HasForeignKey(x=>x.ItemId);
+            builder.Entity<Review>().HasOne(x=>x.Item).WithMany(x=>x.Reviews).HasForeignKey(x=>x.ItemId);
 
             builder.Entity<Item>().Property(x=>x.Name).HasMaxLength(100).IsRequired();
             builder.Entity<Item>().Property(x=>x.Title).HasMaxLength(300).IsRequired();
