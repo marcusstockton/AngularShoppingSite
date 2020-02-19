@@ -29,7 +29,6 @@ namespace WebServer.Models.Items
 
         public virtual List<Review> Reviews { get; set; }
 
-        [JsonIgnore]
         public virtual List<Image> Images { get; set; }
     }
 }

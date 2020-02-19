@@ -21,5 +21,6 @@ namespace WebServer.Models.DTOs.Items
         public virtual ItemCategory ItemCategory { get; set; }
         public virtual ItemCondition ItemCondition { get; set; }
         public virtual DeliveryOption DeliveryOption { get; set; }
+        public virtual List<Image> Images { get; set; }
     }
 }

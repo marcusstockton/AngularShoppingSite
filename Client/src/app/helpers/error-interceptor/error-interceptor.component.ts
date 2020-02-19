@@ -21,7 +21,11 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
             var error = "";
             if(err instanceof HttpErrorResponse){
-                error = err.error;
+                if(err.status === 415){
+                    error = err.error.title;
+                } else{
+                    error = err.error;
+                }
             }
             else{
                 error = err.error.message || err.statusText;
