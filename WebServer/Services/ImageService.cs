@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using WebServer.Data;
 using WebServer.Interfaces;
 using WebServer.Models;
@@ -27,6 +28,26 @@ namespace WebServer.Services
         public async Task<List<Image>> UploadImages(List<IFormFile> files)
         {
             return await WriteFile(files);
+        }
+
+        public async Task<List<byte[]>> GetImagesAsByteArrayForItemId(Guid itemId)
+        {
+            var images = _context.Images.Where( x => x.ItemId == itemId ).ToList();
+
+            // Read the image into the result list:
+            List<byte[]> imageBytes = new List<byte[]>();
+            for (int i = 0; i < images.Count(); i++)
+            {
+                var filePath = Path.Combine( _appEnvironment.ContentRootPath, "Uploads\\img", images[i].FileName);
+                byte[] bytes = await File.ReadAllBytesAsync( filePath );
+                imageBytes.Add( bytes );
+            }
+            return imageBytes;
+        }
+
+        public async Task<List<KeyValuePair<string, string>>> GetImagesForItemId(Guid itemId)
+        {
+            return await _context.Images.Where( x => x.ItemId == itemId ).Select(x=> new KeyValuePair<string, string>( Path.Combine( _appEnvironment.ContentRootPath, "Uploads\\img", x.FileName ), x.Type )).ToListAsync();
         }
         
         /// <summary>

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace WebServer.Controllers
         /// <param name="id">The Item Id.</param>
         /// <returns>An Item.</returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof( ItemDetails ), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ItemDetails>> Get(string id)
         {
@@ -102,36 +103,36 @@ namespace WebServer.Controllers
         /// Updates a cerain Item
         /// </summary>
         /// <param name="id">The item Id</param>
-        /// <param name="item">The Item</param>
+        /// <param name="item">The raw Item</param>
         /// <param name="fileArray">The Files</param>
         /// <returns>The updated item.</returns>
-        [HttpPut("{id}"), DisableRequestSizeLimit]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPut("{id}")]
+        [ProducesResponseType( StatusCodes.Status201Created )]
+        [ProducesResponseType( StatusCodes.Status400BadRequest )]
+        [Consumes( "application/json" )]
         [Authorize]
-        public async Task<IActionResult> Put(string id, ItemEdit item, List<IFormFile> fileArray)
+        public async Task<ActionResult> Put(string id, [FromBody]ItemEdit item)
         {
             Guid _id;
             var idGuid = Guid.TryParse(id, out _id);
-            var images = new List<Image>();
-
+            if (item == null)
+            {
+                return BadRequest("Invalid Data");
+            }
+            if (id != item.Id.ToString())
+            {
+                return BadRequest( "Id's do not match!" );
+            }
             if (idGuid && item != null)
             {
-                // Check if the request contains multipart/form-data.
-                if (fileArray.Any())
-                {
-                    // we have files...
-                    images = await _imageService.UploadImages(fileArray);
-                }
-                
-                var result = await _service.UpdateItemById(_id, item, images);
+                var result = await _service.UpdateItemById( _id, item );
                 if (result != null)
                 {
                     return NoContent();
                 }
                 else
                 {
-                    return BadRequest("Invalid Data");
+                    return BadRequest( "Invalid Data" );
                 }
             }
 

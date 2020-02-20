@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WebServer.Models;
 using WebServer.Models.DTOs.Reviews;
 
 namespace WebServer.Interfaces

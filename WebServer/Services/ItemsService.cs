@@ -54,6 +54,8 @@ namespace WebServer.Services
                 .Include(x=>x.CreatedBy)
                 .Include(x=>x.UpdatedBy)
                 .Include(x=>x.ItemCategory)
+                .Include(x=>x.ItemCondition)
+                .Include(x=>x.DeliveryOption)
                 .Where(i=>i.Id == Id)
                 .SingleOrDefaultAsync();
             if(result == null)
@@ -63,14 +65,13 @@ namespace WebServer.Services
             return _mapper.Map<ItemDetails>(result);
         }
 
-        public async Task<Item> UpdateItemById(Guid id, ItemEdit itemdto, List<Image> images){
+        public async Task<Item> UpdateItemById(Guid id, ItemEdit itemdto){
             if(itemdto.Id == id)
             {
                 var mappedItem = _mapper.Map<Item>(itemdto);
 
                 var item = await _context.Items
                     .Include(x=>x.CreatedBy)
-                    .Include(x=>x.Images)
                     .Include(x => x.Reviews)
                     .Include(x=>x.UpdatedBy)
                     .Include(x=>x.ItemCategory)
@@ -78,8 +79,7 @@ namespace WebServer.Services
 
                 item.UpdatedById = _userService.GetLoggedInUserId();
                 item.UpdatedDate = DateTime.Now;
-                item.Images.AddRange(images);
-                _context.Entry(item).CurrentValues.SetValues(itemdto); // CreatedBy appears to be null... causing the constraint.
+                _context.Entry(item).CurrentValues.SetValues(itemdto);
 
                 await _context.SaveChangesAsync();
                 return item;

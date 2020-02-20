@@ -14,13 +14,13 @@ using System.Text;
 using WebServer.Data;
 using WebServer.Helpers;
 using WebServer.Interfaces;
-using WebServer.Mappings;
 using WebServer.Services;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace WebServer
 {
@@ -103,15 +103,11 @@ namespace WebServer
             services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers()
-                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
-            // services.AddRazorPages();
-            // services.AddMvc(options =>
-            //     {
-            //         var jsonInputFormatter = options.InputFormatters.OfType<JsonInputFormatter>().First();
-            //         jsonInputFormatter.SupportedMediaTypes.Add("multipart/form-data");
-            //     }
-            //);
-            
+                .AddNewtonsoftJson( options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Error;
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                } );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -151,7 +147,7 @@ namespace WebServer
             app.UseCors();
             app.UseAuthorization();
             app.UseEndpoints(endpoints => {
-                endpoints.MapControllers().RequireCors("CorsPolicy");;
+                endpoints.MapControllers().RequireCors("CorsPolicy");
             });
 
             seeder.SeedData();
