@@ -25,9 +25,18 @@ namespace WebServer.Services
             _appEnvironment = appEnvironment;
         }
 
-        public async Task<List<Image>> UploadImages(List<IFormFile> files)
+        public async Task<List<Image>> UploadImagesForItem(Guid itemId, List<IFormFile> files)
         {
-            return await WriteFile(files);
+            return await WriteFile(itemId.ToString(), files);
+        }
+
+        public async Task<Image> UploadAvatar(string userid, IFormFile avatar)
+        {
+            var imageAsList = new List<IFormFile>();
+            imageAsList.Add(avatar);
+
+            var data = await WriteFile(userid, imageAsList, false);
+            return data.First();
         }
 
         public async Task<List<byte[]>> GetImagesAsByteArrayForItemId(Guid itemId)
@@ -53,8 +62,10 @@ namespace WebServer.Services
         /// <summary>
         /// Method to write file onto the disk
         /// </summary>
+        /// <param name="parentId"></param>
         /// <param name="files"></param>
-        private async Task<List<Image>> WriteFile(List<IFormFile> files)
+        /// <param name="isItem"></param>
+        private async Task<List<Image>> WriteFile(string parentId, List<IFormFile> files, bool isItem = true)
         {
             var reservedWords = new[]
             {
@@ -66,7 +77,10 @@ namespace WebServer.Services
             try
             {
                 var images = new List<Image>();
-                var imageFolder = "Uploads\\img";
+                var imageFolder = Path.Combine("Uploads", "img", isItem ? "items" : "avatars", parentId);
+                if(!Directory.Exists(imageFolder)){
+                    Directory.CreateDirectory(imageFolder);
+                }
                 foreach (var file in files)
                 {
                     foreach (string x in reservedWords)

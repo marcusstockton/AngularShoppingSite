@@ -35,6 +35,9 @@ namespace WebServer.Services
             var items = await _context.Items
                 .Include(x=>x.CreatedBy)
                 .Include(x=>x.UpdatedBy)
+                .Include(x=>x.DeliveryOption)
+                .Include(x=>x.ItemCategory)
+                .Include(x=>x.ItemCondition)
                 .OrderByDescending(x=>x.CreatedDate)
                 .AsNoTracking()
                 .ToListAsync();

@@ -8,8 +8,9 @@ namespace WebServer.Interfaces
 {
     public interface IImageService
     {
-        Task<List<Image>> UploadImages(List<IFormFile> file);
+        Task<List<Image>> UploadImagesForItem(Guid itemId, List<IFormFile> files);
         Task<List<byte[]>> GetImagesAsByteArrayForItemId(Guid itemId);
         Task<List<KeyValuePair<string, string>>> GetImagesForItemId(Guid itemId);
+        Task<Image> UploadAvatar(string userid, IFormFile avatar);
     }
 }

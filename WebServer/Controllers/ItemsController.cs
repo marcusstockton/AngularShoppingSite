@@ -62,7 +62,6 @@ namespace WebServer.Controllers
                 {
                     return NotFound();
                 }
-                //return item;
                 return Ok(item);
             }
             else{
@@ -84,15 +83,14 @@ namespace WebServer.Controllers
         public async Task<ActionResult> Post(ItemCreate item, List<IFormFile> fileArray)
         {
             var images = new List<Image>();
-            if (fileArray.Any())
-            {
-                images = await _imageService.UploadImages(fileArray);
-            }
             var result = await _service.CreateItem(item, images);
             if(result.Id != Guid.Empty)
             {
+                if (fileArray.Any())
+                {
+                    images = await _imageService.UploadImagesForItem(result.Id, fileArray);
+                }
                 return CreatedAtAction(nameof(Get), new { id = result.Id.ToString() }, result);
-                //return Ok(result);
             }
             return BadRequest();
         }
@@ -104,10 +102,9 @@ namespace WebServer.Controllers
         /// </summary>
         /// <param name="id">The item Id</param>
         /// <param name="item">The raw Item</param>
-        /// <param name="fileArray">The Files</param>
         /// <returns>The updated item.</returns>
         [HttpPut("{id}")]
-        [ProducesResponseType( StatusCodes.Status201Created )]
+        [ProducesResponseType( StatusCodes.Status204NoContent )]
         [ProducesResponseType( StatusCodes.Status400BadRequest )]
         [Consumes( "application/json" )]
         [Authorize]
@@ -115,11 +112,12 @@ namespace WebServer.Controllers
         {
             Guid _id;
             var idGuid = Guid.TryParse(id, out _id);
+
             if (item == null)
             {
                 return BadRequest("Invalid Data");
             }
-            if (id != item.Id.ToString())
+            if (_id != item.Id)
             {
                 return BadRequest( "Id's do not match!" );
             }

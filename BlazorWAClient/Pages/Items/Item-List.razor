@@ -31,10 +31,10 @@
 </div>
 
 @code {
-    ItemModel[] response;
+    ItemDetails[] response;
     protected override async Task OnInitializedAsync()
     {
-        response = await Http.GetJsonAsync<ItemModel[]>("https://localhost:5001/api/Items");
+        response = await Http.GetJsonAsync<ItemDetails[]>("https://localhost:5001/api/Items");
     }
 
     

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -78,17 +79,15 @@ namespace WebServer.Controllers
         //    return NoContent();
         //}
 
-        //// POST: api/Images
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        //// more details see https://aka.ms/RazorPagesCRUD.
-        //[HttpPost]
-        //public async Task<ActionResult<Image>> PostImage(Image image)
-        //{
-        //    _context.Images.Add(image);
-        //    await _context.SaveChangesAsync();
-
-        //    return CreatedAtAction("GetImage", new { id = image.Id }, image);
-        //}
+        // POST: api/Images
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost, Route("CreateImagesForItem/{itemId}")]
+        [Authorize]
+        public async Task<ActionResult<List<Image>>> CreateImagesForItem(Guid itemId, List<IFormFile> images)
+        {
+            return await _imageService.UploadImagesForItem(itemId, images);
+        }
 
         //// DELETE: api/Images/5
         //[HttpDelete("{id}")]
